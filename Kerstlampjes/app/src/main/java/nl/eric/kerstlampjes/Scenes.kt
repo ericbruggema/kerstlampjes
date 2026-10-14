@@ -1094,7 +1094,7 @@ class NativityScene(ctx: Context, d: Float) : Scene(ctx, d) {
         stars(c, t, 0.55f)
 
         // grote ster van Bethlehem
-        val sx = w * 0.68f
+        val sx = w * 0.60f
         val sy = h * 0.14f
         val pulse = 0.85f + 0.15f * sin(t * 2f)
         glow(c, sx, sy, w * 0.28f * pulse, 0xFFFFE8A0.toInt(), 150)
@@ -1111,10 +1111,10 @@ class NativityScene(ctx: Context, d: Float) : Scene(ctx, d) {
         path.close()
         c.drawPath(path, p)
         // lichtstraal naar de stal
-        p.shader = LinearGradient(sx, sy, w * 0.5f, h * 0.62f, 0x55FFF3B0, 0x00FFF3B0, Shader.TileMode.CLAMP)
+        p.shader = LinearGradient(sx, sy, w * 0.4f, h * 0.62f, 0x55FFF3B0, 0x00FFF3B0, Shader.TileMode.CLAMP)
         path.reset()
         path.moveTo(sx - 6f * d, sy + 10f * d); path.lineTo(sx + 6f * d, sy + 10f * d)
-        path.lineTo(w * 0.58f, h * 0.62f); path.lineTo(w * 0.42f, h * 0.62f); path.close()
+        path.lineTo(w * 0.48f, h * 0.62f); path.lineTo(w * 0.32f, h * 0.62f); path.close()
         c.drawPath(path, p)
         p.shader = null
 
@@ -1125,10 +1125,10 @@ class NativityScene(ctx: Context, d: Float) : Scene(ctx, d) {
         c.drawOval(w * 0.2f, h * 0.66f, w * 1.5f, h * 1.15f, p)
 
         // stal
-        val bx = w * 0.5f
-        val by = h * 0.82f
-        val bw = w * 0.74f
-        val bh = h * 0.21f
+        val bx = w * 0.40f
+        val by = h * 0.84f
+        val bw = w * 0.62f
+        val bh = h * 0.235f
         glow(c, bx, by - bh * 0.4f, bw * 0.75f, 0xFFFFB14A.toInt(), 140)
         // achterwand met warm licht
         p.style = Paint.Style.FILL
@@ -1166,49 +1166,106 @@ class NativityScene(ctx: Context, d: Float) : Scene(ctx, d) {
             p.color = 0xFF111111.toInt()
             c.drawCircle(hx + face * s * 0.15f, by - s * 1.2f, s * 0.05f, p)
         }
-        animal(bx - bw * 0.34f, bw * 0.065f, 0xFF6B4A32.toInt(), false, 1)
-        animal(bx + bw * 0.385f, bw * 0.05f, 0xFF8E8E96.toInt(), true, -1)
+        animal(bx - bw * 0.39f, bw * 0.07f, 0xFF6B4A32.toInt(), false, 1)
+        animal(bx + bw * 0.39f, bw * 0.06f, 0xFF8E8E96.toInt(), true, -1)
 
         // mensen
-        fun figure(x: Float, hgt: Float, robe: Int, hood: Int, lean: Float) {
+        fun figure(x: Float, hgt: Float, robe: Int, hood: Int, lean: Float, spread: Float = 0.38f, halo: Boolean = true) {
             p.style = Paint.Style.FILL
+            // schaduw
+            p.color = 0x33000000
+            c.drawOval(x - hgt * spread, by - hgt * 0.04f, x + hgt * spread, by + hgt * 0.04f, p)
             p.color = robe
             path.reset()
-            path.moveTo(x - hgt * 0.16f, by - hgt * 0.78f)
-            path.lineTo(x + hgt * 0.16f, by - hgt * 0.78f)
-            path.lineTo(x + hgt * 0.38f, by)
-            path.lineTo(x - hgt * 0.38f, by)
+            path.moveTo(x - hgt * 0.15f, by - hgt * 0.78f)
+            path.lineTo(x + hgt * 0.15f, by - hgt * 0.78f)
+            path.quadTo(x + hgt * spread * 0.8f, by - hgt * 0.4f, x + hgt * spread, by)
+            path.lineTo(x - hgt * spread, by)
+            path.quadTo(x - hgt * spread * 0.8f, by - hgt * 0.4f, x - hgt * 0.15f, by - hgt * 0.78f)
             path.close()
             c.drawPath(path, p)
-            c.drawCircle(x, by - hgt * 0.75f, hgt * 0.18f, p)
-            glow(c, x, by - hgt * 0.9f, hgt * 0.32f, 0xFFFFE8A0.toInt(), 120)
+            c.drawCircle(x, by - hgt * 0.76f, hgt * 0.17f, p)
+            // plooien
+            p.color = 0x22000000
+            c.drawRect(x - hgt * 0.01f, by - hgt * 0.6f, x + hgt * 0.01f, by, p)
+            if (halo) glow(c, x, by - hgt * 0.92f, hgt * 0.34f, 0xFFFFE8A0.toInt(), 130)
             p.color = hood
-            c.drawCircle(x, by - hgt * 0.9f, hgt * 0.16f, p)
+            c.drawCircle(x, by - hgt * 0.91f, hgt * 0.16f, p)
+            val fx = x + lean * hgt * 0.035f
             p.color = 0xFFFFD6B0.toInt()
-            c.drawCircle(x + lean * hgt * 0.04f, by - hgt * 0.88f, hgt * 0.105f, p)
+            c.drawCircle(fx, by - hgt * 0.89f, hgt * 0.108f, p)
+            // gezicht
             p.color = 0xFF3A2218.toInt()
-            c.drawCircle(x + lean * hgt * 0.08f, by - hgt * 0.89f, hgt * 0.015f, p)
+            c.drawCircle(fx - hgt * 0.035f, by - hgt * 0.9f, hgt * 0.013f, p)
+            c.drawCircle(fx + hgt * 0.035f, by - hgt * 0.9f, hgt * 0.013f, p)
+            p.color = 0x55FF8A8A
+            c.drawCircle(fx - hgt * 0.06f, by - hgt * 0.86f, hgt * 0.018f, p)
+            c.drawCircle(fx + hgt * 0.06f, by - hgt * 0.86f, hgt * 0.018f, p)
+            p.style = Paint.Style.STROKE
+            p.strokeWidth = 1.3f * d
+            p.color = 0xFF8A4A3A.toInt()
+            c.drawArc(fx - hgt * 0.03f, by - hgt * 0.875f, fx + hgt * 0.03f, by - hgt * 0.84f, 20f, 140f, false, p)
+            p.style = Paint.Style.FILL
+            // armen en handen
             p.color = robe
-            c.drawOval(x + lean * hgt * 0.05f - hgt * 0.12f, by - hgt * 0.62f, x + lean * hgt * 0.05f + hgt * 0.12f, by - hgt * 0.44f, p)
+            c.drawOval(x + lean * hgt * 0.05f - hgt * 0.16f, by - hgt * 0.66f, x + lean * hgt * 0.05f + hgt * 0.16f, by - hgt * 0.42f, p)
             p.color = 0xFFFFD6B0.toInt()
-            c.drawCircle(x + lean * hgt * 0.15f, by - hgt * 0.5f, hgt * 0.05f, p)
+            c.drawCircle(x + lean * hgt * 0.17f, by - hgt * 0.52f, hgt * 0.05f, p)
         }
-        // Maria (blauw, gebogen naar het kind), Jozef (staf, baard, lantaarn)
-        figure(bx - bw * 0.17f, bh * 0.66f, 0xFF2A4C9C.toInt(), 0xFFEFEFF8.toInt(), 1f)
-        val jx = bx + bw * 0.15f
-        val jh = bh * 0.95f
-        figure(jx, jh, 0xFF8A5A2B.toInt(), 0xFF5A3A22.toInt(), -1f)
+        // Maria (blauw, sluier, gebogen naar het kind), Jozef (staf, baard, lantaarn)
+        figure(bx - bw * 0.15f, bh * 0.72f, 0xFF2A4C9C.toInt(), 0xFFEFEFF8.toInt(), 1f, 0.42f)
+        val jx = bx + bw * 0.17f
+        val jh = bh * 0.82f
+        figure(jx, jh, 0xFF8A5A2B.toInt(), 0xFF5A3A22.toInt(), -1f, 0.34f)
         p.color = 0xFFE4DCCB.toInt()
-        c.drawOval(jx - jh * 0.08f, by - jh * 0.86f, jx + jh * 0.08f, by - jh * 0.74f, p)
+        c.drawOval(jx - jh * 0.09f, by - jh * 0.87f, jx + jh * 0.09f, by - jh * 0.73f, p)
+        p.color = 0xFFFFD6B0.toInt()
+        c.drawCircle(jx - jh * 0.035f, by - jh * 0.91f, jh * 0.012f, p)
+        c.drawCircle(jx + jh * 0.035f, by - jh * 0.91f, jh * 0.012f, p)
         p.style = Paint.Style.STROKE
-        p.strokeWidth = 2.5f * d
+        p.strokeWidth = 3f * d
         p.color = 0xFF6B4423.toInt()
-        c.drawLine(jx + jh * 0.42f, by, jx + jh * 0.42f, by - jh * 1.05f, p)
-        c.drawLine(jx + jh * 0.42f, by - jh * 1.05f, jx + jh * 0.3f, by - jh * 1.0f, p)
+        c.drawLine(jx + jh * 0.46f, by, jx + jh * 0.46f, by - jh * 1.05f, p)
+        c.drawArc(jx + jh * 0.36f, by - jh * 1.12f, jx + jh * 0.56f, by - jh * 0.96f, 180f, 200f, false, p)
+        c.drawLine(jx - jh * 0.34f, by - jh * 0.5f, jx - jh * 0.34f, by - jh * 0.38f, p)
         p.style = Paint.Style.FILL
-        glow(c, jx - jh * 0.4f, by - jh * 0.3f, jh * 0.3f, 0xFFFFD27A.toInt(), 200)
+        glow(c, jx - jh * 0.34f, by - jh * 0.3f, jh * 0.3f, 0xFFFFD27A.toInt(), 210)
+        p.color = 0xFF3A2218.toInt()
+        c.drawRect(jx - jh * 0.38f, by - jh * 0.38f, jx - jh * 0.3f, by - jh * 0.22f, p)
         p.color = 0xFFFFE8A0.toInt()
-        c.drawCircle(jx - jh * 0.4f, by - jh * 0.3f, jh * 0.04f, p)
+        c.drawRect(jx - jh * 0.365f, by - jh * 0.36f, jx - jh * 0.315f, by - jh * 0.24f, p)
+
+        // de drie koningen met geschenken, rechts van de stal
+        val kingH = bh * 0.7f
+        val kings = intArrayOf(0xFF7B2D8E.toInt(), 0xFFB71C1C.toInt(), 0xFF1B7A4A.toInt())
+        for (k in 0 until 3) {
+            val kx = w * (0.795f + k * 0.075f)
+            val bob = sin(t * 1.2f + k) * 1.5f * d
+            figure(kx, kingH * (1f - k * 0.04f), kings[k], 0xFFF2C94C.toInt(), -1f, 0.22f, false)
+            val kh = kingH * (1f - k * 0.04f)
+            // kroon
+            p.color = 0xFFF2C94C.toInt()
+            path.reset()
+            path.moveTo(kx - kh * 0.13f, by - kh * 1.0f)
+            path.lineTo(kx - kh * 0.13f, by - kh * 1.12f)
+            path.lineTo(kx - kh * 0.06f, by - kh * 1.07f)
+            path.lineTo(kx, by - kh * 1.14f)
+            path.lineTo(kx + kh * 0.06f, by - kh * 1.07f)
+            path.lineTo(kx + kh * 0.13f, by - kh * 1.12f)
+            path.lineTo(kx + kh * 0.13f, by - kh * 1.0f)
+            path.close()
+            c.drawPath(path, p)
+            // geschenk in de handen
+            val gy = by - kh * 0.5f + bob
+            val gx = kx - kh * 0.2f
+            when (k) {
+                0 -> { p.color = 0xFFD9A441.toInt(); c.drawRect(gx - kh * 0.1f, gy - kh * 0.12f, gx + kh * 0.1f, gy + kh * 0.06f, p) }
+                1 -> { p.color = 0xFFF4B400.toInt(); c.drawOval(gx - kh * 0.08f, gy - kh * 0.14f, gx + kh * 0.08f, gy + kh * 0.06f, p) }
+                else -> { p.color = 0xFF8E24AA.toInt(); c.drawRect(gx - kh * 0.09f, gy - kh * 0.1f, gx + kh * 0.09f, gy + kh * 0.07f, p)
+                    p.color = 0xFFFFE8B0.toInt(); c.drawRect(gx - kh * 0.01f, gy - kh * 0.1f, gx + kh * 0.01f, gy + kh * 0.07f, p) }
+            }
+            glow(c, gx, gy - kh * 0.03f, kh * 0.2f, 0xFFFFE8A0.toInt(), 90)
+        }
 
         // kribbe met stro en kindje
         p.color = 0xFF8A5A2B.toInt()
@@ -1264,11 +1321,9 @@ class NativityScene(ctx: Context, d: Float) : Scene(ctx, d) {
             p.color = 0xFF2B2B2B.toInt()
             c.drawCircle(x + s * 0.75f, by - s * 0.85f, s * 0.28f, p)
         }
-        sheep(bx - bw * 0.46f, bw * 0.05f)
-        sheep(bx + bw * 0.45f, bw * 0.045f)
 
         // engel boven de stal
-        val ax = bx - bw * 0.2f
+        val ax = bx - bw * 0.1f
         val ay = by - bh * 2.2f + sin(t * 1.5f) * 4f * d
         glow(c, ax, ay, bw * 0.12f, 0xFFFFF3B0.toInt(), 130)
         p.color = 0xFFFFFFFF.toInt()
