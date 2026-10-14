@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Christmas Lights</string>
+    <string name="tile_label">Christmas Lights</string>
+    <string name="tree_label">Christmas tree</string>
+    <string name="tree_desc">Your own Christmas tree with twinkling lights</string>
+    <string name="widget_countdown_label">Countdown to Christmas</string>
+    <string name="widget_countdown_desc">How many days are left until Christmas</string>
+    <string name="widget_tree_label">Tree with lights</string>
+    <string name="widget_tree_desc">Your Christmas tree with lights on the home screen</string>
+    <string name="widget_today_label">Scene of the day</string>
+    <string name="widget_today_desc">Today\'s Christmas scene and the countdown</string>
+</resources>

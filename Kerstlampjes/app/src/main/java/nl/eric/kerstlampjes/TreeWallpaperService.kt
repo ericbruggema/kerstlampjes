@@ -22,12 +22,13 @@ class TreeWallpaperService : WallpaperService() {
         private val tick = object : Runnable {
             override fun run() {
                 drawFrame()
-                if (visible) handler.postDelayed(this, 33L)
+                if (visible) handler.postDelayed(this, Perf.frameDelay(this@TreeWallpaperService))
             }
         }
 
         override fun onCreate(surfaceHolder: SurfaceHolder) {
             super.onCreate(surfaceHolder)
+            Tr.init(this@TreeWallpaperService)
             setTouchEventsEnabled(true)
         }
 

@@ -54,13 +54,13 @@ object Credits {
         )
     )
 
-    fun shortTree(i: Int): String = "Foto: ${trees[i].author} · ${trees[i].license}"
+    fun shortTree(i: Int): String = Tr.t("Foto") + ": ${trees[i].author} · ${trees[i].license}"
 
-    fun short(i: Int): String = "Foto: ${photos[i].author} · ${photos[i].license}"
+    fun short(i: Int): String = Tr.t("Foto") + ": ${photos[i].author} · ${photos[i].license}"
 
     fun asText(): String = buildString {
-        append("Foto's van Wikimedia Commons (opgehaald $RETRIEVED). ")
-        append("Voor gebruik in de app zijn ze verkleind en bijgesneden.\n\n")
+        append(Tr.f("Foto's van Wikimedia Commons (opgehaald %s). ", RETRIEVED))
+        append(Tr.t("Voor gebruik in de app zijn ze verkleind en bijgesneden.") + "\n\n")
         photos.forEach {
             append("• ${it.title}\n  ${it.author} — ${it.license}\n  ${it.page}\n\n")
         }

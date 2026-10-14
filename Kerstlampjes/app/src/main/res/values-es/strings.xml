@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Luces de Navidad</string>
+    <string name="tile_label">Luces de Navidad</string>
+    <string name="tree_label">Árbol de Navidad</string>
+    <string name="tree_desc">Tu propio árbol de Navidad con luces parpadeantes</string>
+    <string name="widget_countdown_label">Cuenta atrás para Navidad</string>
+    <string name="widget_countdown_desc">Cuántos días faltan para Navidad</string>
+    <string name="widget_tree_label">Árbol con luces</string>
+    <string name="widget_tree_desc">Tu árbol de Navidad con luces en la pantalla de inicio</string>
+    <string name="widget_today_label">Escena del día</string>
+    <string name="widget_today_desc">La escena navideña del día y la cuenta atrás</string>
+</resources>

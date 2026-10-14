@@ -39,6 +39,42 @@
             </intent-filter>
         </receiver>
 
+        <receiver
+            android:name=".CountdownWidget"
+            android:exported="true"
+            android:label="@string/widget_countdown_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_countdown" />
+        </receiver>
+
+        <receiver
+            android:name=".TodayWidget"
+            android:exported="true"
+            android:label="@string/widget_today_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_today" />
+        </receiver>
+
+        <receiver
+            android:name=".TreeWidget"
+            android:exported="true"
+            android:label="@string/widget_tree_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_tree" />
+        </receiver>
+
         <service
             android:name=".TreeWallpaperService"
             android:exported="true"

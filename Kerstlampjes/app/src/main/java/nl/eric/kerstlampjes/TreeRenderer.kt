@@ -54,7 +54,11 @@ object TreeStyles {
     val COUNT get() = all.size + HearthStyles.all.size + SceneHost.COUNT
     /** 0 = bomen, 1 = haarden */
     fun categoryOf(i: Int) = if (i < all.size) 0 else if (i < all.size + HearthStyles.all.size) 1 else 2
-    fun nameOf(i: Int) = when (categoryOf(i)) {
+    /** Vertaalde naam voor in de interface. */
+    fun nameOf(i: Int) = Tr.t(keyOf(i))
+
+    /** Vaste (Nederlandse) naam, gebruikt als opslagsleutel. */
+    fun keyOf(i: Int) = when (categoryOf(i)) {
         0 -> all[i].name
         1 -> HearthStyles.all[(i - all.size).coerceIn(0, HearthStyles.all.size - 1)].name
         else -> SceneHost.names[(i - all.size - HearthStyles.all.size).coerceIn(0, SceneHost.COUNT - 1)]
@@ -105,8 +109,10 @@ object TreeStyles {
 object LampStyles {
     val names = arrayOf(
         "Klassieke lampjes", "Mini-ledjes", "Glazen bollen", "Vlammetjes",
-        "Sterretjes", "Hartjes", "IJspegels", "Sneeuwvlokken"
+        "Sterretjes", "Hartjes", "IJspegels", "Sneeuwvlokken", "Mix van alles"
     )
+    const val MIX = 8
+    const val BASIC = 8   // aantal losse soorten
 }
 
 /** Opgeslagen boom: lampjes per boomstijl + effect-instellingen. */
@@ -118,15 +124,26 @@ object TreeStore {
         r.mode = p.getInt("tree_mode", Modes.TWINKLE)
         r.speed = p.getInt("tree_speed", 5)
         r.orient = p.getInt("tree_orient", 0)
-        r.lamp = p.getInt("lamp_style", 0).coerceIn(0, LampStyles.names.size - 1)
         r.style = p.getInt("tree_style", 0)
         loadBulbs(p, r)
     }
 
-    /** Sleutel op naam, zodat het toevoegen van nieuwe bomen de opgeslagen lampjes niet door elkaar haalt. */
-    private fun bulbKey(style: Int) = "tree_bulbs_n_" + TreeStyles.nameOf(style)
+    /** Toont een stijl (voor widgets) zonder iets op te slaan. */
+    fun preview(ctx: Context, r: TreeRenderer, style: Int) {
+        val p = ctx.getSharedPreferences(FILE, Context.MODE_PRIVATE)
+        r.mode = Modes.TWINKLE
+        r.speed = p.getInt("tree_speed", 5)
+        r.orient = p.getInt("tree_orient", 0)
+        r.style = style
+        loadBulbs(p, r)
+    }
 
-    private fun loadBulbs(p: android.content.SharedPreferences, r: TreeRenderer) {
+    /** Sleutel op naam, zodat het toevoegen van nieuwe bomen de opgeslagen lampjes niet door elkaar haalt. */
+    private fun bulbKey(style: Int) = "tree_bulbs_n_" + TreeStyles.keyOf(style)
+    private fun lampKey(style: Int) = "lamp_n_" + TreeStyles.keyOf(style)
+
+    fun loadBulbs(p: android.content.SharedPreferences, r: TreeRenderer) {
+        r.lamp = p.getInt(lampKey(r.style), p.getInt("lamp_style", 0)).coerceIn(0, LampStyles.names.size - 1)
         r.bulbs.clear()
         val raw = p.getString(bulbKey(r.style), null)
             ?: if (r.style == 0) p.getString("tree_bulbs_0", null) ?: p.getString("tree_bulbs", null) else null
@@ -145,10 +162,25 @@ object TreeStore {
         }
     }
 
-    fun save(ctx: Context, r: TreeRenderer) {
-        val s = r.bulbs.joinToString(";") {
-            String.format(Locale.US, "%.4f,%.4f,%d", it.x, it.y, it.color)
+    fun bulbString(r: TreeRenderer) = r.bulbs.joinToString(";") {
+        String.format(Locale.US, "%.4f,%.4f,%d", it.x, it.y, it.color)
+    }
+
+    fun applyBulbString(r: TreeRenderer, raw: String) {
+        r.bulbs.clear()
+        raw.split(';').forEach { part ->
+            val f = part.split(',')
+            if (f.size == 3) {
+                val x = f[0].toFloatOrNull(); val y = f[1].toFloatOrNull(); val c = f[2].toIntOrNull()
+                if (x != null && y != null && c != null) {
+                    r.bulbs.add(TreeRenderer.Bulb(x, y, c.coerceIn(0, TreeColors.all.size - 1)))
+                }
+            }
         }
+    }
+
+    fun save(ctx: Context, r: TreeRenderer) {
+        val s = bulbString(r)
         ctx.getSharedPreferences(FILE, Context.MODE_PRIVATE).edit()
             .putString(bulbKey(r.style), s)
             .putInt("tree_style", r.style)
@@ -157,6 +189,7 @@ object TreeStore {
             .putInt("tree_speed", r.speed)
             .putInt("tree_orient", r.orient)
             .putInt("lamp_style", r.lamp)
+            .putInt(lampKey(r.style), r.lamp)
             .apply()
     }
 
@@ -230,12 +263,12 @@ object TreeEggs {
         val cal = java.util.Calendar.getInstance()
         val text = when (egg) {
             SINTERKLAAS ->
-                if (cal.get(java.util.Calendar.DAY_OF_MONTH) == 5) "🎁 Pakjesavond! Is je schoen al gezet?"
-                else "🎁 Vrolijk Sinterklaasfeest!"
-            KERSTAVOND -> "✨ Kerstavond — stille nacht, heilige nacht"
-            KERSTMORGEN -> "🎅 Goedemorgen! Vrolijk kerstfeest — zijn de cadeautjes al open?"
-            KERSTDAG -> "🎄 Eerste kerstdag — vrolijk kerstfeest!"
-            TWEEDE_KERSTDAG -> "🎄 Tweede kerstdag — geniet van de rust"
+                if (cal.get(java.util.Calendar.DAY_OF_MONTH) == 5) Tr.t("🎁 Pakjesavond! Is je schoen al gezet?")
+                else Tr.t("🎁 Vrolijk Sinterklaasfeest!")
+            KERSTAVOND -> Tr.t("✨ Kerstavond — stille nacht, heilige nacht")
+            KERSTMORGEN -> Tr.t("🎅 Goedemorgen! Vrolijk kerstfeest — zijn de cadeautjes al open?")
+            KERSTDAG -> Tr.t("🎄 Eerste kerstdag — vrolijk kerstfeest!")
+            TWEEDE_KERSTDAG -> Tr.t("🎄 Tweede kerstdag — geniet van de rust")
             OUDEJAARSAVOND -> {
                 val end = java.util.Calendar.getInstance().apply {
                     add(java.util.Calendar.DAY_OF_YEAR, 1)
@@ -243,16 +276,16 @@ object TreeEggs {
                     set(java.util.Calendar.SECOND, 0); set(java.util.Calendar.MILLISECOND, 0)
                 }
                 val left = ((end.timeInMillis - System.currentTimeMillis()) / 1000).coerceAtLeast(0)
-                String.format(Locale.US, "🎆 Nog %02d:%02d:%02d tot het nieuwe jaar", left / 3600, left % 3600 / 60, left % 60)
+                String.format(Locale.US, Tr.t("🎆 Nog %02d:%02d:%02d tot het nieuwe jaar"), left / 3600, left % 3600 / 60, left % 60)
             }
             NIEUWJAAR -> {
                 val y = cal.get(java.util.Calendar.YEAR)
-                "🥳 Gelukkig nieuwjaar $y!"
+                Tr.f("🥳 Gelukkig nieuwjaar %d!", y)
             }
-            DRIEKONINGEN -> "⭐ Driekoningen — volg de ster"
+            DRIEKONINGEN -> Tr.t("⭐ Driekoningen — volg de ster")
             else -> return null
         }
-        return if (preview) "$text  (voorbeeld)" else text
+        return if (preview) "$text  (${Tr.t("voorbeeld")})" else text
     }
 }
 
@@ -1047,7 +1080,8 @@ class TreeRenderer(private val density: Float, private val ctx: Context? = null)
             c.drawCircle(0f, 0f, z * 2.2f, glowPaint)
             c.translate(0f, -glassCy)
 
-            drawLamp(c, z, lerp(dark(baseC), baseC, k), k)
+            val ls = if (lamp == LampStyles.MIX) Math.floorMod((b.x * 977f + b.y * 131f).toInt() * 31 + i, LampStyles.BASIC) else lamp
+            drawLamp(c, z, lerp(dark(baseC), baseC, k), k, ls)
             c.restore()
         }
 
@@ -1058,10 +1092,10 @@ class TreeRenderer(private val density: Float, private val ctx: Context? = null)
     private val lampPath = Path()
 
     /** Eén lampje, hangend aan de draad bij (0,0), in de gekozen stijl. */
-    private fun drawLamp(c: Canvas, z: Float, col: Int, k: Float) {
+    private fun drawLamp(c: Canvas, z: Float, col: Int, k: Float, style: Int) {
         bulbPaint.color = col
         shinePaint.alpha = (60 + 160 * k).toInt()
-        when (lamp) {
+        when (style) {
             1 -> {   // mini-ledje
                 c.drawRoundRect(-z * 0.12f, -z * 0.05f, z * 0.12f, z * 0.32f, z * 0.05f, z * 0.05f, capPaint)
                 c.drawCircle(0f, z * 0.62f, z * 0.34f, bulbPaint)
@@ -1165,7 +1199,7 @@ class TreeRenderer(private val density: Float, private val ctx: Context? = null)
         if (b == null) {
             treeCreditPaint.textSize = 15f * density
             treeCreditPaint.textAlign = Paint.Align.CENTER
-            c.drawText("📷 Kies een eigen foto met de knop onderaan", w / 2f, h * 0.5f, treeCreditPaint)
+            c.drawText(Tr.t("📷 Kies een eigen foto met de knop onderaan"), w / 2f, h * 0.5f, treeCreditPaint)
             treeCreditPaint.textAlign = Paint.Align.LEFT
             return
         }

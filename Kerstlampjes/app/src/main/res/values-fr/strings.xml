@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lumières de Noël</string>
+    <string name="tile_label">Lumières de Noël</string>
+    <string name="tree_label">Sapin de Noël</string>
+    <string name="tree_desc">Votre propre sapin avec des guirlandes scintillantes</string>
+    <string name="widget_countdown_label">Compte à rebours jusqu\'à Noël</string>
+    <string name="widget_countdown_desc">Combien de jours il reste avant Noël</string>
+    <string name="widget_tree_label">Sapin illuminé</string>
+    <string name="widget_tree_desc">Votre sapin illuminé sur l\'écran d\'accueil</string>
+    <string name="widget_today_label">Scène du jour</string>
+    <string name="widget_today_desc">La scène de Noël du jour et le compte à rebours</string>
+</resources>

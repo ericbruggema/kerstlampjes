@@ -193,7 +193,7 @@ class SnowGlobeScene(ctx: Context, d: Float) : Scene(ctx, d) {
         c.drawRoundRect(cx - r * 0.78f, cy + r * 0.72f, cx + r * 0.78f, cy + r * 1.18f, 24f, 24f, p)
         p.color = 0xFFD9A441.toInt()
         c.drawRect(cx - r * 0.78f, cy + r * 0.86f, cx + r * 0.78f, cy + r * 0.9f, p)
-        text(c, "Gelukkig kerstfeest", cx, cy + r * 1.08f, 15f, 0xFFFFE8B0.toInt(), true)
+        text(c, Tr.t("Gelukkig kerstfeest"), cx, cy + r * 1.08f, 15f, 0xFFFFE8B0.toInt(), true)
 
         // bol-inhoud
         path.reset()
@@ -327,9 +327,9 @@ class AdventCalendarScene(ctx: Context, d: Float) : Scene(ctx, d) {
         val t = now / 1000f
         sky(c, 0xFF1B0F2E.toInt(), 0xFF0E2B22.toInt())
         stars(c, t, 0.15f)
-        text(c, "Adventskalender", w / 2, h * 0.075f, 24f, 0xFFFFE8B0.toInt(), true)
+        text(c, Tr.t("Adventskalender"), w / 2, h * 0.075f, 24f, 0xFFFFE8B0.toInt(), true)
         val (m, dd) = today()
-        text(c, if (m == 12) "Vandaag: ${dd} december" else "Buiten december: alles mag open", w / 2, h * 0.105f, 13f, 0xFFB8C9BE.toInt())
+        text(c, if (m == 12) Tr.f("Vandaag: %d december", dd) else Tr.t("Buiten december: alles mag open"), w / 2, h * 0.105f, 13f, 0xFFB8C9BE.toInt())
         for (i in 0 until 24) {
             val r = cell(i)
             val day = i + 1
@@ -372,9 +372,9 @@ class AdventCalendarScene(ctx: Context, d: Float) : Scene(ctx, d) {
             val a = min(1f, (now - shownAt) / 300f)
             p.color = ((200 * a).toInt() shl 24) or 0x000000
             c.drawRoundRect(w * 0.08f, h * 0.88f, w * 0.92f, h * 0.97f, 20f, 20f, p)
-            text(c, "Dag ${shownMsg + 1}: ${messages[shownMsg]}", w / 2, h * 0.935f, 16f, 0xFFFFE8B0.toInt(), true)
+            text(c, Tr.f("Dag %d: %s", shownMsg + 1, Tr.t(messages[shownMsg])), w / 2, h * 0.935f, 16f, 0xFFFFE8B0.toInt(), true)
         } else if (lockedAt > 0 && now - lockedAt < 2000) {
-            text(c, "Nog niet! Dit luikje is voor dag ${lockedDoor + 1}", w / 2, h * 0.935f, 15f, 0xFFFFB4B4.toInt(), true)
+            text(c, Tr.f("Nog niet! Dit luikje is voor dag %d", lockedDoor + 1), w / 2, h * 0.935f, 15f, 0xFFFFB4B4.toInt(), true)
         }
     }
 }
@@ -491,10 +491,10 @@ class AdventWreathScene(ctx: Context, d: Float) : Scene(ctx, d) {
             }
         }
         val names = arrayOf("1e", "2e", "3e", "4e")
-        text(c, "$anyLit van 4 kaarsen branden", cx, h * 0.80f, 15f, 0xFFFFE8B0.toInt(), true)
-        text(c, "Advent", cx, h * 0.12f, 28f, 0xFFFFE8B0.toInt(), true)
-        if (anyLit == 4) text(c, "Het is bijna kerstmis!", cx, h * 0.16f, 14f, 0xFFB8C9BE.toInt())
-        else if (anyLit > 0) text(c, "${names[anyLit - 1]} advent", cx, h * 0.16f, 14f, 0xFFB8C9BE.toInt())
+        text(c, Tr.f("%d van 4 kaarsen branden", anyLit), cx, h * 0.80f, 15f, 0xFFFFE8B0.toInt(), true)
+        text(c, Tr.t("Advent"), cx, h * 0.12f, 28f, 0xFFFFE8B0.toInt(), true)
+        if (anyLit == 4) text(c, Tr.t("Het is bijna kerstmis!"), cx, h * 0.16f, 14f, 0xFFB8C9BE.toInt())
+        else if (anyLit > 0) text(c, Tr.f("%de advent", anyLit), cx, h * 0.16f, 14f, 0xFFB8C9BE.toInt())
     }
 }
 
@@ -502,7 +502,7 @@ class AdventWreathScene(ctx: Context, d: Float) : Scene(ctx, d) {
 
 class VillageScene(ctx: Context, d: Float) : Scene(ctx, d) {
     override val name = "Kerstdorp"
-    override val hint = "Tik op een huisje voor licht, tik op de trein om te toeteren."
+    override val hint = "Tik op een huisje voor licht, tik op de trein om te toeteren, tik op de lucht voor een sterretje. Houd ingedrukt op het spoor om de trein te laten stoppen."
 
     private val lit = BooleanArray(6) { true }
     private var tootAt = -10_000L
@@ -532,6 +532,17 @@ class VillageScene(ctx: Context, d: Float) : Scene(ctx, d) {
 
     private var trainPos = 0f
     private var lastT = 0L
+    private var stopped = false
+    private class Pop(val x: Float, val y: Float, val born: Long)
+    private val pops = ArrayList<Pop>()
+
+    override fun longPress(x: Float, y: Float, now: Long): Boolean {
+        if (y in (h * 0.70f)..(h * 0.90f)) {
+            stopped = !stopped
+            return true
+        }
+        return false
+    }
 
     override fun tap(x: Float, y: Float, now: Long): Boolean {
         for (i in 0 until 6) {
@@ -545,6 +556,10 @@ class VillageScene(ctx: Context, d: Float) : Scene(ctx, d) {
             tootAt = now
             return true
         }
+        if (y < h * 0.5f) {
+            pops.add(Pop(x, y, now))
+            return true
+        }
         return false
     }
 
@@ -552,7 +567,7 @@ class VillageScene(ctx: Context, d: Float) : Scene(ctx, d) {
         val t = now / 1000f
         val dt = if (lastT == 0L) 0.016f else ((now - lastT) / 1000f).coerceIn(0.001f, 0.05f)
         lastT = now
-        trainPos += dt * (if (now - tootAt < 2500) 0.22f else 0.10f)
+        if (!stopped) trainPos += dt * (if (now - tootAt < 2500) 0.22f else 0.10f)
         if (trainPos > 1.95f) trainPos -= 1.95f
 
         sky(c, 0xFF08122B.toInt(), 0xFF1B2F55.toInt(), 0.7f)
@@ -614,8 +629,24 @@ class VillageScene(ctx: Context, d: Float) : Scene(ctx, d) {
             c.drawCircle(x + len * 0.2f, ty + 14f * d, 7f * d, p)
             c.drawCircle(x + len * 0.75f, ty + 14f * d, 7f * d, p)
         }
-        if (now - tootAt < 1200) text(c, "TOET TOET!", head, ty - 70f * d, 18f, 0xFFFFE8B0.toInt(), true)
+        if (now - tootAt < 1200) text(c, Tr.t("TOET TOET!"), head, ty - 70f * d, 18f, 0xFFFFE8B0.toInt(), true)
+        if (stopped) text(c, Tr.t("Station! Houd ingedrukt om weer te rijden"), w / 2, h * 0.93f, 14f, 0xFFFFE8B0.toInt(), true)
         snow(c, flakes, t)
+        val pi = pops.iterator()
+        while (pi.hasNext()) {
+            val o = pi.next()
+            val a = (now - o.born) / 1200f
+            if (a > 1f) { pi.remove(); continue }
+            p.style = Paint.Style.FILL
+            p.color = 0xFFFFF3B0.toInt()
+            p.alpha = (255 * (1f - a)).toInt()
+            for (k in 0 until 8) {
+                val ang = k * PI.toFloat() / 4f
+                val r1 = a * 36f * d
+                c.drawCircle(o.x + cos(ang) * r1, o.y + sin(ang) * r1, (3f - a * 2f) * d, p)
+            }
+            p.alpha = 255
+        }
     }
 }
 
@@ -623,7 +654,7 @@ class VillageScene(ctx: Context, d: Float) : Scene(ctx, d) {
 
 class SleighScene(ctx: Context, d: Float) : Scene(ctx, d) {
     override val name = "Slee van de kerstman"
-    override val hint = "Tik op de slee voor een regen van cadeautjes. Tik op de lucht voor een sterretje."
+    override val hint = "Tik op de slee voor een regen van cadeautjes. Tik op de lucht voor een sterretje. Houd ingedrukt: de rendieren geven gas!"
 
     private class Gift(var x: Float, var y: Float, var vy: Float, val color: Int, var rot: Float, var born: Long)
     private class Spark(val x: Float, val y: Float, val born: Long)
@@ -632,6 +663,14 @@ class SleighScene(ctx: Context, d: Float) : Scene(ctx, d) {
     private val sparks = ArrayList<Spark>()
     private var sleighX = 0f
     private var sleighY = 0f
+    private var phase = 0f
+    private var lastDraw = 0L
+    private var turboUntil = -1L
+
+    override fun longPress(x: Float, y: Float, now: Long): Boolean {
+        turboUntil = now + 4000
+        return true
+    }
     private val colors = intArrayOf(0xFFD7263D.toInt(), 0xFF2E86DE.toInt(), 0xFF1E9E57.toInt(), 0xFFF4B400.toInt(), 0xFFB36BFF.toInt())
 
     override fun tap(x: Float, y: Float, now: Long): Boolean {
@@ -666,7 +705,11 @@ class SleighScene(ctx: Context, d: Float) : Scene(ctx, d) {
 
         // slee + rendieren vliegen een lus
         val period = 14f
-        val ph = (t % period) / period
+        val dts = if (lastDraw == 0L) 0.016f else ((now - lastDraw) / 1000f).coerceIn(0f, 0.1f)
+        lastDraw = now
+        phase = (phase + dts / period * (if (now < turboUntil) 2.6f else 1f)) % 1f
+        val ph = phase
+        if (now < turboUntil) text(c, Tr.t("🦌 Rudolf geeft gas!"), w / 2, h * 0.08f, 18f, 0xFFFFE8B0.toInt(), true)
         sleighX = -w * 0.62f + ph * w * 1.95f
         sleighY = h * 0.30f + sin(ph * 2f * PI.toFloat() * 2f) * h * 0.06f + sin(t * 2f) * h * 0.008f
         val tilt = cos(ph * 2f * PI.toFloat() * 2f) * 6f
@@ -900,9 +943,9 @@ class SnowmanScene(ctx: Context, d: Float) : Scene(ctx, d) {
         }
 
         snow(c, flakes, t, 210)
-        text(c, "Sneeuwpop", cx, h * 0.09f, 26f, 0xFFFFE8B0.toInt(), true)
-        text(c, labels[stage], cx, h * 0.135f, 15f, 0xFFB8C9BE.toInt())
-        if (stage >= 7) text(c, "Tik voor andere kleuren", cx, h * 0.17f, 13f, 0xFF8FA597.toInt())
+        text(c, Tr.t("Sneeuwpop"), cx, h * 0.09f, 26f, 0xFFFFE8B0.toInt(), true)
+        text(c, Tr.t(labels[stage]), cx, h * 0.135f, 15f, 0xFFB8C9BE.toInt())
+        if (stage >= 7) text(c, Tr.t("Tik voor andere kleuren"), cx, h * 0.17f, 13f, 0xFF8FA597.toInt())
     }
 }
 
@@ -1063,7 +1106,7 @@ class IceRinkScene(ctx: Context, d: Float) : Scene(ctx, d) {
             c.restore()
         }
         snow(c, flakes, t, 200)
-        text(c, "IJsbaan", cx, h * 0.09f, 26f, 0xFFE8F4FF.toInt(), true)
+        text(c, Tr.t("IJsbaan"), cx, h * 0.09f, 26f, 0xFFE8F4FF.toInt(), true)
     }
 }
 
@@ -1071,15 +1114,48 @@ class IceRinkScene(ctx: Context, d: Float) : Scene(ctx, d) {
 
 class NativityScene(ctx: Context, d: Float) : Scene(ctx, d) {
     override val name = "Kerststal"
-    override val hint = "Tik op de sterrenhemel om een wens te doen."
+    override val hint = "Tik op de sterrenhemel om een wens te doen. Tik op de figuren: ze reageren."
 
     private class Wish(val x: Float, val y: Float, val born: Long)
 
     private val wishes = ArrayList<Wish>()
     private var count = prefs.getInt("wish_count", 0)
     private val flakes = Flakes(0, 1)
+    private var bubble = ""
+    private var bubbleX = 0f
+    private var bubbleY = 0f
+    private var bubbleAt = -10_000L
+
+    private fun say(text: String, x: Float, y: Float, now: Long) {
+        bubble = text; bubbleX = x; bubbleY = y; bubbleAt = now
+    }
 
     override fun tap(x: Float, y: Float, now: Long): Boolean {
+        val bx = w * 0.40f
+        val bw = w * 0.62f
+        val by = h * 0.84f
+        val bh = h * 0.235f
+        class Who(val x: Float, val hgt: Float, val text: String)
+        val who = listOf(
+            Who(bx - bw * 0.15f, bh * 0.72f, "💙 Sst... hij slaapt"),
+            Who(bx + bw * 0.17f, bh * 0.82f, "Ik waak over jullie"),
+            Who(w * 0.795f, bh * 0.7f, "Goud!"),
+            Who(w * 0.87f, bh * 0.67f, "Wierook!"),
+            Who(w * 0.945f, bh * 0.64f, "Mirre!"),
+            Who(bx - bw * 0.39f, bh * 0.4f, "Boe!"),
+            Who(bx + bw * 0.39f, bh * 0.35f, "Ia-ia!"),
+            Who(bx, bh * 0.34f, "👶 Koetjoe, kleintje")
+        )
+        for (o in who) {
+            if (abs(x - o.x) < max(o.hgt * 0.45f, 36f * d) && y > by - o.hgt * 1.25f && y < by + 8f * d) {
+                say(Tr.t(o.text), o.x, by - o.hgt * 1.25f, now)
+                return true
+            }
+        }
+        if (abs(x - (bx - bw * 0.1f)) < bw * 0.12f && abs(y - (by - bh * 2.2f)) < bh * 0.4f) {
+            say(Tr.t("Vrede op aarde!"), bx - bw * 0.1f, by - bh * 2.5f, now)
+            return true
+        }
         if (y < h * 0.55f) {
             wishes.add(Wish(x, y, now))
             count++
@@ -1351,8 +1427,27 @@ class NativityScene(ctx: Context, d: Float) : Scene(ctx, d) {
             c.drawCircle(wsh.x, wsh.y - a * 40f * d, 4f * d * (1f - a * 0.5f), p)
             p.alpha = 255
         }
-        text(c, "Kerststal", w * 0.28f, h * 0.075f, 26f, 0xFFFFE8B0.toInt(), true)
-        text(c, "Wensen gedaan: $count", w / 2, h * 0.975f, 13f, 0xFFB8C9BE.toInt())
+        text(c, Tr.t("Kerststal"), w * 0.28f, h * 0.075f, 26f, 0xFFFFE8B0.toInt(), true)
+        if (now - bubbleAt < 2400) {
+            val a = min(1f, (now - bubbleAt) / 150f) * min(1f, (2400 - (now - bubbleAt)) / 300f)
+            textPaint.textSize = 14f * d
+            textPaint.typeface = Typeface.DEFAULT_BOLD
+            val tw = textPaint.measureText(bubble) + 24f * d
+            val cx = bubbleX.coerceIn(tw / 2 + 4f * d, w - tw / 2 - 4f * d)
+            val cy = bubbleY - 10f * d
+            p.style = Paint.Style.FILL
+            p.color = 0xFFFFFFFF.toInt()
+            p.alpha = (240 * a).toInt()
+            rect.set(cx - tw / 2, cy - 30f * d, cx + tw / 2, cy)
+            c.drawRoundRect(rect, 14f * d, 14f * d, p)
+            path.reset()
+            path.moveTo(bubbleX - 6f * d, cy); path.lineTo(bubbleX + 6f * d, cy); path.lineTo(bubbleX, cy + 9f * d); path.close()
+            c.drawPath(path, p)
+            p.alpha = 255
+            textPaint.color = 0xFF3A2218.toInt().let { (it and 0x00FFFFFF) or ((255 * a).toInt() shl 24) }
+            c.drawText(bubble, cx, cy - 10f * d, textPaint)
+        }
+        text(c, Tr.f("Wensen gedaan: %d", count), w / 2, h * 0.975f, 13f, 0xFFB8C9BE.toInt())
     }
 }
 
@@ -1384,7 +1479,7 @@ class GiftsScene(ctx: Context, d: Float) : Scene(ctx, d) {
 
     init {
         for (i in 0 until 6) {
-            messages[i] = prefs.getString("gift_msg_$i", messages[i])!!
+            messages[i] = prefs.getString("gift_msg_$i", Tr.t(messages[i]))!!
             unlock[i] = prefs.getInt("gift_unlock_$i", unlock[i])
             opened[i] = prefs.getBoolean("gift_open_$i", false)
         }
@@ -1409,7 +1504,8 @@ class GiftsScene(ctx: Context, d: Float) : Scene(ctx, d) {
         return if (u < 600) now in u..599 else now >= u
     }
 
-    private fun label(u: Int): String = if (u == 0) "altijd" else "${u % 100} ${arrayOf("", "jan", "feb", "mrt", "apr", "mei", "jun", "jul", "aug", "sep", "okt", "nov", "dec")[u / 100]}"
+    private fun label(u: Int): String = if (u == 0) Tr.t("altijd") else "${u % 100} " +
+        Tr.t(arrayOf("", "jan", "feb", "mrt", "apr", "mei", "jun", "jul", "aug", "sep", "okt", "nov", "dec")[u / 100])
 
     override fun tap(x: Float, y: Float, now: Long): Boolean {
         if (showing >= 0) { showing = -1; return true }
@@ -1500,9 +1596,9 @@ class GiftsScene(ctx: Context, d: Float) : Scene(ctx, d) {
             text(c, label(unlock[i]), r.centerX(), r.bottom + 16f * d, 11f, 0xFFB8C9BE.toInt())
         }
 
-        text(c, "Cadeautjes", w / 2, h * 0.07f, 26f, 0xFFFFE8B0.toInt(), true)
+        text(c, Tr.t("Cadeautjes"), w / 2, h * 0.07f, 26f, 0xFFFFE8B0.toInt(), true)
         if (lockedIdx >= 0 && now - lockedAt < 2200) {
-            text(c, "Nog niet! Te openen op ${label(unlock[lockedIdx])}", w / 2, h * 0.98f, 14f, 0xFFFFB4B4.toInt(), true)
+            text(c, Tr.f("Nog niet! Te openen op %s", label(unlock[lockedIdx])), w / 2, h * 0.98f, 14f, 0xFFFFB4B4.toInt(), true)
         }
 
         // bericht
@@ -1517,17 +1613,20 @@ class GiftsScene(ctx: Context, d: Float) : Scene(ctx, d) {
             text(c, "🎁", w / 2, h * 0.37f, 32f)
             // lange berichten over twee regels verdelen
             val msg = messages[showing]
-            val words = msg.split(' ')
             val lines = ArrayList<String>()
-            var cur = ""
-            for (wd in words) {
-                if ((cur + " " + wd).length > 24 && cur.isNotEmpty()) { lines.add(cur); cur = wd } else cur = if (cur.isEmpty()) wd else "$cur $wd"
+            if (!msg.contains(' ')) {
+                lines.addAll(msg.chunked(11))
+            } else {
+                var cur = ""
+                for (wd in msg.split(' ')) {
+                    if ((cur + " " + wd).length > 24 && cur.isNotEmpty()) { lines.add(cur); cur = wd } else cur = if (cur.isEmpty()) wd else "$cur $wd"
+                }
+                if (cur.isNotEmpty()) lines.add(cur)
             }
-            if (cur.isNotEmpty()) lines.add(cur)
             for ((k, ln) in lines.take(4).withIndex()) {
                 text(c, ln, w / 2, h * 0.43f + k * 22f * d, 17f, 0xFF3A2218.toInt(), true)
             }
-            text(c, "Tik om te sluiten", w / 2, h * 0.53f, 11f, 0xFF8A7A6A.toInt())
+            text(c, Tr.t("Tik om te sluiten"), w / 2, h * 0.53f, 11f, 0xFF8A7A6A.toInt())
         }
     }
 }

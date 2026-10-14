@@ -4,4 +4,10 @@
     <string name="tile_label">Kerstlampjes</string>
     <string name="tree_label">Kerstboom</string>
     <string name="tree_desc">Je eigen kerstboom met flikkerende lampjes</string>
+    <string name="widget_countdown_label">Aftellen tot kerst</string>
+    <string name="widget_countdown_desc">Hoeveel dagen het nog is tot kerst</string>
+    <string name="widget_tree_label">Kerstboom met lampjes</string>
+    <string name="widget_tree_desc">Jouw kerstboom met lampjes op het beginscherm</string>
+    <string name="widget_today_label">Scène van vandaag</string>
+    <string name="widget_today_desc">De kerstscène van de dag en het aftellen</string>
 </resources>

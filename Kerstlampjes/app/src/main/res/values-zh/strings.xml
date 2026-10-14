@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">圣诞彩灯</string>
+    <string name="tile_label">圣诞彩灯</string>
+    <string name="tree_label">圣诞树</string>
+    <string name="tree_desc">属于你自己的、闪烁着彩灯的圣诞树</string>
+    <string name="widget_countdown_label">圣诞倒计时</string>
+    <string name="widget_countdown_desc">距离圣诞节还有多少天</string>
+    <string name="widget_tree_label">挂满彩灯的树</string>
+    <string name="widget_tree_desc">在主屏幕上显示你的圣诞树和彩灯</string>
+    <string name="widget_today_label">今日场景</string>
+    <string name="widget_today_desc">今天的圣诞场景和倒计时</string>
+</resources>

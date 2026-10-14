@@ -62,6 +62,7 @@ class LightsService : Service() {
 
     override fun onCreate() {
         super.onCreate()
+        Tr.init(this)
         wm = getSystemService(WINDOW_SERVICE) as WindowManager
         registerReceiver(screenReceiver, IntentFilter().apply {
             addAction(Intent.ACTION_SCREEN_ON)
@@ -128,8 +129,8 @@ class LightsService : Service() {
         val nm = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         if (nm.getNotificationChannel(CHANNEL) == null) {
             nm.createNotificationChannel(
-                NotificationChannel(CHANNEL, "Kerstlampjes", NotificationManager.IMPORTANCE_MIN).apply {
-                    description = "Melding zolang de lampjes branden"
+                NotificationChannel(CHANNEL, Tr.t("Kerstlampjes"), NotificationManager.IMPORTANCE_MIN).apply {
+                    description = Tr.t("Melding zolang de lampjes branden")
                     setShowBadge(false)
                 }
             )
@@ -141,11 +142,11 @@ class LightsService : Service() {
         )
         val n = Notification.Builder(this, CHANNEL)
             .setSmallIcon(R.drawable.ic_bulb)
-            .setContentTitle("Kerstlampjes branden 🎄")
-            .setContentText("Tik om aan te passen")
+            .setContentTitle(Tr.t("Kerstlampjes branden 🎄"))
+            .setContentText(Tr.t("Tik om aan te passen"))
             .setContentIntent(open)
             .setOngoing(true)
-            .addAction(Notification.Action.Builder(null as android.graphics.drawable.Icon?, "Uitzetten", stop).build())
+            .addAction(Notification.Action.Builder(null as android.graphics.drawable.Icon?, Tr.t("Uitzetten"), stop).build())
             .build()
 
         if (Build.VERSION.SDK_INT >= 34) {

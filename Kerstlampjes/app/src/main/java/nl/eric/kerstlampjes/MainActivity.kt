@@ -34,6 +34,7 @@ class MainActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Tr.init(this)
         s = Prefs.load(this)
         setContentView(buildUi())
 
@@ -58,7 +59,7 @@ class MainActivity : Activity() {
         }
 
         root.addView(TextView(this).apply {
-            text = "🎄 Kerstlampjes"
+            text = Tr.t("🎄 Kerstlampjes")
             textSize = 28f
             setTypeface(typeface, Typeface.BOLD)
             setTextColor(0xFFFFF4E0.toInt())
@@ -98,7 +99,7 @@ class MainActivity : Activity() {
         })
 
         root.addView(Button(this).apply {
-            text = "🎄 Bouw je kerstboom"
+            text = Tr.t("🎄 Bouw je kerstboom")
             textSize = 16f
             setTextColor(Color.WHITE)
             background = GradientDrawable().apply {
@@ -107,24 +108,24 @@ class MainActivity : Activity() {
             setOnClickListener { startActivity(Intent(this@MainActivity, TreeActivity::class.java)) }
         }, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, px(52)))
 
-        section(root, "Effect")
-        root.addView(spinner(Modes.names, s.mode) { s = s.copy(mode = it) })
-        section(root, "Kleuren")
-        root.addView(spinner(Palettes.names, s.palette) { s = s.copy(palette = it) })
+        section(root, Tr.t("Effect"))
+        root.addView(spinner(Modes.names.map { Tr.t(it) }.toTypedArray(), s.mode) { s = s.copy(mode = it) })
+        section(root, Tr.t("Kleuren"))
+        root.addView(spinner(Palettes.names.map { Tr.t(it) }.toTypedArray(), s.palette) { s = s.copy(palette = it) })
 
-        section(root, "Uiterlijk")
-        slider(root, "Snelheid", 1, 10, s.speed, "") { s = s.copy(speed = it) }
-        slider(root, "Grootte lampjes", 6, 32, s.bulbSizeDp, " dp") { s = s.copy(bulbSizeDp = it) }
-        slider(root, "Afstand tussen lampjes", 16, 100, s.spacingDp, " dp") { s = s.copy(spacingDp = it) }
-        slider(root, "Doorhang van de draad", 0, 20, s.sagDp, " dp") { s = s.copy(sagDp = it) }
-        slider(root, "Helderheid", 30, 100, s.opacity, " %") { s = s.copy(opacity = it) }
+        section(root, Tr.t("Uiterlijk"))
+        slider(root, Tr.t("Snelheid"), 1, 10, s.speed, "") { s = s.copy(speed = it) }
+        slider(root, Tr.t("Grootte lampjes"), 6, 32, s.bulbSizeDp, " dp") { s = s.copy(bulbSizeDp = it) }
+        slider(root, Tr.t("Afstand tussen lampjes"), 16, 100, s.spacingDp, " dp") { s = s.copy(spacingDp = it) }
+        slider(root, Tr.t("Doorhang van de draad"), 0, 20, s.sagDp, " dp") { s = s.copy(sagDp = it) }
+        slider(root, Tr.t("Helderheid"), 30, 100, s.opacity, " %") { s = s.copy(opacity = it) }
 
-        section(root, "Pasvorm scherm")
-        slider(root, "Afronding hoeken", 0, 80, s.cornerDp, " dp") { s = s.copy(cornerDp = it) }
-        slider(root, "Afstand tot rand", 0, 40, s.insetDp, " dp") { s = s.copy(insetDp = it) }
+        section(root, Tr.t("Pasvorm scherm"))
+        slider(root, Tr.t("Afronding hoeken"), 0, 80, s.cornerDp, " dp") { s = s.copy(cornerDp = it) }
+        slider(root, Tr.t("Afstand tot rand"), 0, 40, s.insetDp, " dp") { s = s.copy(insetDp = it) }
 
         root.addView(TextView(this).apply {
-            text = "Tip: voeg de tegel \"Kerstlampjes\" toe aan je snelle instellingen om ze met één veeg aan en uit te zetten."
+            text = Tr.t("Tip: voeg de tegel \"Kerstlampjes\" toe aan je snelle instellingen om ze met één veeg aan en uit te zetten.")
             setTextColor(0xFF8FA597.toInt())
             textSize = 13f
             setPadding(0, px(20), 0, 0)
@@ -203,18 +204,18 @@ class MainActivity : Activity() {
         val on = LightsService.isRunning
         when {
             !canDraw -> {
-                toggle.text = "Toestemming geven"
-                status.text = "Geef toestemming om boven andere apps te tekenen."
+                toggle.text = Tr.t("Toestemming geven")
+                status.text = Tr.t("Geef toestemming om boven andere apps te tekenen.")
                 tint(0xFFB26A00.toInt())
             }
             on -> {
-                toggle.text = "Lampjes uitzetten"
-                status.text = "De lampjes branden ✨"
+                toggle.text = Tr.t("Lampjes uitzetten")
+                status.text = Tr.t("De lampjes branden ✨")
                 tint(0xFF7A1F1F.toInt())
             }
             else -> {
-                toggle.text = "Lampjes aanzetten"
-                status.text = "Lampjes staan uit."
+                toggle.text = Tr.t("Lampjes aanzetten")
+                status.text = Tr.t("Lampjes staan uit.")
                 tint(0xFF2E7D32.toInt())
             }
         }

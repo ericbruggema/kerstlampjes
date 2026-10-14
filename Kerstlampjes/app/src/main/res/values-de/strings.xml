@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Weihnachtslichter</string>
+    <string name="tile_label">Weihnachtslichter</string>
+    <string name="tree_label">Weihnachtsbaum</string>
+    <string name="tree_desc">Dein eigener Weihnachtsbaum mit funkelnden Lichtern</string>
+    <string name="widget_countdown_label">Countdown bis Weihnachten</string>
+    <string name="widget_countdown_desc">Wie viele Tage es noch bis Weihnachten sind</string>
+    <string name="widget_tree_label">Baum mit Lichtern</string>
+    <string name="widget_tree_desc">Dein Weihnachtsbaum mit Lichtern auf dem Startbildschirm</string>
+    <string name="widget_today_label">Szene des Tages</string>
+    <string name="widget_today_desc">Die Weihnachtsszene des Tages und der Countdown</string>
+</resources>
