@@ -101,6 +101,14 @@ object TreeStyles {
     )
 }
 
+/** Soorten kerstlampjes die je kunt kiezen. */
+object LampStyles {
+    val names = arrayOf(
+        "Klassieke lampjes", "Mini-ledjes", "Glazen bollen", "Vlammetjes",
+        "Sterretjes", "Hartjes", "IJspegels", "Sneeuwvlokken"
+    )
+}
+
 /** Opgeslagen boom: lampjes per boomstijl + effect-instellingen. */
 object TreeStore {
     private const val FILE = "kerstlampjes"
@@ -110,6 +118,7 @@ object TreeStore {
         r.mode = p.getInt("tree_mode", Modes.TWINKLE)
         r.speed = p.getInt("tree_speed", 5)
         r.orient = p.getInt("tree_orient", 0)
+        r.lamp = p.getInt("lamp_style", 0).coerceIn(0, LampStyles.names.size - 1)
         r.style = p.getInt("tree_style", 0)
         loadBulbs(p, r)
     }
@@ -147,6 +156,7 @@ object TreeStore {
             .putInt("tree_mode", r.mode)
             .putInt("tree_speed", r.speed)
             .putInt("tree_orient", r.orient)
+            .putInt("lamp_style", r.lamp)
             .apply()
     }
 
@@ -263,6 +273,7 @@ class TreeRenderer(private val density: Float, private val ctx: Context? = null)
     var speed = 5
     /** 0 = omlaag, 1 = omhoog, 2 = willekeurig */
     var orient = 0
+    var lamp = 0
 
     private var w = 0f
     private var h = 0f
@@ -1036,19 +1047,98 @@ class TreeRenderer(private val density: Float, private val ctx: Context? = null)
             c.drawCircle(0f, 0f, z * 2.2f, glowPaint)
             c.translate(0f, -glassCy)
 
-            // fitting
-            c.drawRoundRect(-z * 0.2f, -z * 0.05f, z * 0.2f, z * 0.5f, z * 0.08f, z * 0.08f, capPaint)
-            // glas
-            bulbPaint.color = lerp(dark(baseC), baseC, k)
-            c.drawPath(glassPath, bulbPaint)
-            // glimlicht
-            shinePaint.alpha = (60 + 160 * k).toInt()
-            c.drawOval(-z * 0.26f, z * 0.62f, -z * 0.08f, z * 1.12f, shinePaint)
+            drawLamp(c, z, lerp(dark(baseC), baseC, k), k)
             c.restore()
         }
 
         if (hasSnow(egg) && (!isFireplace || hearthKind == HearthStyles.CAMPFIRE)) drawSnow(c, t)
         if (egg == TreeEggs.NIEUWJAAR) drawConfetti(c, t)
+    }
+
+    private val lampPath = Path()
+
+    /** Eén lampje, hangend aan de draad bij (0,0), in de gekozen stijl. */
+    private fun drawLamp(c: Canvas, z: Float, col: Int, k: Float) {
+        bulbPaint.color = col
+        shinePaint.alpha = (60 + 160 * k).toInt()
+        when (lamp) {
+            1 -> {   // mini-ledje
+                c.drawRoundRect(-z * 0.12f, -z * 0.05f, z * 0.12f, z * 0.32f, z * 0.05f, z * 0.05f, capPaint)
+                c.drawCircle(0f, z * 0.62f, z * 0.34f, bulbPaint)
+                c.drawCircle(-z * 0.1f, z * 0.52f, z * 0.08f, shinePaint)
+            }
+            2 -> {   // glazen bol
+                c.drawRoundRect(-z * 0.22f, -z * 0.05f, z * 0.22f, z * 0.38f, z * 0.08f, z * 0.08f, capPaint)
+                c.drawCircle(0f, z * 1.02f, z * 0.66f, bulbPaint)
+                c.drawOval(-z * 0.42f, z * 0.68f, -z * 0.12f, z * 1.12f, shinePaint)
+            }
+            3 -> {   // vlammetje
+                c.drawRoundRect(-z * 0.16f, -z * 0.05f, z * 0.16f, z * 0.42f, z * 0.06f, z * 0.06f, capPaint)
+                lampPath.reset()
+                lampPath.moveTo(0f, z * 1.9f)
+                lampPath.cubicTo(z * 0.62f, z * 1.25f, z * 0.5f, z * 0.6f, 0f, z * 0.42f)
+                lampPath.cubicTo(-z * 0.5f, z * 0.6f, -z * 0.62f, z * 1.25f, 0f, z * 1.9f)
+                lampPath.close()
+                c.drawPath(lampPath, bulbPaint)
+                c.drawOval(-z * 0.2f, z * 0.8f, -z * 0.06f, z * 1.25f, shinePaint)
+            }
+            4 -> {   // sterretje
+                c.drawRoundRect(-z * 0.1f, -z * 0.05f, z * 0.1f, z * 0.3f, z * 0.05f, z * 0.05f, capPaint)
+                lampPath.reset()
+                for (i in 0 until 10) {
+                    val r = if (i % 2 == 0) z * 0.78f else z * 0.34f
+                    val a = (-PI / 2 + i * PI / 5).toFloat()
+                    val x = r * cos(a); val y = z * 1.05f + r * sin(a)
+                    if (i == 0) lampPath.moveTo(x, y) else lampPath.lineTo(x, y)
+                }
+                lampPath.close()
+                c.drawPath(lampPath, bulbPaint)
+                c.drawCircle(-z * 0.08f, z * 0.95f, z * 0.08f, shinePaint)
+            }
+            5 -> {   // hartje
+                c.drawRoundRect(-z * 0.1f, -z * 0.05f, z * 0.1f, z * 0.3f, z * 0.05f, z * 0.05f, capPaint)
+                val r = z * 0.62f
+                val cy = z * 1.0f
+                lampPath.reset()
+                lampPath.moveTo(0f, cy + r * 0.95f)
+                lampPath.cubicTo(-r * 1.4f, cy + r * 0.05f, -r * 0.8f, cy - r * 0.95f, 0f, cy - r * 0.35f)
+                lampPath.cubicTo(r * 0.8f, cy - r * 0.95f, r * 1.4f, cy + r * 0.05f, 0f, cy + r * 0.95f)
+                lampPath.close()
+                c.drawPath(lampPath, bulbPaint)
+                c.drawCircle(-r * 0.45f, cy - r * 0.15f, r * 0.13f, shinePaint)
+            }
+            6 -> {   // ijspegel
+                c.drawRoundRect(-z * 0.14f, -z * 0.05f, z * 0.14f, z * 0.3f, z * 0.05f, z * 0.05f, capPaint)
+                lampPath.reset()
+                lampPath.moveTo(-z * 0.3f, z * 0.3f)
+                lampPath.lineTo(z * 0.3f, z * 0.3f)
+                lampPath.lineTo(z * 0.06f, z * 2.1f)
+                lampPath.lineTo(0f, z * 2.25f)
+                lampPath.lineTo(-z * 0.06f, z * 2.1f)
+                lampPath.close()
+                c.drawPath(lampPath, bulbPaint)
+                c.drawRect(-z * 0.2f, z * 0.45f, -z * 0.1f, z * 1.2f, shinePaint)
+            }
+            7 -> {   // sneeuwvlok
+                c.drawRoundRect(-z * 0.1f, -z * 0.05f, z * 0.1f, z * 0.3f, z * 0.05f, z * 0.05f, capPaint)
+                val cy = z * 1.05f
+                val r = z * 0.72f
+                bulbPaint.style = Paint.Style.STROKE
+                bulbPaint.strokeWidth = z * 0.14f
+                bulbPaint.strokeCap = Paint.Cap.ROUND
+                for (i in 0 until 3) {
+                    val a = (i * PI / 3).toFloat()
+                    c.drawLine(-r * cos(a), cy - r * sin(a), r * cos(a), cy + r * sin(a), bulbPaint)
+                }
+                bulbPaint.style = Paint.Style.FILL
+                c.drawCircle(0f, cy, z * 0.16f, shinePaint)
+            }
+            else -> {   // klassieke peer
+                c.drawRoundRect(-z * 0.2f, -z * 0.05f, z * 0.2f, z * 0.5f, z * 0.08f, z * 0.08f, capPaint)
+                c.drawPath(glassPath, bulbPaint)
+                c.drawOval(-z * 0.26f, z * 0.62f, -z * 0.08f, z * 1.12f, shinePaint)
+            }
+        }
     }
 
     private var treeBmp: android.graphics.Bitmap? = null

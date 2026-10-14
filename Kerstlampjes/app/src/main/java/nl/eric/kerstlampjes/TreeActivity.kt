@@ -342,6 +342,13 @@ class TreeActivity : Activity() {
             topMargin = px(8)
         })
         treeOnly.add(pickers)
+        val lampPicker = picker(LampStyles.names, getSharedPreferences("kerstlampjes", MODE_PRIVATE).getInt("lamp_style", 0)) {
+            rendererRef.lamp = it
+            TreeStore.save(this@TreeActivity, rendererRef)
+        }
+        lampPicker.contentDescription = "Soort lampjes"
+        panel.addView(lampPicker, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
+        treeOnly.add(lampPicker)
 
         val speedLabel = TextView(this).apply {
             setTextColor(0xFFE8EFEA.toInt()); textSize = 14f
