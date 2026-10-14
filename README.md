@@ -11,6 +11,8 @@
 [🌍 Talen](#-talen) ·
 [📄 Bronnen](#-bronnen-en-licenties)
 
+🌍 **Lees dit in:** **Nederlands** · [English](README.en.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [中文](README.zh.md)
+
 <img src="website/media/extra-beginscherm.jpg" alt="Randlampjes boven het beginscherm" width="360">
 
 </div>
