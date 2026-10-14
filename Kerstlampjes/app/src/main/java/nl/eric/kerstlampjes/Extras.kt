@@ -125,7 +125,7 @@ object OwnPhoto {
     }
 
     /** Leest een gekozen afbeelding, verkleint die en bewaart hem. */
-    fun import(ctx: Context, uri: android.net.Uri): Boolean = try {
+    fun import(ctx: Context, uri: android.net.Uri, target: File = file(ctx)): Boolean = try {
         val bounds = BitmapFactory.Options().apply { inJustDecodeBounds = true }
         ctx.contentResolver.openInputStream(uri)?.use { BitmapFactory.decodeStream(it, null, bounds) }
         var sample = 1
@@ -133,7 +133,7 @@ object OwnPhoto {
         val opts = BitmapFactory.Options().apply { inSampleSize = sample }
         val bmp = ctx.contentResolver.openInputStream(uri)?.use { BitmapFactory.decodeStream(it, null, opts) }
         if (bmp == null) false else {
-            file(ctx).outputStream().use { bmp.compress(Bitmap.CompressFormat.JPEG, 88, it) }
+            target.outputStream().use { bmp.compress(Bitmap.CompressFormat.JPEG, 88, it) }
             bmp.recycle()
             true
         }

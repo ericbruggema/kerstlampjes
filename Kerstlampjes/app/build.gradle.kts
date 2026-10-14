@@ -19,8 +19,8 @@ android {
         applicationId = "nl.eric.kerstlampjes"
         minSdk = 26
         targetSdk = 35
-        versionCode = 2
-        versionName = "2.0"
+        versionCode = 3
+        versionName = "2.1"
         // Talen die de app kent (overige talen vallen terug op Engels)
         resourceConfigurations += listOf("nl", "en", "de", "fr", "es", "zh")
     }
@@ -58,6 +58,7 @@ android {
 
 dependencies {
     testImplementation("junit:junit:4.13.2")
+    testImplementation("org.json:json:20231013")
 }
 
 // Bewust geen AndroidX-afhankelijkheden voor de app zelf: alleen het Android-framework.

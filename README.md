@@ -2,9 +2,9 @@
 
 # 🎄 Kerstlampjes
 
-**Kerstlampjes op je scherm, een eigen kerstboom, een knapperend haardvuur, interactieve kerstscènes, widgets en live wallpapers. Voor Android.**
+**Een snoer kerstlampjes langs de rand van je scherm, ook boven je beginscherm, je iconen en je widgets. Plus bonus: eigen kerstbomen, haarden, scènes en een editor voor je eigen scène. Voor Android.**
 
-[⬇️ Download de APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.0) ·
+[⬇️ Download de APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.1) ·
 [✨ Functies](#-functies) ·
 [📲 Installeren](#-installeren) ·
 [🛠️ Bouwen](#️-bouwen-uit-de-broncode) ·
@@ -27,6 +27,7 @@
    - [Kerstbomen](#-kerstbomen)
    - [Haarden](#-haarden)
    - [Interactieve scènes](#-interactieve-scènes)
+   - [Eigen scène maken](#-eigen-scène-maken)
    - [Soorten lampjes](#-soorten-lampjes)
    - [Widgets](#-widgets)
    - [Live wallpaper](#-live-wallpaper)
@@ -48,12 +49,20 @@
 
 ## 🎅 Wat is het?
 
-Kerstlampjes is een Android-app die je telefoon verandert in een kerstversiering:
+Kerstlampjes is een Android-app die je telefoon verandert in een kerstversiering. **De hoofdzaak zijn de lampjes
+op de achtergrond van je telefoon**: een lichtsnoer om de rand van je scherm dat ook boven je beginscherm blijft staan.
+Alles daarna is bonus.
 
-- een **lichtsnoer langs de rand van je scherm**, dat óók boven je beginscherm, je iconen, widgets en andere apps blijft staan;
+**Hoofdzaak**
+
+- een **lichtsnoer langs de rand van je scherm**, dat óók boven je beginscherm, je iconen, widgets en andere apps blijft staan, met 5 effecten, 5 kleurenschema's, aan en uit via een snelle-instellingen-tegel, terug na een herstart en (in te stellen) reagerend op geluid;
+
+**Bonus**
+
 - **19 kerstbomen** (14 getekend, 5 op foto) plus je **eigen foto**, waar je zelf lampjes in hangt;
 - **12 haarden** met echt deeltjesvuur of foto's van een knapperend haardvuur;
 - **9 interactieve scènes**: sneeuwbol, adventskalender, adventskrans, kerstdorp met trein, slee, sneeuwpop, ijsbaan, kerststal en cadeautjes;
+- een **eigen-scène-editor**: eigen achtergrond (ook je eigen foto), vuur in je eigen kleur, sneeuw, vuurwerk, stickers met eigen animaties, zelf getekende lichtsnoeren en delen met anderen;
 - **8 soorten lampjes**, **3 widgets**, **live wallpaper**, **4 kerstliedjes**, een slaaptimer en favoriete looks;
 - verrassingen op **speciale dagen** (Sinterklaas, kerstavond, oud en nieuw, Driekoningen …);
 - **6 talen**: Nederlands, Engels, Duits, Frans, Spaans en Chinees.
@@ -65,7 +74,7 @@ Er zijn **geen advertenties, geen accounts en geen internetverbinding nodig**.
 | | |
 |---|---|
 | Pakketnaam | `nl.eric.kerstlampjes` |
-| Versie | 2.0 (versionCode 2) |
+| Versie | 2.1 (versionCode 3) |
 | Android | 8.0 (API 26) of nieuwer |
 | Taal | Kotlin |
 | Grootte | circa 3 MB |
@@ -76,9 +85,9 @@ Er zijn **geen advertenties, geen accounts en geen internetverbinding nodig**.
 
 ### Optie 1: de APK van GitHub (aanbevolen)
 
-1. Ga op je telefoon naar de [release v2.0](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.0).
+1. Ga op je telefoon naar de [release v2.1](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.1).
    Omdat de repository privé is, moet je ingelogd zijn op GitHub.
-2. Download **`Kerstlampjes-2.0.apk`**.
+2. Download **`Kerstlampjes-2.1.apk`**.
 3. Open het gedownloade bestand. Vraagt Android om toestemming voor *installeren uit onbekende bronnen*, sta dat dan toe voor je browser of bestandsbeheer.
 4. Tik op **Installeren** en daarna op **Openen**.
 
@@ -241,6 +250,44 @@ Niet alleen kijken: tik, schud en bouw.
 <td align="center"><img src="website/media/extra-trein-stop.jpg" width="170"><br><sub>De trein laten stoppen</sub></td>
 </tr>
 </table>
+
+### 🎨 Eigen scène maken
+
+Je bouwt je eigen kerstscène, precies zoals jij hem wilt. Open **⋯ → 🎨 Eigen scène maken**. Je ziet
+bovenaan precies wat de scène later laat zien en onderaan vijf tabbladen.
+
+| Tabblad | Wat kun je? |
+|---|---|
+| 🖼️ **Achtergrond** | Kies uit acht kleurverlopen of gebruik je **eigen foto**. Zet een sneeuwgrond aan of uit. |
+| ✨ **Effecten** | Sneeuw, vallende dingen (cadeautjes, sterren, hartjes …), confetti, fonkelende sterren, vuurwerk, vallende sterren, een zachte gloed en **vuur**. Elk effect heeft eigen schuifjes (hoeveelheid, snelheid, grootte) en kleur. |
+| 🎅 **Stickers** | 32 plaatjes (kerstboom, kerstman, sneeuwpop, slee, trein …). Sleep ze, maak ze groter of kleiner en draai ze. |
+| 💡 **Lampjes** | **Teken met je vinger een lichtsnoer** langs een raam, dak of boom, of kies *Bovenkant*, *Boog* of *Rondom*. Kies per snoer de soort lampjes, de kleuren en het effect. |
+| 💾 **Meer** | Naam, nieuwe scène, dupliceren, al je scènes, **delen**, plakken en verwijderen. |
+
+<table>
+<tr>
+<td align="center"><img src="website/media/eigen-scene.jpg" width="170"><br><sub>Een eigen scène</sub></td>
+<td align="center"><img src="website/media/editor-effecten.jpg" width="170"><br><sub>Effecten en vuur</sub></td>
+<td align="center"><img src="website/media/editor-stickers.jpg" width="170"><br><sub>Stickers</sub></td>
+<td align="center"><img src="website/media/editor-lampjes.jpg" width="170"><br><sub>Lichtsnoeren tekenen</sub></td>
+</tr>
+</table>
+
+**Vuur in je eigen kleur.** Zet het vuur waar je wilt en kies oranje, blauw, groen, paars of wit. Stel hoogte,
+breedte en snelheid in. Tik op het vuur in de scène en het laait op.
+
+**Eigen animaties.** Elke sticker heeft een animatie en een reactie op een tik:
+
+| Animatie | Reactie bij een tik |
+|---|---|
+| Stil, zweven, zwaaien, pulseren, knipperen, hupsen, ronddraaien, voorbijrijden, rondjes draaien | Niets, hupsen, sterretjes, draaien, belletje of **zeg iets** (een tekstballon met je eigen tekst) |
+
+**Opslaan en gebruiken.** Alles wordt automatisch bewaard. Je ziet je scène terug als scène **Mijn scène** (de
+laatste in de rij van scènes). Je kunt hem als **live wallpaper** instellen en in je favorieten bewaren. Je kunt
+meerdere scènes bewaren en tussen ze wisselen via *Meer → Mijn scènes*.
+
+**Delen.** Kies *Meer → Delen* en stuur de tekst via WhatsApp, e-mail of een andere app. De ontvanger kopieert de
+tekst en kiest in de editor *Meer → Plakken*. Een eigen foto als achtergrond wordt niet meegestuurd.
 
 ### 💡 Soorten lampjes
 
@@ -500,7 +547,7 @@ De keystore en de wachtwoorden horen **niet** in git.
 ### Een release op GitHub zetten
 
 ```bash
-gh release create v2.0 app-release.apk --title "Kerstlampjes 2.0" --notes "..."
+gh release create v2.1 app-release.apk --title "Kerstlampjes 2.1" --notes "..."
 ```
 
 ---
@@ -517,6 +564,8 @@ KerstApp/
 │       │   ├── TreeRenderer.kt        Tekenen van bomen, lampjes, snoer, TreeStore
 │       │   ├── Hearths.kt             Haarden en deeltjesvuur
 │       │   ├── Scenes.kt              De 9 interactieve scènes
+│       │   ├── MyScene.kt             Eigen scène: recept, opslag, tekenen van effecten, stickers en lichtsnoeren
+│       │   ├── SceneEditorActivity.kt Editor voor eigen scènes
 │       │   ├── LightsService.kt       Voorgrondservice voor de randlampjes
 │       │   ├── LightsView.kt          Overlay-view met het lichtsnoer
 │       │   ├── TreeWallpaperService.kt Live wallpaper

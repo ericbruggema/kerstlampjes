@@ -683,6 +683,7 @@ class TreeActivity : Activity() {
                     refreshTreeLabel()
                 }
             },
+            Item("🎨 " + Tr.t("Eigen scène maken")) { startActivity(Intent(this, SceneEditorActivity::class.java)) },
             Item("⭐ " + Tr.t("Favoriete looks")) { showLooks() },
             Item("😴 " + Tr.t("Slaaptimer") + if (sleepEndsAt > 0) ": " + Tr.t("actief") else "") { pickSleep() },
             Item("⚡ " + Tr.t("Beeldsnelheid") + ": " + Tr.t(fpsNames[ExtraPrefs.fps(this).coerceIn(0, 2)])) { pickFps(fpsNames) },

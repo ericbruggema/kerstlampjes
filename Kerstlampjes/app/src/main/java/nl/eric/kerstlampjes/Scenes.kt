@@ -1647,9 +1647,9 @@ class SceneHost(ctx: Context) {
     val scenes: List<Scene> = listOf(
         SnowGlobeScene(ctx, d), AdventCalendarScene(ctx, d), AdventWreathScene(ctx, d),
         VillageScene(ctx, d), SleighScene(ctx, d), SnowmanScene(ctx, d),
-        IceRinkScene(ctx, d), NativityScene(ctx, d), GiftsScene(ctx, d)
+        IceRinkScene(ctx, d), NativityScene(ctx, d), GiftsScene(ctx, d), MyScene(ctx, d)
     )
-    val gifts get() = scenes.last() as GiftsScene
+    val gifts get() = scenes[8] as GiftsScene
 
     fun resize(w: Float, h: Float) = scenes.forEach { it.resize(w, h) }
     fun scene(i: Int) = scenes[i.coerceIn(0, scenes.size - 1)]
@@ -1657,8 +1657,9 @@ class SceneHost(ctx: Context) {
     companion object {
         val names = arrayOf(
             "Sneeuwbol", "Adventskalender", "Adventskrans", "Kerstdorp met trein", "Slee van de kerstman",
-            "Sneeuwpop bouwen", "IJsbaan", "Kerststal", "Cadeautjes"
+            "Sneeuwpop bouwen", "IJsbaan", "Kerststal", "Cadeautjes", "Mijn scène"
         )
-        const val COUNT = 9
+        const val COUNT = 10
+        const val MINE = 9
     }
 }

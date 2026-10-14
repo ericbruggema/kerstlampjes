@@ -54,7 +54,7 @@ object HearthStyles {
  * Deeltjesvuur: honderden zachte, gloeiende deeltjes die additief worden gemengd.
  * Ze stijgen, krimpen en lopen van wit-geel via oranje naar donkerrood.
  */
-class FireSim(private val count: Int = 240) {
+class FireSim(private val count: Int = 240, additive: Boolean = true) {
     private val x = FloatArray(count)
     private val y = FloatArray(count)
     private val vx = FloatArray(count)
@@ -70,7 +70,7 @@ class FireSim(private val count: Int = 240) {
     private var paletteKey: IntArray = IntArray(0)
     private var sprites: Array<Bitmap> = emptyArray()
     private val paint = Paint(Paint.FILTER_BITMAP_FLAG).apply {
-        xfermode = PorterDuffXfermode(PorterDuff.Mode.ADD)
+        if (additive) xfermode = PorterDuffXfermode(PorterDuff.Mode.ADD)
     }
     private val dst = RectF()
 

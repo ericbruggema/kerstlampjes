@@ -104,3 +104,8 @@ footer { padding: 40px 0 60px; color: var(--muted); text-align: center; font-siz
 .credits li { margin: 6px 0; }
 
 .edge-note { font-size: .85rem; opacity: .8; margin-top: .25rem; }
+
+.lead { font-size: 1.1rem; max-width: 62ch; color: var(--ink); margin: 0 0 20px; }
+h3.sub { margin: 26px 0 8px; font-size: 1.15rem; }
+.steps { padding-left: 1.3rem; line-height: 1.7; }
+#rand { border-bottom: 1px solid #2c4a3d; padding-bottom: 28px; margin-bottom: 36px; }

@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kerstlampjes — lichtjes op je scherm</title>
-  <meta name="description" content="Kerstlampjes tekent een snoer lampjes langs de rand van je scherm, en geeft je een eigen kerstboom of open haard als achtergrond.">
+  <title>Kerstlampjes — kerstlampjes op de achtergrond van je telefoon</title>
+  <meta name="description" content="Een snoer kerstlampjes langs de rand van je scherm, ook boven je beginscherm, je iconen en widgets. Plus bonus: eigen kerstbomen, haarden, scènes en een eigen-scène-editor.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,9 +13,9 @@
   <header class="hero">
     <div class="wrap">
       <h1>🎄 Kerstlampjes</h1>
-      <p>Een snoer lampjes langs de rand van je scherm. Een eigen kerstboom. Een open haard op je achtergrond.</p>
+      <p>Een snoer kerstlampjes langs de rand van je scherm, ook boven je beginscherm, je iconen en je widgets.</p>
       <a class="btn" href="Kerstlampjes.apk" download>Download de app (Android)</a>
-      <a class="btn secondary" href="#functies">Wat kan het?</a>
+      <a class="btn secondary" href="#rand">Zo ziet het eruit</a>
     </div>
   </header>
 
@@ -24,17 +24,35 @@
     <!-- Verschijnt alleen op de datum van een speciale dag. Zie eggs.js. -->
     <div id="egg-today" aria-live="polite"></div>
 
-    <section id="functies">
-      <h2>Wat kan het?</h2>
+    <section id="rand">
+      <h2>💡 Lampjes op de achtergrond van je telefoon</h2>
+      <p class="lead">Dit is waar de app om draait: een geanimeerd snoer kerstlampjes dat langs de rand en de hoeken van je scherm loopt.
+      Het blijft zichtbaar als je naar je beginscherm gaat, tussen je iconen en widgets, en boven andere apps.
+      Aanrakingen gaan gewoon door naar wat eronder staat, dus je telefoon werkt zoals altijd.</p>
+      <div class="grid hearths">
+        <figure class="card"><img class="shot" src="media/extra-beginscherm.jpg" alt="Randlampjes boven je beginscherm" loading="lazy"><h3>Boven je beginscherm</h3><p>De lampjes liggen boven je iconen, widgets en dock. Hier met de zoekbalk van de launcher.</p></figure>
+        <figure class="card"><img class="shot" src="media/haard-kachel.jpg" alt="Randlampjes om een haard" loading="lazy"><h3>Boven elke app</h3><p>Ook in andere apps loopt het snoer om de rand, hier boven de Kerstlampjes-app zelf.</p></figure>
+        <figure class="card"><img class="shot" src="media/scene-kerstdorp.jpg" alt="Randlampjes om het kerstdorp" loading="lazy"><h3>In elke kleur</h3><p>Kies uit vijf kleurenschema's: klassiek bont, warm wit, rood/groen/goud, ijsblauw of roze/paars.</p></figure>
+      </div>
       <div class="grid">
-        <div class="card">
-          <h3>Lampjes boven alle apps</h3>
-          <p>Een geanimeerd lichtsnoer volgt de rand en de hoeken van je scherm. Tikken gaan gewoon door naar de app eronder.</p>
-        </div>
-        <div class="card">
-          <h3>5 effecten</h3>
-          <p>Vast, fonkelen, om en om knipperen, lopend licht en kleurgolf — in 5 kleurenschema's.</p>
-        </div>
+        <div class="card"><h3>5 effecten</h3><p>Vast, fonkelen, om en om knipperen, lopend licht en kleurgolf. Plus <strong>op de muziek</strong>: de lampjes bewegen mee met geluid uit de microfoon (in te stellen).</p></div>
+        <div class="card"><h3>Past op jouw scherm</h3><p>Stel de grootte van de lampjes, de afstand ertussen, de doorhang van de draad, de helderheid, de afronding van de hoeken en de afstand tot de rand zelf in.</p></div>
+        <div class="card"><h3>Met één veeg aan en uit</h3><p>Zet de lampjes aan of uit via de snelle-instellingen-tegel in je meldingenpaneel, via de app of via het menu. Na een herstart van je telefoon komen ze vanzelf terug.</p></div>
+        <div class="card"><h3>Zuinig</h3><p>Bij <em>Vast</em> hoeft er niets te bewegen. Bij de andere effecten kies je zuinig (15 beelden per seconde) of automatisch bij batterijbesparing.</p></div>
+        <div class="card"><h3>Geen gedoe</h3><p>Geen account, geen internet, geen advertenties. Je hoeft maar één toestemming te geven: tekenen boven andere apps.</p></div>
+      </div>
+      <h3 class="sub">Zo zet je ze aan</h3>
+      <ol class="steps">
+        <li>Open de app en tik op <strong>Lampjes aanzetten</strong>.</li>
+        <li>Geef eenmalig toestemming om boven andere apps te tekenen.</li>
+        <li>Ga naar je beginscherm. De lampjes lopen om de rand van je scherm.</li>
+      </ol>
+    </section>
+
+    <section id="functies">
+      <h2>🎁 Bonus: nog veel meer in de app</h2>
+      <p class="lead">Naast de lampjes op je achtergrond zit er nog veel meer in: eigen kerstbomen, haarden, scènes, widgets en een editor om je eigen scène te maken.</p>
+      <div class="grid">
         <div class="card">
           <h3>Bouw je eigen boom</h3>
           <p>Tik om lampjes te hangen, tik op een lampje voor een andere kleur, houd ingedrukt om te verwijderen.</p>
@@ -122,12 +140,23 @@
       <p class="hint">Op sommige dagen gebeurt er iets bijzonders. Kom op een speciale dag nog eens terug. 👀</p>
     </section>
 
+    <section id="eigenscene">
+      <h2>🎨 Bonus: maak je eigen scène</h2>
+      <p class="lead">Bouw je eigen kerstscène met een eigen achtergrond (ook je eigen foto), vuur in je eigen kleur, sneeuw, vuurwerk,
+      stickers met eigen animaties en lichtsnoeren die je met je vinger tekent. Je kunt hem als live wallpaper instellen en delen met anderen.</p>
+      <div class="grid hearths">
+        <figure><video class="shot" src="media/eigen-scene.mp4" poster="media/eigen-scene.jpg" autoplay muted loop playsinline></video><p>Een scène die met de editor is gemaakt, hier met lampjes om de rand</p></figure>
+        <figure><img class="shot" src="media/editor-effecten.jpg" alt="Editor: effecten en vuur" loading="lazy"><p><strong>Effecten</strong>: sneeuw, vuurwerk, vallende sterren en vuur in oranje, blauw, groen, paars of wit</p></figure>
+        <figure><img class="shot" src="media/editor-stickers.jpg" alt="Editor: stickers" loading="lazy"><p><strong>Stickers</strong>: 32 plaatjes met een animatie en een reactie op een tik</p></figure>
+        <figure><img class="shot" src="media/editor-lampjes.jpg" alt="Editor: lichtsnoeren tekenen" loading="lazy"><p><strong>Lampjes</strong>: teken zelf een snoer, kies de soort, de kleuren en het effect</p></figure>
+      </div>
+    </section>
+
     <section id="nieuw">
       <h2>🆕 Nieuw in versie 2.0</h2>
       <p>Ook nieuw: drie widgets voor je beginscherm (<strong>aftellen tot kerst</strong>, <strong>scène van vandaag</strong> en <strong>je kerstboom met lampjes</strong>),
       een lampsoort per boom (of een mix van alles) en een zuinige beeldsnelheid voor je batterij.</p>
       <div class="grid hearths">
-        <figure class="card"><img class="shot" src="media/extra-beginscherm.jpg" alt="Randlampjes boven je beginscherm" loading="lazy"><h3>Lampjes boven alles</h3><p>De lampjes om de rand van je scherm blijven zichtbaar boven je beginscherm, je iconen en widgets, en boven andere apps. Ze komen terug na een herstart, en je kunt ze (in te stellen) op de microfoon laten reageren.</p></figure>
         <figure class="card"><img class="shot" src="media/extra-looks.jpg" alt="Favoriete looks" loading="lazy"><h3>Favoriete looks</h3><p>Sla je boom of haard met lampjes, effect en soort lampjes op onder een eigen naam en laad hem later met één tik.</p></figure>
         <figure class="card"><img class="shot" src="media/extra-slaap.jpg" alt="Slaaptimer" loading="lazy"><h3>Slaaptimer</h3><p>15 minuten tot 2 uur: de lampjes dimmen rustig en gaan uit. Handig als nachtlampje.</p></figure>
         <figure class="card"><img class="shot" src="media/extra-muziek.jpg" alt="Vier kerstliedjes" loading="lazy"><h3>Vier kerstliedjes</h3><p>Jingle Bells, Stille nacht, We wish you a merry Christmas en Deck the halls, zelf gesynthetiseerd. Met "Op de muziek" dansen de lampjes mee.</p></figure>
