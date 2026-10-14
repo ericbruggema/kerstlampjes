@@ -553,7 +553,7 @@ class VillageScene(ctx: Context, d: Float) : Scene(ctx, d) {
         val dt = if (lastT == 0L) 0.016f else ((now - lastT) / 1000f).coerceIn(0.001f, 0.05f)
         lastT = now
         trainPos += dt * (if (now - tootAt < 2500) 0.22f else 0.10f)
-        if (trainPos > 1.6f) trainPos -= 1.6f
+        if (trainPos > 1.95f) trainPos -= 1.95f
 
         sky(c, 0xFF08122B.toInt(), 0xFF1B2F55.toInt(), 0.7f)
         stars(c, t, 0.35f)
@@ -667,7 +667,7 @@ class SleighScene(ctx: Context, d: Float) : Scene(ctx, d) {
         // slee + rendieren vliegen een lus
         val period = 14f
         val ph = (t % period) / period
-        sleighX = -w * 0.35f + ph * w * 1.7f
+        sleighX = -w * 0.62f + ph * w * 1.95f
         sleighY = h * 0.30f + sin(ph * 2f * PI.toFloat() * 2f) * h * 0.06f + sin(t * 2f) * h * 0.008f
         val tilt = cos(ph * 2f * PI.toFloat() * 2f) * 6f
 
@@ -910,12 +910,19 @@ class SnowmanScene(ctx: Context, d: Float) : Scene(ctx, d) {
 
 class IceRinkScene(ctx: Context, d: Float) : Scene(ctx, d) {
     override val name = "IJsbaan"
-    override val hint = "Tik op het ijs om er een schaatser bij te zetten. Houd ingedrukt om ze weer weg te halen."
+    override val hint = "Tik op het ijs voor een schaatser erbij. Tik op een schaatser en hij valt. Houd ingedrukt om ze weg te halen."
 
-    private class Skater(var ang: Float, val speed: Float, val rx: Float, val color: Int, val dir: Int) {
+    private class Skater(var ang: Float, val speed: Float, val rx: Float, val color: Int, var dir: Int) {
         val tx = FloatArray(18)
         val ty = FloatArray(18)
         var n = 0
+        var turnAt = -10_000L
+        var fallAt = -1L
+        var fx = 0f
+        var fy = 0f
+        var sx = 0f
+        var sy = 0f
+        var su = 1f
     }
 
     private val skaters = ArrayList<Skater>()
@@ -930,6 +937,12 @@ class IceRinkScene(ctx: Context, d: Float) : Scene(ctx, d) {
     private val rnd = Random(2)
 
     override fun tap(x: Float, y: Float, now: Long): Boolean {
+        for (s in skaters) {
+            if (s.fallAt < 0 && abs(x - s.sx) < s.su * 7f && y > s.sy - s.su * 15f && y < s.sy + s.su * 3f) {
+                s.fallAt = now; s.fx = s.sx; s.fy = s.sy
+                return true
+            }
+        }
         if (skaters.size >= 14) return true
         val cx = w / 2f
         val cy = h * 0.58f
@@ -941,6 +954,7 @@ class IceRinkScene(ctx: Context, d: Float) : Scene(ctx, d) {
 
     override fun longPress(x: Float, y: Float, now: Long): Boolean {
         while (skaters.size > 1) skaters.removeAt(skaters.size - 1)
+        skaters.firstOrNull()?.fallAt = -1L
         return true
     }
 
@@ -984,16 +998,40 @@ class IceRinkScene(ctx: Context, d: Float) : Scene(ctx, d) {
             c.drawCircle(x, y, 4f * d, p)
         }
 
-        // schaatsers
+        // schaatsers: eerst bewegen, dan botsingen vermijden door te draaien
+        skaters.removeAll { it.fallAt >= 0 && now - it.fallAt > 2200 }
+        val live = skaters.filter { it.fallAt < 0 }
+        for (s in live) s.ang += s.speed * s.dir * dt
+        for (i in live.indices) for (j in i + 1 until live.size) {
+            val a = live[i]; val b = live[j]
+            if (now - a.turnAt < 1500 || now - b.turnAt < 1500) continue
+            val ax = cos(a.ang) * rx * a.rx * 0.9f; val ay = sin(a.ang) * ry * a.rx * 0.9f
+            val bx = cos(b.ang) * rx * b.rx * 0.9f; val by = sin(b.ang) * ry * b.rx * 0.9f
+            if (abs(ax - bx) < w * 0.07f && abs(ay - by) < h * 0.04f) {
+                a.dir = -a.dir; b.dir = -b.dir
+                a.turnAt = now; b.turnAt = now
+            }
+        }
         skaters.sortedBy { sin(it.ang) }.forEach { s ->
-            s.ang += s.speed * s.dir * dt
-            val x = cx + cos(s.ang) * rx * s.rx * 0.9f
-            val y = cy + sin(s.ang) * ry * s.rx * 0.9f
-            // spoor
-            System.arraycopy(s.tx, 0, s.tx, 1, s.tx.size - 1)
-            System.arraycopy(s.ty, 0, s.ty, 1, s.ty.size - 1)
-            s.tx[0] = x; s.ty[0] = y
-            s.n = min(s.tx.size, s.n + 1)
+            var x = cx + cos(s.ang) * rx * s.rx * 0.9f
+            var y = cy + sin(s.ang) * ry * s.rx * 0.9f
+            val falling = s.fallAt >= 0
+            val age = if (falling) (now - s.fallAt) / 1000f else 0f
+            if (falling) {
+                // glijdt op zijn buik van het ijs af
+                val vx = (s.fx - cx) / rx
+                val vy = (s.fy - cy) / ry
+                val len = max(0.2f, kotlin.math.sqrt(vx * vx + vy * vy))
+                val e = min(1f, age / 2.2f)
+                x = s.fx + vx / len * rx * 0.7f * e * e
+                y = s.fy + vy / len * ry * 0.7f * e * e
+            } else {
+                // spoor
+                System.arraycopy(s.tx, 0, s.tx, 1, s.tx.size - 1)
+                System.arraycopy(s.ty, 0, s.ty, 1, s.ty.size - 1)
+                s.tx[0] = x; s.ty[0] = y
+                s.n = min(s.tx.size, s.n + 1)
+            }
             p.style = Paint.Style.STROKE
             p.strokeWidth = 1.6f * d
             for (k in 0 until s.n - 1) {
@@ -1005,7 +1043,8 @@ class IceRinkScene(ctx: Context, d: Float) : Scene(ctx, d) {
             p.style = Paint.Style.FILL
             val sc = 0.8f + 0.5f * (sin(s.ang) * 0.5f + 0.5f)
             val u = w * 0.012f * sc
-            val lean = s.dir * 4f
+            s.sx = x; s.sy = y; s.su = u
+            val lean = if (falling) -s.dir * 90f * min(1f, age / 0.35f) else s.dir * 4f
             c.save()
             c.translate(x, y)
             c.rotate(lean)
@@ -1087,51 +1126,162 @@ class NativityScene(ctx: Context, d: Float) : Scene(ctx, d) {
 
         // stal
         val bx = w * 0.5f
-        val by = h * 0.80f
-        val bw = w * 0.5f
-        val bh = h * 0.17f
-        glow(c, bx, by - bh * 0.4f, bw * 0.8f, 0xFFFFB14A.toInt(), 130)
-        p.color = 0xFF5A3A22.toInt()
-        c.drawRect(bx - bw / 2, by - bh, bx - bw / 2 + 8f * d, by, p)
-        c.drawRect(bx + bw / 2 - 8f * d, by - bh, bx + bw / 2, by, p)
-        p.color = 0xFF2B1D12.toInt()
-        c.drawRect(bx - bw / 2 + 8f * d, by - bh, bx + bw / 2 - 8f * d, by, p)
+        val by = h * 0.82f
+        val bw = w * 0.74f
+        val bh = h * 0.21f
+        glow(c, bx, by - bh * 0.4f, bw * 0.75f, 0xFFFFB14A.toInt(), 140)
+        // achterwand met warm licht
+        p.style = Paint.Style.FILL
+        p.color = 0xFF3A2616.toInt()
+        c.drawRect(bx - bw / 2, by - bh, bx + bw / 2, by, p)
         p.color = 0xFFFFC66E.toInt()
-        c.drawRect(bx - bw / 2 + 8f * d, by - bh * 0.95f, bx + bw / 2 - 8f * d, by, p)
-        p.color = 0xFF7A4A24.toInt()
+        p.alpha = 190
+        c.drawRect(bx - bw / 2 + 10f * d, by - bh * 0.96f, bx + bw / 2 - 10f * d, by, p)
+        p.alpha = 255
+        // balken
+        p.color = 0xFF5A3A22.toInt()
+        c.drawRect(bx - bw / 2, by - bh * 1.02f, bx - bw / 2 + 10f * d, by, p)
+        c.drawRect(bx + bw / 2 - 10f * d, by - bh * 1.02f, bx + bw / 2, by, p)
+
+        // dieren achterin: os en ezel
+        fun animal(x: Float, s: Float, body: Int, ears: Boolean, face: Int) {
+            p.style = Paint.Style.FILL
+            p.color = body
+            c.drawOval(x - s, by - s * 1.15f, x + s, by - s * 0.35f, p)
+            val hx = x + face * s * 1.05f
+            c.drawOval(hx - s * 0.38f, by - s * 1.5f, hx + s * 0.38f, by - s * 0.7f, p)
+            c.drawRect(x - s * 0.7f, by - s * 0.5f, x - s * 0.5f, by, p)
+            c.drawRect(x + s * 0.5f, by - s * 0.5f, x + s * 0.7f, by, p)
+            p.style = Paint.Style.STROKE
+            p.strokeWidth = 2f * d
+            p.color = if (ears) body else 0xFFEFE6D2.toInt()
+            if (ears) {
+                c.drawLine(hx - s * 0.1f, by - s * 1.45f, hx - s * 0.2f, by - s * 2.0f, p)
+                c.drawLine(hx + s * 0.15f, by - s * 1.45f, hx + s * 0.3f, by - s * 1.98f, p)
+            } else {
+                c.drawLine(hx - s * 0.3f, by - s * 1.4f, hx - s * 0.5f, by - s * 1.75f, p)
+                c.drawLine(hx + s * 0.3f, by - s * 1.4f, hx + s * 0.5f, by - s * 1.75f, p)
+            }
+            p.style = Paint.Style.FILL
+            p.color = 0xFF111111.toInt()
+            c.drawCircle(hx + face * s * 0.15f, by - s * 1.2f, s * 0.05f, p)
+        }
+        animal(bx - bw * 0.34f, bw * 0.065f, 0xFF6B4A32.toInt(), false, 1)
+        animal(bx + bw * 0.385f, bw * 0.05f, 0xFF8E8E96.toInt(), true, -1)
+
+        // mensen
+        fun figure(x: Float, hgt: Float, robe: Int, hood: Int, lean: Float) {
+            p.style = Paint.Style.FILL
+            p.color = robe
+            path.reset()
+            path.moveTo(x - hgt * 0.16f, by - hgt * 0.78f)
+            path.lineTo(x + hgt * 0.16f, by - hgt * 0.78f)
+            path.lineTo(x + hgt * 0.38f, by)
+            path.lineTo(x - hgt * 0.38f, by)
+            path.close()
+            c.drawPath(path, p)
+            c.drawCircle(x, by - hgt * 0.75f, hgt * 0.18f, p)
+            glow(c, x, by - hgt * 0.9f, hgt * 0.32f, 0xFFFFE8A0.toInt(), 120)
+            p.color = hood
+            c.drawCircle(x, by - hgt * 0.9f, hgt * 0.16f, p)
+            p.color = 0xFFFFD6B0.toInt()
+            c.drawCircle(x + lean * hgt * 0.04f, by - hgt * 0.88f, hgt * 0.105f, p)
+            p.color = 0xFF3A2218.toInt()
+            c.drawCircle(x + lean * hgt * 0.08f, by - hgt * 0.89f, hgt * 0.015f, p)
+            p.color = robe
+            c.drawOval(x + lean * hgt * 0.05f - hgt * 0.12f, by - hgt * 0.62f, x + lean * hgt * 0.05f + hgt * 0.12f, by - hgt * 0.44f, p)
+            p.color = 0xFFFFD6B0.toInt()
+            c.drawCircle(x + lean * hgt * 0.15f, by - hgt * 0.5f, hgt * 0.05f, p)
+        }
+        // Maria (blauw, gebogen naar het kind), Jozef (staf, baard, lantaarn)
+        figure(bx - bw * 0.17f, bh * 0.66f, 0xFF2A4C9C.toInt(), 0xFFEFEFF8.toInt(), 1f)
+        val jx = bx + bw * 0.15f
+        val jh = bh * 0.95f
+        figure(jx, jh, 0xFF8A5A2B.toInt(), 0xFF5A3A22.toInt(), -1f)
+        p.color = 0xFFE4DCCB.toInt()
+        c.drawOval(jx - jh * 0.08f, by - jh * 0.86f, jx + jh * 0.08f, by - jh * 0.74f, p)
+        p.style = Paint.Style.STROKE
+        p.strokeWidth = 2.5f * d
+        p.color = 0xFF6B4423.toInt()
+        c.drawLine(jx + jh * 0.42f, by, jx + jh * 0.42f, by - jh * 1.05f, p)
+        c.drawLine(jx + jh * 0.42f, by - jh * 1.05f, jx + jh * 0.3f, by - jh * 1.0f, p)
+        p.style = Paint.Style.FILL
+        glow(c, jx - jh * 0.4f, by - jh * 0.3f, jh * 0.3f, 0xFFFFD27A.toInt(), 200)
+        p.color = 0xFFFFE8A0.toInt()
+        c.drawCircle(jx - jh * 0.4f, by - jh * 0.3f, jh * 0.04f, p)
+
+        // kribbe met stro en kindje
+        p.color = 0xFF8A5A2B.toInt()
         path.reset()
-        path.moveTo(bx - bw * 0.58f, by - bh)
-        path.lineTo(bx, by - bh * 1.7f)
-        path.lineTo(bx + bw * 0.58f, by - bh)
+        path.moveTo(bx - bw * 0.1f, by - bh * 0.24f)
+        path.lineTo(bx + bw * 0.1f, by - bh * 0.24f)
+        path.lineTo(bx + bw * 0.075f, by - bh * 0.1f)
+        path.lineTo(bx - bw * 0.075f, by - bh * 0.1f)
         path.close()
         c.drawPath(path, p)
+        p.style = Paint.Style.STROKE
+        p.strokeWidth = 3f * d
+        c.drawLine(bx - bw * 0.075f, by - bh * 0.1f, bx - bw * 0.1f, by, p)
+        c.drawLine(bx + bw * 0.075f, by - bh * 0.1f, bx + bw * 0.1f, by, p)
+        p.style = Paint.Style.FILL
+        p.color = 0xFFE8C45A.toInt()
+        c.drawOval(bx - bw * 0.105f, by - bh * 0.3f, bx + bw * 0.105f, by - bh * 0.2f, p)
+        glow(c, bx, by - bh * 0.32f, bw * 0.2f, 0xFFFFFFFF.toInt(), 170)
+        p.color = 0xFFFFF3E0.toInt()
+        c.drawOval(bx - bw * 0.06f, by - bh * 0.32f, bx + bw * 0.06f, by - bh * 0.22f, p)
+        p.color = 0xFFFFD6B0.toInt()
+        c.drawCircle(bx - bw * 0.055f, by - bh * 0.3f, bw * 0.03f, p)
+
+        // dak van stro
+        p.color = 0xFF9A7B3A.toInt()
+        path.reset()
+        path.moveTo(bx - bw * 0.6f, by - bh * 0.98f)
+        path.lineTo(bx, by - bh * 1.75f)
+        path.lineTo(bx + bw * 0.6f, by - bh * 0.98f)
+        path.close()
+        c.drawPath(path, p)
+        p.style = Paint.Style.STROKE
+        p.strokeWidth = 1.5f * d
+        p.color = 0xFF6B5320.toInt()
+        for (k in 1..5) {
+            val yy = by - bh * (0.98f + k * 0.13f)
+            val half = bw * 0.6f * (1f - k * 0.17f)
+            c.drawLine(bx - half, yy + bh * 0.02f, bx + half, yy + bh * 0.02f, p)
+        }
+        p.style = Paint.Style.FILL
         p.color = 0xFFEAF2FF.toInt()
         c.drawRect(bx - bw * 0.55f, by - bh * 1.04f, bx + bw * 0.55f, by - bh * 0.98f, p)
 
-        // figuren (Maria, Jozef, kribbe, dieren)
-        fun person(x: Float, hgt: Float, robe: Int, head: Int) {
-            p.color = robe
-            path.reset()
-            path.moveTo(x, by - hgt)
-            path.lineTo(x + hgt * 0.32f, by)
-            path.lineTo(x - hgt * 0.32f, by)
-            path.close()
-            c.drawPath(path, p)
-            p.color = head
-            c.drawCircle(x, by - hgt - hgt * 0.12f, hgt * 0.14f, p)
+        // schaapjes buiten de stal
+        fun sheep(x: Float, s: Float) {
+            p.color = 0xFF222222.toInt()
+            c.drawRect(x - s * 0.5f, by - s * 0.5f, x - s * 0.35f, by, p)
+            c.drawRect(x + s * 0.35f, by - s * 0.5f, x + s * 0.5f, by, p)
+            p.color = 0xFFF2F2F2.toInt()
+            c.drawCircle(x - s * 0.4f, by - s * 0.8f, s * 0.45f, p)
+            c.drawCircle(x, by - s * 0.9f, s * 0.5f, p)
+            c.drawCircle(x + s * 0.4f, by - s * 0.8f, s * 0.45f, p)
+            p.color = 0xFF2B2B2B.toInt()
+            c.drawCircle(x + s * 0.75f, by - s * 0.85f, s * 0.28f, p)
         }
-        person(bx - bw * 0.22f, bh * 0.62f, 0xFF2A4C9C.toInt(), 0xFFFFD6B0.toInt())
-        person(bx + bw * 0.22f, bh * 0.70f, 0xFF7A4A24.toInt(), 0xFFFFD6B0.toInt())
-        // kribbe + kind
-        p.color = 0xFF8A5A2B.toInt()
-        c.drawRoundRect(bx - bw * 0.1f, by - bh * 0.22f, bx + bw * 0.1f, by - bh * 0.05f, 6f, 6f, p)
-        p.color = 0xFFFFF3E0.toInt()
-        c.drawOval(bx - bw * 0.07f, by - bh * 0.28f, bx + bw * 0.07f, by - bh * 0.14f, p)
-        glow(c, bx, by - bh * 0.22f, bw * 0.22f, 0xFFFFFFFF.toInt(), 150)
-        // schaapjes
-        p.color = 0xFFF2F2F2.toInt()
-        c.drawOval(bx - bw * 0.40f, by - bh * 0.22f, bx - bw * 0.30f, by - bh * 0.04f, p)
-        c.drawOval(bx + bw * 0.31f, by - bh * 0.2f, bx + bw * 0.41f, by - bh * 0.03f, p)
+        sheep(bx - bw * 0.46f, bw * 0.05f)
+        sheep(bx + bw * 0.45f, bw * 0.045f)
+
+        // engel boven de stal
+        val ax = bx - bw * 0.2f
+        val ay = by - bh * 2.2f + sin(t * 1.5f) * 4f * d
+        glow(c, ax, ay, bw * 0.12f, 0xFFFFF3B0.toInt(), 130)
+        p.color = 0xFFFFFFFF.toInt()
+        c.drawOval(ax - bw * 0.07f, ay - bw * 0.04f, ax - bw * 0.005f, ay + bw * 0.04f, p)
+        c.drawOval(ax + bw * 0.005f, ay - bw * 0.04f, ax + bw * 0.07f, ay + bw * 0.04f, p)
+        path.reset()
+        path.moveTo(ax, ay - bw * 0.02f)
+        path.lineTo(ax + bw * 0.035f, ay + bw * 0.09f)
+        path.lineTo(ax - bw * 0.035f, ay + bw * 0.09f)
+        path.close()
+        c.drawPath(path, p)
+        p.color = 0xFFFFD6B0.toInt()
+        c.drawCircle(ax, ay - bw * 0.04f, bw * 0.022f, p)
 
         // wensen
         val it = wishes.iterator()
