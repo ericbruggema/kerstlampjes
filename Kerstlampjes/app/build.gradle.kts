@@ -12,15 +12,15 @@ val keystoreProps = Properties().apply {
 }
 
 android {
-    namespace = "nl.eric.kerstlampjes"
+    namespace = "nl.kerstlampjes.app"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "nl.eric.kerstlampjes"
+        applicationId = "nl.kerstlampjes.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 3
-        versionName = "2.1"
+        versionCode = 4
+        versionName = "2.2"
         // Talen die de app kent (overige talen vallen terug op Engels)
         resourceConfigurations += listOf("nl", "en", "de", "fr", "es", "zh")
     }

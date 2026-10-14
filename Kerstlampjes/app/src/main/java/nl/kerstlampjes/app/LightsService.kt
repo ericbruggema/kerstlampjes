@@ -1,4 +1,4 @@
-package nl.eric.kerstlampjes
+package nl.kerstlampjes.app
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -25,9 +25,9 @@ import android.view.WindowManager
 class LightsService : Service() {
 
     companion object {
-        const val ACTION_START = "nl.eric.kerstlampjes.START"
-        const val ACTION_UPDATE = "nl.eric.kerstlampjes.UPDATE"
-        const val ACTION_STOP = "nl.eric.kerstlampjes.STOP"
+        const val ACTION_START = "nl.kerstlampjes.app.START"
+        const val ACTION_UPDATE = "nl.kerstlampjes.app.UPDATE"
+        const val ACTION_STOP = "nl.kerstlampjes.app.STOP"
         private const val CHANNEL = "lampjes"
         private const val NOTIF_ID = 1225
 

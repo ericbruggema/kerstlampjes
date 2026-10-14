@@ -1,4 +1,4 @@
-package nl.eric.kerstlampjes
+package nl.kerstlampjes.app
 
 import android.app.Activity
 import android.app.AlertDialog

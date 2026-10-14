@@ -40,7 +40,7 @@
             android:name=".DailyReceiver"
             android:exported="false">
             <intent-filter>
-                <action android:name="nl.eric.kerstlampjes.DAILY" />
+                <action android:name="nl.kerstlampjes.app.DAILY" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>

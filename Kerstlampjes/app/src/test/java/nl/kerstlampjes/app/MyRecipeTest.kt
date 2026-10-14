@@ -1,4 +1,4 @@
-package nl.eric.kerstlampjes
+package nl.kerstlampjes.app
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue

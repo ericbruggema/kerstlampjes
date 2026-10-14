@@ -4,7 +4,7 @@
 
 **Een snoer kerstlampjes langs de rand van je scherm, ook boven je beginscherm, je iconen en je widgets. Plus bonus: eigen kerstbomen, haarden, scènes en een editor voor je eigen scène. Voor Android.**
 
-[⬇️ Download de APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.1) ·
+[⬇️ Download de APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.2) ·
 [✨ Functies](#-functies) ·
 [📲 Installeren](#-installeren) ·
 [🛠️ Bouwen](#️-bouwen-uit-de-broncode) ·
@@ -75,8 +75,8 @@ Er zijn **geen advertenties, geen accounts en geen internetverbinding nodig**.
 
 | | |
 |---|---|
-| Pakketnaam | `nl.eric.kerstlampjes` |
-| Versie | 2.1 (versionCode 3) |
+| Pakketnaam | `nl.kerstlampjes.app` |
+| Versie | 2.2 (versionCode 4) |
 | Android | 8.0 (API 26) of nieuwer |
 | Taal | Kotlin |
 | Grootte | circa 3 MB |
@@ -87,9 +87,9 @@ Er zijn **geen advertenties, geen accounts en geen internetverbinding nodig**.
 
 ### Optie 1: de APK van GitHub (aanbevolen)
 
-1. Ga op je telefoon naar de [release v2.1](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.1).
+1. Ga op je telefoon naar de [release v2.2](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.2).
    Omdat de repository privé is, moet je ingelogd zijn op GitHub.
-2. Download **`Kerstlampjes-2.1.apk`**.
+2. Download **`Kerstlampjes-2.2.apk`**.
 3. Open het gedownloade bestand. Vraagt Android om toestemming voor *installeren uit onbekende bronnen*, sta dat dan toe voor je browser of bestandsbeheer.
 4. Tik op **Installeren** en daarna op **Openen**.
 
@@ -549,7 +549,7 @@ De keystore en de wachtwoorden horen **niet** in git.
 ### Een release op GitHub zetten
 
 ```bash
-gh release create v2.1 app-release.apk --title "Kerstlampjes 2.1" --notes "..."
+gh release create v2.2 app-release.apk --title "Kerstlampjes 2.2" --notes "..."
 ```
 
 ---
@@ -560,7 +560,7 @@ gh release create v2.1 app-release.apk --title "Kerstlampjes 2.1" --notes "..."
 KerstApp/
 ├── Kerstlampjes/                  Android-project (Gradle, Kotlin)
 │   └── app/src/
-│       ├── main/java/nl/eric/kerstlampjes/
+│       ├── main/java/nl/kerstlampjes/app/
 │       │   ├── MainActivity.kt        Instellingen van de randlampjes
 │       │   ├── TreeActivity.kt        Boom/haard/scène-scherm, pickers en ⋯-menu
 │       │   ├── TreeRenderer.kt        Tekenen van bomen, lampjes, snoer, TreeStore

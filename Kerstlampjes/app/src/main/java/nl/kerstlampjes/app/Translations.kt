@@ -1,4 +1,4 @@
-package nl.eric.kerstlampjes
+package nl.kerstlampjes.app
 
 /** Vertalingen (sleutel = Nederlandse tekst). Gegenereerd; zie Tr.kt. */
 object Translations {

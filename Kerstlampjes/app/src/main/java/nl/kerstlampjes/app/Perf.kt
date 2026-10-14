@@ -1,4 +1,4 @@
-package nl.eric.kerstlampjes
+package nl.kerstlampjes.app
 
 import android.content.Context
 import android.os.BatteryManager

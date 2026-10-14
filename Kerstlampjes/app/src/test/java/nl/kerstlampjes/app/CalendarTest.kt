@@ -1,4 +1,4 @@
-package nl.eric.kerstlampjes
+package nl.kerstlampjes.app
 
 import java.time.LocalDate
 import org.junit.Assert.assertEquals

@@ -4,7 +4,7 @@
 
 **A string of Christmas lights along the edge of your screen, also on top of your home screen, your icons and your widgets. Plus bonus: your own Christmas trees, fireplaces, scenes and an editor for your own scene. For Android.**
 
-[⬇️ Download the APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.1)
+[⬇️ Download the APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.2)
 
 🌍 **Read this in:** [Nederlands](README.md) · **English** · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [中文](README.zh.md)
 
@@ -60,8 +60,8 @@ There are **no ads, no accounts and no internet connection needed**.
 
 | | |
 |---|---|
-| Package name | `nl.eric.kerstlampjes` |
-| Version | 2.1 (versionCode 3) |
+| Package name | `nl.kerstlampjes.app` |
+| Version | 2.2 (versionCode 4) |
 | Android | 8.0 (API 26) or newer |
 | Language | Kotlin |
 | Size | about 3 MB |
@@ -72,9 +72,9 @@ There are **no ads, no accounts and no internet connection needed**.
 
 ### Option 1: the APK from GitHub (recommended)
 
-1. On your phone, go to [release v2.1](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.1).
+1. On your phone, go to [release v2.2](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.2).
    Because the repository is private, you need to be logged in to GitHub.
-2. Download **`Kerstlampjes-2.1.apk`**.
+2. Download **`Kerstlampjes-2.2.apk`**.
 3. Open the downloaded file. If Android asks for permission to *install from unknown sources*, allow it for your browser or file manager.
 4. Tap **Install** and then **Open**.
 
@@ -391,7 +391,7 @@ The keystore and the passwords do **not** belong in git.
 ### Publishing a release on GitHub
 
 ```bash
-gh release create v2.1 app-release.apk --title "Kerstlampjes 2.1" --notes "..."
+gh release create v2.2 app-release.apk --title "Kerstlampjes 2.2" --notes "..."
 ```
 
 ---
@@ -402,7 +402,7 @@ gh release create v2.1 app-release.apk --title "Kerstlampjes 2.1" --notes "..."
 KerstApp/
 ├── Kerstlampjes/                  Android project (Gradle, Kotlin)
 │   └── app/src/
-│       ├── main/java/nl/eric/kerstlampjes/
+│       ├── main/java/nl/kerstlampjes/app/
 │       │   ├── MainActivity.kt        Edge light settings
 │       │   ├── TreeActivity.kt        Tree/fireplace/scene screen, pickers and ⋯ menu
 │       │   ├── TreeRenderer.kt        Drawing trees, lights, string, TreeStore

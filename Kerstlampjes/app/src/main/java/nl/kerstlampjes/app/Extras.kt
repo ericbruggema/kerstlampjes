@@ -1,4 +1,4 @@
-package nl.eric.kerstlampjes
+package nl.kerstlampjes.app
 
 import android.Manifest
 import android.app.AlarmManager
@@ -410,7 +410,7 @@ class DailyReceiver : BroadcastReceiver() {
 
     companion object {
         private fun pending(ctx: Context) = PendingIntent.getBroadcast(
-            ctx, 8, Intent(ctx, DailyReceiver::class.java).setAction("nl.eric.kerstlampjes.DAILY"),
+            ctx, 8, Intent(ctx, DailyReceiver::class.java).setAction("nl.kerstlampjes.app.DAILY"),
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 

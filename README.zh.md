@@ -4,7 +4,7 @@
 
 **一串彩灯沿着屏幕边缘亮起，同样显示在主屏幕、图标和小组件之上。另有额外功能：自己的圣诞树、壁炉、场景，以及可以制作自己场景的编辑器。适用于 Android。**
 
-[⬇️ 下载 APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.1)
+[⬇️ 下载 APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.2)
 
 🌍 **其他语言版本：** [Nederlands](README.md) · [English](README.en.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · **中文**
 
@@ -59,8 +59,8 @@ Kerstlampjes 是一款 Android 应用，把你的手机变成圣诞装饰。**�
 
 | | |
 |---|---|
-| 包名 | `nl.eric.kerstlampjes` |
-| 版本 | 2.1（versionCode 3） |
+| 包名 | `nl.kerstlampjes.app` |
+| 版本 | 2.2（versionCode 4） |
 | Android | 8.0（API 26）或更高 |
 | 语言 | Kotlin |
 | 大小 | 约 3 MB |
@@ -71,9 +71,9 @@ Kerstlampjes 是一款 Android 应用，把你的手机变成圣诞装饰。**�
 
 ### 方式 1：从 GitHub 下载 APK（推荐）
 
-1. 在手机上打开 [release v2.1](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.1)。
+1. 在手机上打开 [release v2.2](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.2)。
    由于仓库是私有的，你需要登录 GitHub。
-2. 下载 **`Kerstlampjes-2.1.apk`**。
+2. 下载 **`Kerstlampjes-2.2.apk`**。
 3. 打开下载的文件。如果 Android 要求*允许安装未知来源应用*，请为你的浏览器或文件管理器开启该权限。
 4. 点击**安装**，然后点击**打开**。
 
@@ -391,7 +391,7 @@ keystore 和密码**不应**放进 git。
 ### 在 GitHub 上发布 release
 
 ```bash
-gh release create v2.1 app-release.apk --title "Kerstlampjes 2.1" --notes "..."
+gh release create v2.2 app-release.apk --title "Kerstlampjes 2.2" --notes "..."
 ```
 
 ---
@@ -402,7 +402,7 @@ gh release create v2.1 app-release.apk --title "Kerstlampjes 2.1" --notes "..."
 KerstApp/
 ├── Kerstlampjes/                  Android 项目（Gradle、Kotlin）
 │   └── app/src/
-│       ├── main/java/nl/eric/kerstlampjes/
+│       ├── main/java/nl/kerstlampjes/app/
 │       │   ├── MainActivity.kt        边缘彩灯设置
 │       │   ├── TreeActivity.kt        树/壁炉/场景界面、选择器和 ⋯ 菜单
 │       │   ├── TreeRenderer.kt        绘制树、灯、灯串、TreeStore

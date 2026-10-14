@@ -1,4 +1,4 @@
-package nl.eric.kerstlampjes
+package nl.kerstlampjes.app
 
 import java.io.File
 import org.junit.Assert.assertEquals
@@ -11,8 +11,8 @@ class TranslationsTest {
 
     private fun sourceDir(): File {
         val candidates = listOf(
-            File("src/main/java/nl/eric/kerstlampjes"),
-            File("app/src/main/java/nl/eric/kerstlampjes")
+            File("src/main/java/nl/kerstlampjes/app"),
+            File("app/src/main/java/nl/kerstlampjes/app")
         )
         return candidates.first { it.isDirectory }
     }

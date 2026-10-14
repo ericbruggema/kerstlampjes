@@ -4,7 +4,7 @@
 
 **Una guirnalda de luces a lo largo del borde de tu pantalla, también por encima de tu pantalla de inicio, tus iconos y tus widgets. Además, como extra: tus propios árboles de Navidad, chimeneas, escenas y un editor para tu propia escena. Para Android.**
 
-[⬇️ Descargar el APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.1)
+[⬇️ Descargar el APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.2)
 
 🌍 **Léelo en:** [Nederlands](README.md) · [English](README.en.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · **Español** · [中文](README.zh.md)
 
@@ -60,8 +60,8 @@ imágenes son las fotos de árboles y chimeneas reales, de Wikimedia Commons ([f
 
 | | |
 |---|---|
-| Nombre del paquete | `nl.eric.kerstlampjes` |
-| Versión | 2.1 (versionCode 3) |
+| Nombre del paquete | `nl.kerstlampjes.app` |
+| Versión | 2.2 (versionCode 4) |
 | Android | 8.0 (API 26) o más reciente |
 | Lenguaje | Kotlin |
 | Tamaño | unos 3 MB |
@@ -72,9 +72,9 @@ imágenes son las fotos de árboles y chimeneas reales, de Wikimedia Commons ([f
 
 ### Opción 1: el APK desde GitHub (recomendada)
 
-1. En tu teléfono, ve a la [release v2.1](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.1).
+1. En tu teléfono, ve a la [release v2.2](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.2).
    Como el repositorio es privado, tienes que haber iniciado sesión en GitHub.
-2. Descarga **`Kerstlampjes-2.1.apk`**.
+2. Descarga **`Kerstlampjes-2.2.apk`**.
 3. Abre el archivo descargado. Si Android te pide permiso para *instalar desde orígenes desconocidos*, concédelo a tu navegador o gestor de archivos.
 4. Toca **Instalar** y después **Abrir**.
 
@@ -392,7 +392,7 @@ El keystore y las contraseñas **no** deben estar en git.
 ### Publicar una release en GitHub
 
 ```bash
-gh release create v2.1 app-release.apk --title "Kerstlampjes 2.1" --notes "..."
+gh release create v2.2 app-release.apk --title "Kerstlampjes 2.2" --notes "..."
 ```
 
 ---
@@ -403,7 +403,7 @@ gh release create v2.1 app-release.apk --title "Kerstlampjes 2.1" --notes "..."
 KerstApp/
 ├── Kerstlampjes/                  Proyecto Android (Gradle, Kotlin)
 │   └── app/src/
-│       ├── main/java/nl/eric/kerstlampjes/
+│       ├── main/java/nl/kerstlampjes/app/
 │       │   ├── MainActivity.kt        Ajustes de las luces del borde
 │       │   ├── TreeActivity.kt        Pantalla árbol/chimenea/escena, selectores y menú ⋯
 │       │   ├── TreeRenderer.kt        Dibujo de árboles, luces, guirnalda, TreeStore

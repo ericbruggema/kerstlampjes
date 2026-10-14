@@ -1,4 +1,4 @@
-package nl.eric.kerstlampjes
+package nl.kerstlampjes.app
 
 /** Bronnen en licenties van de gebruikte foto's (alle van Wikimedia Commons). */
 object Credits {
