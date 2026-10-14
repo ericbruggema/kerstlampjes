@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kerstlampjes</string>
+    <string name="tile_label">Kerstlampjes</string>
+    <string name="tree_label">Kerstboom</string>
+    <string name="tree_desc">Je eigen kerstboom met flikkerende lampjes</string>
+</resources>

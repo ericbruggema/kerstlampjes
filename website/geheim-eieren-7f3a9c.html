@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Verborgen — alle easter eggs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="garland" aria-hidden="true"></div>
+
+  <header class="hero">
+    <div class="wrap">
+      <h1>🥚 Alle easter eggs</h1>
+      <p>Deze pagina staat nergens in het menu. Op de hoofdpagina verschijnt alleen het ei van de datum van vandaag.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section>
+      <div id="today" class="hint" style="margin-bottom:18px"></div>
+      <div class="eggs" id="eggs"></div>
+    </section>
+    <p class="hint">In de app kun je zelf door ze heen bladeren: tik op de ster bovenaan de boom.</p>
+    <p class="hint"><a href="index.html">← Terug naar de hoofdpagina</a></p>
+  </main>
+
+  <footer>
+    <div class="wrap">Let op: dit is een verborgen, geen beveiligde pagina. Wie de link kent, kan hem openen.</div>
+  </footer>
+
+  <script src="eggs.js"></script>
+  <script>
+    (function () {
+      var now = new Date();
+      var cur = window.KL_eggForDate(now);
+      document.getElementById("today").textContent = cur
+        ? "Vandaag is het: " + cur.title + "."
+        : "Vandaag is er geen speciaal ei.";
+      var list = document.getElementById("eggs");
+      window.KL_EGGS.forEach(function (e) {
+        var el = document.createElement("article");
+        el.className = "egg";
+        el.innerHTML =
+          '<video controls loop muted playsinline preload="none" src="media/' + e.id + '.mp4" poster="media/' + e.id + '.jpg"></video>' +
+          "<h3>" + e.title + (cur && cur.id === e.id ? ' <span class="badge">vandaag</span>' : "") + "</h3>" +
+          '<div class="when">' + e.when + "</div>" +
+          '<p class="banner">' + e.banner + "</p>" +
+          '<p class="banner">' + e.text + "</p>";
+        list.appendChild(el);
+      });
+    })();
+  </script>
+</body>
+</html>

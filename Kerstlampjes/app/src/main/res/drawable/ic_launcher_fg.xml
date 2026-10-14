@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- draad -->
+    <path android:strokeColor="#2E7D32" android:strokeWidth="3"
+        android:pathData="M24,38 Q54,52 84,38" />
+    <!-- fittingen -->
+    <path android:fillColor="#3E4A42" android:pathData="M30,40h8v6h-8z" />
+    <path android:fillColor="#3E4A42" android:pathData="M50,44h8v6h-8z" />
+    <path android:fillColor="#3E4A42" android:pathData="M70,40h8v6h-8z" />
+    <!-- lampjes -->
+    <path android:fillColor="#FF3B3B"
+        android:pathData="M34,46c-5,0 -8,5 -8,11c0,7 3.5,15 8,15s8,-8 8,-15c0,-6 -3,-11 -8,-11z" />
+    <path android:fillColor="#FFD54F"
+        android:pathData="M54,50c-5,0 -8,5 -8,11c0,7 3.5,15 8,15s8,-8 8,-15c0,-6 -3,-11 -8,-11z" />
+    <path android:fillColor="#4FC3F7"
+        android:pathData="M74,46c-5,0 -8,5 -8,11c0,7 3.5,15 8,15s8,-8 8,-15c0,-6 -3,-11 -8,-11z" />
+</vector>
