@@ -143,6 +143,7 @@ object TreeStore {
     private fun lampKey(style: Int) = "lamp_n_" + TreeStyles.keyOf(style)
 
     fun loadBulbs(p: android.content.SharedPreferences, r: TreeRenderer) {
+        r.loaded = true
         r.lamp = p.getInt(lampKey(r.style), p.getInt("lamp_style", 0)).coerceIn(0, LampStyles.names.size - 1)
         r.bulbs.clear()
         val raw = p.getString(bulbKey(r.style), null)
@@ -180,6 +181,7 @@ object TreeStore {
     }
 
     fun save(ctx: Context, r: TreeRenderer) {
+        if (!r.loaded) return
         val s = bulbString(r)
         ctx.getSharedPreferences(FILE, Context.MODE_PRIVATE).edit()
             .putString(bulbKey(r.style), s)
@@ -302,6 +304,8 @@ class TreeRenderer(private val density: Float, private val ctx: Context? = null)
     }
 
     val bulbs = ArrayList<Bulb>()
+    /** true zodra de opgeslagen lampjes zijn ingelezen; eerder opslaan zou ze wissen. */
+    var loaded = false
     var mode = Modes.TWINKLE
     var speed = 5
     /** 0 = omlaag, 1 = omhoog, 2 = willekeurig */
@@ -602,6 +606,17 @@ class TreeRenderer(private val density: Float, private val ctx: Context? = null)
         isFireplace && w > 0f && (if (hearthKind == HearthStyles.CARTOON) px in openL..openR && py in openT..openB
             else painter.fireRect(hearthKind, w, h).contains(px, py))
 
+    private val socks = arrayOf(
+        Pair(-0.38f, 0xFFD7263D.toInt()),
+        Pair(-0.31f, 0xFF1E9E57.toInt()),
+        Pair(0.30f, 0xFF2E86DE.toInt())
+    )
+    private val layers = arrayOf(
+        Pair(1f, 0xDDE8431A.toInt()),
+        Pair(0.72f, 0xEEFF9A1F.toInt()),
+        Pair(0.42f, 0xFFFFE27A.toInt())
+    )
+
     private fun drawFireplace(c: Canvas, t: Float, nowMs: Long) {
         val sp = speed / 5f
         val fl = ((nowMs - flareStart) / 1400f).let { if (it in 0f..1f) 1f - it else 0f }
@@ -646,11 +661,6 @@ class TreeRenderer(private val density: Float, private val ctx: Context? = null)
         c.drawRect(cx - 0.47f * w, mantelTop, cx + 0.47f * w, mantelTop + h * 0.007f, brickPaint)
 
         // sokken
-        val socks = arrayOf(
-            Pair(-0.38f, 0xFFD7263D.toInt()),
-            Pair(-0.31f, 0xFF1E9E57.toInt()),
-            Pair(0.30f, 0xFF2E86DE.toInt())
-        )
         for (s in socks) {
             val x = cx + s.first * w
             val tw = w * 0.06f
@@ -695,11 +705,6 @@ class TreeRenderer(private val density: Float, private val ctx: Context? = null)
         brickPaint.alpha = 255
 
         // vlammen
-        val layers = arrayOf(
-            Pair(1f, 0xDDE8431A.toInt()),
-            Pair(0.72f, 0xEEFF9A1F.toInt()),
-            Pair(0.42f, 0xFFFFE27A.toInt())
-        )
         for (l in layers) {
             brickPaint.color = l.second
             for (i in 0 until 7) {
@@ -829,6 +834,18 @@ class TreeRenderer(private val density: Float, private val ctx: Context? = null)
         }
     }
 
+    private var wireSig = Long.MIN_VALUE
+
+    /** Goedkope vingerafdruk van wat het snoer bepaalt (positie van de lampjes, boom, schermmaat). */
+    private fun wireSignature(): Long {
+        var sg = style * 1_000_003L + w.toLong() * 31L + h.toLong() + orient
+        for (b in bulbs) {
+            sg = sg * 31L + java.lang.Float.floatToRawIntBits(b.x)
+            sg = sg * 31L + java.lang.Float.floatToRawIntBits(b.y)
+        }
+        return sg
+    }
+
     /** Groepeer lampjes op hoogte en sorteer op x: elke groep hangt aan één snoer. */
     private fun groups(): List<List<Bulb>> {
         if (bulbs.isEmpty()) return emptyList()
@@ -893,34 +910,36 @@ class TreeRenderer(private val density: Float, private val ctx: Context? = null)
         }
     }
 
-    fun draw(c: Canvas, nowMs: Long) {
-        if (w <= 0f) return
-        val t = nowMs / 1000f
-        val egg = currentEgg(nowMs)
-        c.drawRect(0f, 0f, w, h, if (egg == TreeEggs.KERSTMORGEN && !isFireplace) sunPaint else bgPaint)
+    // ---------- boom: statische laag in een bitmap ----------
 
-        // sterretjes
-        var j = 0
-        while (j + 2 < bgStars.size) {
-            val tw = 0.5f + 0.5f * sin(t * 0.8f + j)
-            starsPaint.alpha = (60 + 120 * tw).toInt()
-            c.drawCircle(bgStars[j] * w, bgStars[j + 1] * h * 0.5f, (0.6f + bgStars[j + 2]) * density, starsPaint)
-            j += 3
+    private var bodyBmp: android.graphics.Bitmap? = null
+    private var bodyKey = -1L
+    private var bodyTop = 0f
+
+    /** De takken en stam veranderen niet per frame: teken ze één keer in een bitmap. */
+    private fun ensureBody() {
+        val key = style.toLong() * 100_003L + w.toLong() * 31L + h.toLong()
+        if (bodyBmp != null && key == bodyKey) return
+        bodyBmp?.recycle()
+        bodyBmp = null
+        bodyKey = -1L
+        try {
+            val yTop = (apex[0] - 4f).coerceAtLeast(0f)
+            val yBot = (base[n - 1] + h * 0.05f + treeH * 0.07f).coerceAtMost(h)
+            if (yBot - yTop < 8f || w < 8f) return
+            val bmp = android.graphics.Bitmap.createBitmap(w.toInt(), (yBot - yTop).toInt() + 1, android.graphics.Bitmap.Config.ARGB_8888)
+            val cv = Canvas(bmp)
+            cv.translate(0f, -yTop)
+            drawTreeBody(cv)
+            bodyBmp = bmp
+            bodyTop = yTop
+            bodyKey = key
+        } catch (e: OutOfMemoryError) {
+            bodyBmp = null
         }
+    }
 
-        if (egg == TreeEggs.OUDEJAARSAVOND || egg == TreeEggs.NIEUWJAAR) drawFireworks(c, t)
-        if (egg == TreeEggs.DRIEKONINGEN) drawShootingStar(c, t)
-
-        if (isFireplace) {
-            if (hearthKind == HearthStyles.CARTOON) {
-                drawFireplace(c, t, nowMs)
-            } else {
-                val fl = ((nowMs - flareStart) / 1400f).let { if (it in 0f..1f) 1f - it else 0f }
-                painter.draw(c, w, h, t, nowMs, hearthKind, fl, speed / 5f)
-            }
-        } else if (spec.photo != -1) {
-            drawPhotoTree(c)
-        } else {
+    private fun drawTreeBody(c: Canvas) {
         // stam + takken
         val sp = spec
         val tw = w * 0.05f
@@ -1026,6 +1045,40 @@ class TreeRenderer(private val density: Float, private val ctx: Context? = null)
         treePaint.shader = null
         treePaint.style = Paint.Style.FILL
 
+    }
+
+    fun draw(c: Canvas, nowMs: Long) {
+        if (w <= 0f) return
+        val t = nowMs / 1000f
+        val egg = currentEgg(nowMs)
+        c.drawRect(0f, 0f, w, h, if (egg == TreeEggs.KERSTMORGEN && !isFireplace) sunPaint else bgPaint)
+
+        // sterretjes
+        var j = 0
+        while (j + 2 < bgStars.size) {
+            val tw = 0.5f + 0.5f * sin(t * 0.8f + j)
+            starsPaint.alpha = (60 + 120 * tw).toInt()
+            c.drawCircle(bgStars[j] * w, bgStars[j + 1] * h * 0.5f, (0.6f + bgStars[j + 2]) * density, starsPaint)
+            j += 3
+        }
+
+        if (egg == TreeEggs.OUDEJAARSAVOND || egg == TreeEggs.NIEUWJAAR) drawFireworks(c, t)
+        if (egg == TreeEggs.DRIEKONINGEN) drawShootingStar(c, t)
+
+        if (isFireplace) {
+            if (hearthKind == HearthStyles.CARTOON) {
+                drawFireplace(c, t, nowMs)
+            } else {
+                val fl = ((nowMs - flareStart) / 1400f).let { if (it in 0f..1f) 1f - it else 0f }
+                painter.draw(c, w, h, t, nowMs, hearthKind, fl, speed / 5f)
+            }
+        } else if (spec.photo != -1) {
+            drawPhotoTree(c)
+        } else {
+        ensureBody()
+        val bb = bodyBmp
+        if (bb != null) c.drawBitmap(bb, 0f, bodyTop, null) else drawTreeBody(c)
+
         // ster
         val sr = w * 0.075f * (if (egg == TreeEggs.DRIEKONINGEN) 1.4f else 1f)
         val sy = apex[0] + sr * 0.2f
@@ -1045,6 +1098,9 @@ class TreeRenderer(private val density: Float, private val ctx: Context? = null)
         if (hasPresents(egg)) drawPresents(c)
 
         // snoer: per groep van links naar rechts, met uiteinden aan de rand van de boom
+        val ws = wireSignature()
+        if (ws != wireSig) {
+        wireSig = ws
         wirePath.reset()
         for (g in groups()) {
             val first = g.first(); val last = g.last()
@@ -1052,6 +1108,7 @@ class TreeRenderer(private val density: Float, private val ctx: Context? = null)
             swag(cx - halfAt(fy) + bulbR * 0.2f, fy - bulbR * 0.4f, first.x * w, fy)
             for (i in 0 until g.size - 1) swag(g[i].x * w, g[i].y * h, g[i + 1].x * w, g[i + 1].y * h)
             swag(last.x * w, ly, cx + halfAt(ly) - bulbR * 0.2f, ly - bulbR * 0.4f)
+        }
         }
         c.drawPath(wirePath, wirePaint)
 

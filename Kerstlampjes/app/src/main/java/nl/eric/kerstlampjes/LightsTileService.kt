@@ -36,6 +36,7 @@ class LightsTileService : TileService() {
     }
 
     @Suppress("DEPRECATION")
+    @android.annotation.SuppressLint("StartActivityAndCollapseDeprecated")
     private fun openApp() {
         val i = Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         if (Build.VERSION.SDK_INT >= 34) {

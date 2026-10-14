@@ -43,5 +43,5 @@ object Tr {
         return Translations.forLang(language)[nl] ?: Translations.forLang("en")[nl] ?: nl
     }
 
-    fun f(nl: String, vararg args: Any?): String = String.format(Locale.getDefault(), t(nl), *args)
+    fun f(nl: String, vararg args: Any?): String = String.format(Locale.ROOT, t(nl), *args)
 }

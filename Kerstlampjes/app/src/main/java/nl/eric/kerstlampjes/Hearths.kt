@@ -144,6 +144,16 @@ class HearthPainter(private val density: Float, private val ctx: Context? = null
     private val path = Path()
     private val rect = RectF()
 
+    private val shaderCache = HashMap<Int, Shader>()
+    private var cacheW = 0f
+    private var cacheH = 0f
+
+    /** Gradient per tekenplek één keer maken zolang de schermmaat gelijk blijft. */
+    private inline fun shader(id: Int, w: Float, h: Float, make: () -> Shader): Shader {
+        if (cacheW != w || cacheH != h) { shaderCache.clear(); cacheW = w; cacheH = h }
+        return shaderCache.getOrPut(id) { make() }
+    }
+
     private val unitGlow = RadialGradient(
         0f, 0f, 1f, intArrayOf(0xFFFFFFFF.toInt(), 0x00FFFFFF), null, Shader.TileMode.CLAMP
     )
@@ -415,11 +425,13 @@ class HearthPainter(private val density: Float, private val ctx: Context? = null
             row++
         }
         // ronding: zijkanten donkerder
-        p.shader = LinearGradient(
-            bl, 0f, br, 0f,
-            intArrayOf(0xB0000000.toInt(), 0x00000000, 0x00000000, 0xB0000000.toInt()),
-            floatArrayOf(0f, 0.25f, 0.75f, 1f), Shader.TileMode.CLAMP
-        )
+        p.shader = shader(1, w, h) {
+            LinearGradient(
+                bl, 0f, br, 0f,
+                intArrayOf(0xB0000000.toInt(), 0x00000000, 0x00000000, 0xB0000000.toInt()),
+                floatArrayOf(0f, 0.25f, 0.75f, 1f), Shader.TileMode.CLAMP
+            )
+        }
         c.drawRect(bl, mantelBottom, br, bb, p)
         p.shader = null
         c.restore()
@@ -437,7 +449,7 @@ class HearthPainter(private val density: Float, private val ctx: Context? = null
         c.clipPath(path)
         // achterwand
         val inset = 0.07f * w
-        p.shader = LinearGradient(0f, tp, 0f, bb, 0xFF1A0F0A.toInt(), 0xFF3A1F12.toInt(), Shader.TileMode.CLAMP)
+        p.shader = shader(2, w, h) { LinearGradient(0f, tp, 0f, bb, 0xFF1A0F0A.toInt(), 0xFF3A1F12.toInt(), Shader.TileMode.CLAMP) }
         c.drawRect(l + inset, tp + inset * 1.2f, r - inset, bb - h * 0.03f, p)
         p.shader = null
         // zijwanden (perspectief)
@@ -474,7 +486,7 @@ class HearthPainter(private val density: Float, private val ctx: Context? = null
         c.drawRect(cx - 0.48f * w, mantelTop - h * 0.012f, cx + 0.48f * w, mantelTop + h * 0.006f, p)
         p.color = 0xFF8E9299.toInt()
         c.drawRect(cx - 0.47f * w, mantelTop + h * 0.006f, cx + 0.47f * w, mantelBottom + h * 0.006f, p)
-        p.shader = LinearGradient(0f, mantelBottom, 0f, mantelBottom + h * 0.03f, 0x66000000, 0x00000000, Shader.TileMode.CLAMP)
+        p.shader = shader(3, w, h) { LinearGradient(0f, mantelBottom, 0f, mantelBottom + h * 0.03f, 0x66000000, 0x00000000, Shader.TileMode.CLAMP) }
         c.drawRect(bl, mantelBottom + h * 0.006f, br, mantelBottom + h * 0.03f, p)
         p.shader = null
 
@@ -615,7 +627,7 @@ class HearthPainter(private val density: Float, private val ctx: Context? = null
             c.drawPath(path, p)
         }
         // grond
-        p.shader = LinearGradient(0f, h * 0.68f, 0f, h, 0xFF14201A.toInt(), 0xFF060A08.toInt(), Shader.TileMode.CLAMP)
+        p.shader = shader(4, w, h) { LinearGradient(0f, h * 0.68f, 0f, h, 0xFF14201A.toInt(), 0xFF060A08.toInt(), Shader.TileMode.CLAMP) }
         c.drawRect(0f, h * 0.68f, w, h, p)
         p.shader = null
         glow(c, cx, h * 0.80f, w * 0.75f, 0xFFFF7A1F.toInt(), (170 * flick).toInt())
@@ -717,7 +729,7 @@ class HearthPainter(private val density: Float, private val ctx: Context? = null
         // vloer met weerspiegeling
         p.color = 0xFF191A1F.toInt()
         c.drawRect(0f, h * 0.70f + 0.0f, w, h, p)
-        p.shader = LinearGradient(0f, bt, 0f, bt + h * 0.12f, 0x55FF8A3A, 0x00FF8A3A, Shader.TileMode.CLAMP)
+        p.shader = shader(5, w, h) { LinearGradient(0f, bt, 0f, bt + h * 0.12f, 0x55FF8A3A, 0x00FF8A3A, Shader.TileMode.CLAMP) }
         c.drawRect(l, bt, r, bt + h * 0.12f, p)
         p.shader = null
     }

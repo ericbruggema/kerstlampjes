@@ -71,14 +71,24 @@ abstract class Scene(protected val ctx: Context, protected val d: Float) {
         p.alpha = 255
     }
 
+    private val glowShaders = HashMap<Int, RadialGradient>()
+    private val glowMatrix = android.graphics.Matrix()
+
+    /** Zachte gloed. Eén gradient per kleur wordt hergebruikt en met een matrix op maat gezet. */
     protected fun glow(c: Canvas, x: Float, y: Float, r: Float, color: Int, alpha: Int) {
-        p.shader = RadialGradient(
-            x, y, r,
-            intArrayOf((color and 0x00FFFFFF) or (alpha.coerceIn(0, 255) shl 24), color and 0x00FFFFFF),
-            null, Shader.TileMode.CLAMP
-        )
+        val rgb = color and 0x00FFFFFF
+        val sh = glowShaders.getOrPut(rgb) {
+            RadialGradient(0f, 0f, 1f, intArrayOf(0xFF000000.toInt() or rgb, rgb), null, Shader.TileMode.CLAMP)
+        }
+        glowMatrix.setScale(r, r)
+        glowMatrix.postTranslate(x, y)
+        sh.setLocalMatrix(glowMatrix)
+        val old = p.alpha
+        p.shader = sh
+        p.alpha = alpha.coerceIn(0, 255) * old / 255
         c.drawCircle(x, y, r, p)
         p.shader = null
+        p.alpha = old
     }
 
     protected fun text(c: Canvas, s: String, x: Float, y: Float, sizeDp: Float, color: Int = Color.WHITE, bold: Boolean = false) {

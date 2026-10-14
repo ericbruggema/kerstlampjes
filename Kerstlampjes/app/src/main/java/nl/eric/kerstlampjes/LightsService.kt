@@ -36,7 +36,7 @@ class LightsService : Service() {
 
         fun start(ctx: Context) {
             val i = Intent(ctx, LightsService::class.java).setAction(ACTION_START)
-            if (Build.VERSION.SDK_INT >= 26) ctx.startForegroundService(i) else ctx.startService(i)
+            ctx.startForegroundService(i)
         }
 
         fun update(ctx: Context) {

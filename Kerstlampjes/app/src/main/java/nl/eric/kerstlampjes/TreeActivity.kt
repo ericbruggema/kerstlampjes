@@ -209,6 +209,17 @@ class TreeView(
         super.onDetachedFromWindow()
     }
 
+    /** Niet tekenen (en de CPU niet wakker houden) terwijl de app niet zichtbaar is. */
+    override fun onWindowVisibilityChanged(visibility: Int) {
+        super.onWindowVisibilityChanged(visibility)
+        if (visibility == VISIBLE) {
+            if (!running && isAttachedToWindow) { running = true; post(frame) }
+        } else {
+            running = false
+            removeCallbacks(frame)
+        }
+    }
+
     fun shake() {
         if (renderer.isScene) scene().shake(SystemClock.uptimeMillis())
     }
@@ -217,6 +228,7 @@ class TreeView(
 class TreeActivity : Activity() {
 
     private lateinit var tree: TreeView
+    private var lastWidgetSig = ""
     private val dp get() = resources.displayMetrics.density
     private val swatches = ArrayList<View>()
     private lateinit var treeLabel: TextView
@@ -321,7 +333,12 @@ class TreeActivity : Activity() {
         handler.removeCallbacks(sleepTick)
         sensors.unregisterListener(shakeListener)
         TreeStore.save(this, tree.renderer)
-        Widgets.refreshAll(this)
+        val sig = tree.renderer.style.toString() + "|" + tree.renderer.lamp + "|" + tree.renderer.orient + "|" +
+            TreeStore.bulbString(tree.renderer).hashCode()
+        if (sig != lastWidgetSig) {
+            lastWidgetSig = sig
+            Widgets.refreshAll(this)
+        }
         super.onPause()
     }
 
@@ -679,7 +696,8 @@ class TreeActivity : Activity() {
     private fun toggleNotify() {
         if (ExtraPrefs.notify(this)) {
             ExtraPrefs.setNotify(this, false); DailyReceiver.cancel(this)
-        } else if (checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) ==
+        } else if (android.os.Build.VERSION.SDK_INT < 33 ||
+            checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) ==
             android.content.pm.PackageManager.PERMISSION_GRANTED
         ) {
             ExtraPrefs.setNotify(this, true); DailyReceiver.schedule(this)

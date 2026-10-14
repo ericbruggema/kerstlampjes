@@ -60,8 +60,9 @@ class LightsView(context: Context) : View(context) {
     private val frame = object : Runnable {
         override fun run() {
             if (!running) return
-            invalidate()
-            postDelayed(this, 33L) // ~30 fps, zuinig op de accu
+            // "Vast aan" verandert niet: dan hoeft er niets opnieuw getekend te worden.
+            if (settings.mode != Modes.STEADY) invalidate()
+            postDelayed(this, if (settings.mode == Modes.STEADY) 500L else Perf.frameDelay(context))
         }
     }
 

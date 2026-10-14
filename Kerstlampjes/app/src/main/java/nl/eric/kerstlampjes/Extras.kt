@@ -10,6 +10,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.os.Build
 import android.graphics.BitmapFactory
 import android.media.AudioAttributes
 import android.media.AudioFormat
@@ -333,6 +334,8 @@ object AudioLevel {
         Thread({ record() }, "kl-mic").also { it.isDaemon = true; it.start() }
     }
 
+    // De aanroeper (sync) controleert de microfoontoestemming; een SecurityException wordt hieronder opgevangen.
+    @android.annotation.SuppressLint("MissingPermission")
     private fun record() {
         val rate = 16000
         val min = AudioRecord.getMinBufferSize(rate, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT)
@@ -386,7 +389,9 @@ class DailyReceiver : BroadcastReceiver() {
             .setContentIntent(pi)
             .setAutoCancel(true)
             .build()
-        if (ctx.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+        if (Build.VERSION.SDK_INT < 33 ||
+            ctx.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED
+        ) {
             nm.notify(7, n)
         }
     }
