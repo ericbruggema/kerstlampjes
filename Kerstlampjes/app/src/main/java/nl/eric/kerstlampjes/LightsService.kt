@@ -72,6 +72,7 @@ class LightsService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         if (intent?.action == ACTION_STOP) {
+            getSharedPreferences("kerstlampjes", MODE_PRIVATE).edit().putBoolean("lights_on", false).apply()
             stopSelf()
             return START_NOT_STICKY
         }
@@ -87,8 +88,11 @@ class LightsService : Service() {
         if (view == null) addOverlay()
         view?.apply(s)
         updateWindowAlpha(s)
+        AudioLevel.sync(this, s.mode == TreeModes.MUSIC, "overlay")
 
         isRunning = true
+        // Onthouden dat de lampjes aan staan, zodat ze na een herstart van de telefoon terugkomen
+        getSharedPreferences("kerstlampjes", MODE_PRIVATE).edit().putBoolean("lights_on", true).apply()
         refreshTile()
         return START_STICKY
     }
@@ -150,7 +154,15 @@ class LightsService : Service() {
             .build()
 
         if (Build.VERSION.SDK_INT >= 34) {
-            startForeground(NOTIF_ID, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE)
+            // De microfoon in een voorgrondservice vraagt om het type "microphone" (alleen als dat nodig is en mag).
+            val wantMic = Prefs.load(this).mode == TreeModes.MUSIC && AudioLevel.hasPermission(this)
+            try {
+                val type = ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE or
+                    (if (wantMic) ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE else 0)
+                startForeground(NOTIF_ID, n, type)
+            } catch (e: Exception) {
+                startForeground(NOTIF_ID, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE)
+            }
         } else {
             startForeground(NOTIF_ID, n)
         }
@@ -162,6 +174,7 @@ class LightsService : Service() {
 
     override fun onDestroy() {
         isRunning = false
+        AudioLevel.sync(this, false, "overlay")
         try { unregisterReceiver(screenReceiver) } catch (_: Exception) {}
         view?.let {
             it.setAnimating(false)

@@ -109,7 +109,12 @@ class MainActivity : Activity() {
         }, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, px(52)))
 
         section(root, Tr.t("Effect"))
-        root.addView(spinner(Modes.names.map { Tr.t(it) }.toTypedArray(), s.mode) { s = s.copy(mode = it) })
+        root.addView(spinner(TreeModes.names.map { Tr.t(it) }.toTypedArray(), s.mode) {
+            s = s.copy(mode = it)
+            if (it == TreeModes.MUSIC && !AudioLevel.hasPermission(this)) {
+                requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), 3)
+            }
+        })
         section(root, Tr.t("Kleuren"))
         root.addView(spinner(Palettes.names.map { Tr.t(it) }.toTypedArray(), s.palette) { s = s.copy(palette = it) })
 

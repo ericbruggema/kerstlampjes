@@ -43,13 +43,13 @@ class TreeWallpaperService : WallpaperService() {
 
         override fun onVisibilityChanged(visible: Boolean) {
             this.visible = visible
-            if (!visible) AudioLevel.sync(this@TreeWallpaperService, false)
+            if (!visible) AudioLevel.sync(this@TreeWallpaperService, false, "wallpaper")
             handler.removeCallbacks(tick)
             if (visible) {
                 // Pak wijzigingen uit de app op
                 if (sized) TreeStore.load(this@TreeWallpaperService, renderer)
                 renderer.reloadOwn()
-                AudioLevel.sync(this@TreeWallpaperService, renderer.mode == TreeModes.MUSIC)
+                AudioLevel.sync(this@TreeWallpaperService, renderer.mode == TreeModes.MUSIC, "wallpaper")
                 handler.post(tick)
             }
         }

@@ -324,8 +324,15 @@ object AudioLevel {
     fun hasPermission(ctx: Context) =
         ctx.checkSelfPermission(Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED
 
-    fun sync(ctx: Context, wanted: Boolean) {
-        want = wanted && hasPermission(ctx)
+    private val owners = HashSet<String>()
+
+    /** Meerdere onderdelen (app, wallpaper, randlampjes) kunnen de microfoon vragen; hij gaat uit als niemand hem nodig heeft. */
+    fun sync(ctx: Context, wanted: Boolean, owner: String = "app") {
+        val any = synchronized(owners) {
+            if (wanted) owners.add(owner) else owners.remove(owner)
+            owners.isNotEmpty()
+        }
+        want = any && hasPermission(ctx)
         if (!want) { mic = 0f; return }
         synchronized(this) {
             if (running) return
@@ -368,11 +375,16 @@ object AudioLevel {
 class DailyReceiver : BroadcastReceiver() {
     override fun onReceive(ctx: Context, intent: Intent) {
         Tr.init(ctx)
-        if (!ExtraPrefs.notify(ctx)) return
         if (intent.action == Intent.ACTION_BOOT_COMPLETED) {
-            schedule(ctx)
+            // Na een herstart: de randlampjes terugzetten en de dagelijkse melding opnieuw plannen
+            val on = ctx.getSharedPreferences("kerstlampjes", Context.MODE_PRIVATE).getBoolean("lights_on", false)
+            if (on && android.provider.Settings.canDrawOverlays(ctx)) {
+                try { LightsService.start(ctx) } catch (e: Exception) {}
+            }
+            if (ExtraPrefs.notify(ctx)) schedule(ctx)
             return
         }
+        if (!ExtraPrefs.notify(ctx)) return
         val today = LocalDate.now()
         if (!Calendar2.inSeason(today)) return
         val scene = Calendar2.sceneFor(today)

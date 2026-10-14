@@ -185,6 +185,12 @@ class LightsView(context: Context) : View(context) {
                 val v = 0.5f + 0.5f * sin(i * 0.35f - t * sp * 2.5f)
                 0.25f + 0.75f * v
             }
+            TreeModes.MUSIC -> {
+                // elk lampje heeft een eigen drempel: hoe harder het geluid, hoe meer er aangaan
+                val th = ((i * 37) % 100) / 100f
+                val k = ((AudioLevel.level * 1.5f - th * 0.9f) / 0.25f).coerceIn(0f, 1f)
+                0.12f + 0.88f * k
+            }
             else -> { // TWINKLE
                 val v = 0.5f + 0.5f * sin(2f * PI.toFloat() * t * sp * freq[i] + phase[i])
                 0.2f + 0.8f * v.pow(2.2f)

@@ -643,7 +643,10 @@ class TreeActivity : Activity() {
     override fun onRequestPermissionsResult(code: Int, perms: Array<out String>, results: IntArray) {
         super.onRequestPermissionsResult(code, perms, results)
         val ok = results.isNotEmpty() && results[0] == android.content.pm.PackageManager.PERMISSION_GRANTED
-        if (code == 31) {
+        if (code == 33) {
+            if (!ok) Toast.makeText(this, Tr.t("Zonder microfoon kunnen de lampjes niet op de muziek bewegen."), Toast.LENGTH_LONG).show()
+            LightsService.update(this)
+        } else if (code == 31) {
             if (!ok) Toast.makeText(this, Tr.t("Zonder microfoon kunnen de lampjes niet op de muziek bewegen."), Toast.LENGTH_LONG).show()
             applyAudio()
         } else if (code == 32) {
@@ -658,6 +661,11 @@ class TreeActivity : Activity() {
         class Item(val label: String, val action: () -> Unit)
         val fpsNames = arrayOf("Normaal (30 fps)", "Zuinig (15 fps)", "Automatisch")
         val items = listOf(
+            Item("💡 " + Tr.t("Lampjes om het scherm") + ": " + onOff(LightsService.isRunning)) { toggleEdgeLights() },
+            Item("🎤 " + Tr.t("Randlampjes reageren op geluid") + ": " +
+                onOff(getSharedPreferences("kerstlampjes", MODE_PRIVATE).getInt("mode", Modes.TWINKLE) == TreeModes.MUSIC)) {
+                toggleEdgeMic()
+            },
             Item("🔊 " + Tr.t("Geluid") + ": " + onOff(ExtraPrefs.sound(this))) {
                 ExtraPrefs.setSound(this, !ExtraPrefs.sound(this)); applyAudio()
             },
@@ -691,6 +699,39 @@ class TreeActivity : Activity() {
             .setItems(items.map { it.label }.toTypedArray()) { _, which -> items[which].action() }
             .setNegativeButton(Tr.t("Sluiten"), null)
             .show()
+    }
+
+    /** De lampjes langs de rand van je scherm (ook boven je beginscherm en andere apps). */
+    private fun toggleEdgeLights() {
+        if (LightsService.isRunning) {
+            LightsService.stop(this)
+        } else if (!android.provider.Settings.canDrawOverlays(this)) {
+            Toast.makeText(this, Tr.t("Geef eerst toestemming om boven andere apps te tekenen."), Toast.LENGTH_LONG).show()
+            try {
+                startActivity(
+                    Intent(android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        android.net.Uri.parse("package:$packageName"))
+                )
+            } catch (e: Exception) {
+            }
+        } else {
+            LightsService.start(this)
+        }
+    }
+
+    /** Laat de randlampjes (in)stelbaar op het geluid van de microfoon reageren. */
+    private fun toggleEdgeMic() {
+        val p = getSharedPreferences("kerstlampjes", MODE_PRIVATE)
+        val cur = p.getInt("mode", Modes.TWINKLE)
+        if (cur == TreeModes.MUSIC) {
+            p.edit().putInt("mode", p.getInt("mode_prev", Modes.TWINKLE)).apply()
+        } else {
+            p.edit().putInt("mode_prev", cur).putInt("mode", TreeModes.MUSIC).apply()
+            if (!AudioLevel.hasPermission(this)) {
+                requestPermissions(arrayOf(android.Manifest.permission.RECORD_AUDIO), 33)
+            }
+        }
+        LightsService.update(this)
     }
 
     private fun toggleNotify() {
