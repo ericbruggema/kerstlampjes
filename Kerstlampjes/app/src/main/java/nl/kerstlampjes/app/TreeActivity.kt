@@ -693,6 +693,7 @@ class TreeActivity : Activity() {
                 refreshTreeLabel()
                 pickPhoto()
             },
+            Item("🔄 " + Tr.t("Controleren op updates")) { Updater.check(this) },
             Item("🌐 " + Tr.t("Taal") + ": " + Tr.languageNames[Tr.languages.indexOf(Tr.preference(this)).coerceAtLeast(0)]) { pickLanguage() }
         )
         AlertDialog.Builder(this)

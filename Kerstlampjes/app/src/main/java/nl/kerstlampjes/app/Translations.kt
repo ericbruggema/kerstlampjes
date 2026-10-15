@@ -363,7 +363,16 @@ object Translations {
             "Groen" to "Green",
             "Paars" to "Purple",
             "Wit" to "White",
-            "Tik op je stickers. Maak je eigen scène via ⋯ → Eigen scène maken" to "Tap your stickers. Make your own scene via ⋯ → Create your own scene"
+            "Tik op je stickers. Maak je eigen scène via ⋯ → Eigen scène maken" to "Tap your stickers. Make your own scene via ⋯ → Create your own scene",
+            "Controleren op updates" to "Check for updates",
+            "Controleren…" to "Checking…",
+            "Updates" to "Updates",
+            "Controleren is niet gelukt. Ben je online?" to "Checking failed. Are you online?",
+            "Er is een nieuwe versie: %s (jij hebt %s)." to "There is a new version: %s (you have %s).",
+            "Je hebt de nieuwste versie (%s)." to "You have the latest version (%s).",
+            "Downloaden" to "Download",
+            "Later" to "Later",
+            "Kerstlampjes is open source en vrij voor iedereen te gebruiken (MIT-licentie). Gebruik je code of ideeën uit dit project? Vermeld dan een verwijzing naar:" to "Kerstlampjes is open source and free for everyone to use (MIT licence). Do you use code or ideas from this project? Please credit and link to:"
         )
     }
 
@@ -719,7 +728,16 @@ object Translations {
             "Groen" to "Grün",
             "Paars" to "Lila",
             "Wit" to "Weiß",
-            "Tik op je stickers. Maak je eigen scène via ⋯ → Eigen scène maken" to "Tippe auf deine Sticker. Erstelle deine eigene Szene über ⋯ → Eigene Szene erstellen"
+            "Tik op je stickers. Maak je eigen scène via ⋯ → Eigen scène maken" to "Tippe auf deine Sticker. Erstelle deine eigene Szene über ⋯ → Eigene Szene erstellen",
+            "Controleren op updates" to "Nach Updates suchen",
+            "Controleren…" to "Prüfe …",
+            "Updates" to "Updates",
+            "Controleren is niet gelukt. Ben je online?" to "Die Prüfung ist fehlgeschlagen. Bist du online?",
+            "Er is een nieuwe versie: %s (jij hebt %s)." to "Es gibt eine neue Version: %s (du hast %s).",
+            "Je hebt de nieuwste versie (%s)." to "Du hast die neueste Version (%s).",
+            "Downloaden" to "Herunterladen",
+            "Later" to "Später",
+            "Kerstlampjes is open source en vrij voor iedereen te gebruiken (MIT-licentie). Gebruik je code of ideeën uit dit project? Vermeld dan een verwijzing naar:" to "Kerstlampjes ist Open Source und für alle frei nutzbar (MIT-Lizenz). Verwendest du Code oder Ideen aus diesem Projekt? Dann nenne bitte als Quelle und verlinke:"
         )
     }
 
@@ -1075,7 +1093,16 @@ object Translations {
             "Groen" to "Vert",
             "Paars" to "Violet",
             "Wit" to "Blanc",
-            "Tik op je stickers. Maak je eigen scène via ⋯ → Eigen scène maken" to "Touche tes stickers. Crée ta scène via ⋯ → Créer ta propre scène"
+            "Tik op je stickers. Maak je eigen scène via ⋯ → Eigen scène maken" to "Touche tes stickers. Crée ta scène via ⋯ → Créer ta propre scène",
+            "Controleren op updates" to "Rechercher des mises à jour",
+            "Controleren…" to "Vérification…",
+            "Updates" to "Mises à jour",
+            "Controleren is niet gelukt. Ben je online?" to "La vérification a échoué. Es-tu en ligne ?",
+            "Er is een nieuwe versie: %s (jij hebt %s)." to "Une nouvelle version est disponible : %s (tu as %s).",
+            "Je hebt de nieuwste versie (%s)." to "Tu as la dernière version (%s).",
+            "Downloaden" to "Télécharger",
+            "Later" to "Plus tard",
+            "Kerstlampjes is open source en vrij voor iedereen te gebruiken (MIT-licentie). Gebruik je code of ideeën uit dit project? Vermeld dan een verwijzing naar:" to "Kerstlampjes est open source et libre pour tous (licence MIT). Tu utilises du code ou des idées de ce projet ? Merci de citer et de renvoyer vers :"
         )
     }
 
@@ -1431,7 +1458,16 @@ object Translations {
             "Groen" to "Verde",
             "Paars" to "Morado",
             "Wit" to "Blanco",
-            "Tik op je stickers. Maak je eigen scène via ⋯ → Eigen scène maken" to "Toca tus pegatinas. Crea tu escena en ⋯ → Crear tu propia escena"
+            "Tik op je stickers. Maak je eigen scène via ⋯ → Eigen scène maken" to "Toca tus pegatinas. Crea tu escena en ⋯ → Crear tu propia escena",
+            "Controleren op updates" to "Buscar actualizaciones",
+            "Controleren…" to "Comprobando…",
+            "Updates" to "Actualizaciones",
+            "Controleren is niet gelukt. Ben je online?" to "No se pudo comprobar. ¿Estás conectado?",
+            "Er is een nieuwe versie: %s (jij hebt %s)." to "Hay una nueva versión: %s (tienes %s).",
+            "Je hebt de nieuwste versie (%s)." to "Tienes la última versión (%s).",
+            "Downloaden" to "Descargar",
+            "Later" to "Más tarde",
+            "Kerstlampjes is open source en vrij voor iedereen te gebruiken (MIT-licentie). Gebruik je code of ideeën uit dit project? Vermeld dan een verwijzing naar:" to "Kerstlampjes es de código abierto y de uso libre para todos (licencia MIT). ¿Usas código o ideas de este proyecto? Por favor, menciona y enlaza:"
         )
     }
 
@@ -1787,7 +1823,16 @@ object Translations {
             "Groen" to "绿色",
             "Paars" to "紫色",
             "Wit" to "白色",
-            "Tik op je stickers. Maak je eigen scène via ⋯ → Eigen scène maken" to "点按你的贴纸。通过 ⋯ → 制作自己的场景 来创建。"
+            "Tik op je stickers. Maak je eigen scène via ⋯ → Eigen scène maken" to "点按你的贴纸。通过 ⋯ → 制作自己的场景 来创建。",
+            "Controleren op updates" to "检查更新",
+            "Controleren…" to "正在检查…",
+            "Updates" to "更新",
+            "Controleren is niet gelukt. Ben je online?" to "检查失败。你已联网吗？",
+            "Er is een nieuwe versie: %s (jij hebt %s)." to "有新版本：%s（你的版本是 %s）。",
+            "Je hebt de nieuwste versie (%s)." to "你已是最新版本（%s）。",
+            "Downloaden" to "下载",
+            "Later" to "稍后",
+            "Kerstlampjes is open source en vrij voor iedereen te gebruiken (MIT-licentie). Gebruik je code of ideeën uit dit project? Vermeld dan een verwijzing naar:" to "Kerstlampjes 是开源的，任何人都可以自由使用（MIT 许可）。如果你使用了本项目的代码或创意，请注明出处并链接到："
         )
     }
 

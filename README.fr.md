@@ -1,10 +1,10 @@
 <div align="center">
 
-# 🎄 Kerstlampjes (Lumières de Noël)
+# 🎄 Lumières de Noël (Kerstlampjes)
 
 **Une guirlande lumineuse le long du bord de ton écran, aussi par-dessus ton écran d'accueil, tes icônes et tes widgets. En bonus : tes propres sapins, cheminées, scènes et un éditeur pour ta propre scène. Pour Android.**
 
-[⬇️ Télécharger l'APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.2)
+[⬇️ Télécharger l'APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.3)
 
 🌍 **Lire en :** [Nederlands](README.md) · [English](README.en.md) · [Deutsch](README.de.md) · **Français** · [Español](README.es.md) · [中文](README.zh.md)
 
@@ -36,7 +36,7 @@
 
 ## 🎅 Qu'est-ce que c'est ?
 
-Kerstlampjes est une application Android qui transforme ton téléphone en décoration de Noël. **L'essentiel, ce sont les lumières
+Lumières de Noël est une application Android qui transforme ton téléphone en décoration de Noël. **L'essentiel, ce sont les lumières
 à l'arrière-plan de ton téléphone** : une guirlande autour du bord de ton écran qui reste aussi par-dessus ton écran d'accueil.
 Tout le reste est un bonus.
 
@@ -56,12 +56,12 @@ Tout le reste est un bonus.
 
 Tout est dessiné et synthétisé dans l'application elle-même (Canvas, pas de moteur de jeu, pas d'AndroidX). Les seules
 images sont les photos de vrais sapins et cheminées, issues de Wikimedia Commons ([sources](#-sources-et-licences)).
-Il n'y a **ni publicité, ni compte, et aucune connexion internet n'est nécessaire**.
+Il n'y a **ni publicité, ni compte**. Internet n'est utilisé que si tu appuies toi-même sur *Rechercher des mises à jour*.
 
 | | |
 |---|---|
 | Nom du paquet | `nl.kerstlampjes.app` |
-| Version | 2.2 (versionCode 4) |
+| Version | 2.3 (versionCode 5) |
 | Android | 8.0 (API 26) ou plus récent |
 | Langage | Kotlin |
 | Taille | environ 3 Mo |
@@ -72,9 +72,8 @@ Il n'y a **ni publicité, ni compte, et aucune connexion internet n'est nécessa
 
 ### Option 1 : l'APK depuis GitHub (recommandé)
 
-1. Sur ton téléphone, va sur la [release v2.2](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.2).
-   Comme le dépôt est privé, tu dois être connecté à GitHub.
-2. Télécharge **`Kerstlampjes-2.2.apk`**.
+1. Sur ton téléphone, va sur la [release v2.3](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.3).
+2. Télécharge **`Kerstlampjes-2.3.apk`**.
 3. Ouvre le fichier téléchargé. Si Android demande l'autorisation d'*installer depuis des sources inconnues*, autorise-le pour ton navigateur ou ton gestionnaire de fichiers.
 4. Appuie sur **Installer** puis sur **Ouvrir**.
 
@@ -195,7 +194,7 @@ Classique · Mini-LED · Boules de verre · Petites flammes · Petites étoiles 
 
 ### 📱 Widgets
 
-Trois widgets pour ton écran d'accueil. Maintiens appuyé un endroit vide de ton écran d'accueil, choisis *Widgets* et cherche *Kerstlampjes*.
+Trois widgets pour ton écran d'accueil. Maintiens appuyé un endroit vide de ton écran d'accueil, choisis *Widgets* et cherche *Lumières de Noël*.
 
 | Widget | Que vois-tu ? |
 |---|---|
@@ -238,6 +237,7 @@ Tout le son est **synthétisé dans l'application elle-même**. Il n'y a pas de 
 | 😴 **Minuterie de sommeil** | De 15 minutes à 2 heures : les lumières s'atténuent doucement et s'éteignent. |
 | 🔋 **Fréquence d'images** | Normale (30 fps), économique (15 fps) ou automatique. |
 | 🖼️ **Photo personnelle** | Utilise ta propre photo comme arrière-plan. |
+| 🔄 **Rechercher des mises à jour** | Cherche sur GitHub une version plus récente et ouvre la page de téléchargement. |
 | 🌍 **Langue** | Automatique, ou choisis toi-même l'une des six langues. |
 
 ### 📅 Jours spéciaux
@@ -285,13 +285,14 @@ toute l'application, aux widgets et à la notification. Si ton téléphone est r
 
 ## 🔐 Autorisations et vie privée
 
-L'application n'a **aucune autorisation internet** et n'envoie rien. Tout reste sur ton téléphone.
+L'application n'utilise internet **que** si tu appuies sur *Rechercher des mises à jour* dans le menu ⋯. Elle demande alors à GitHub le nom de la dernière version et n'envoie rien te concernant. Pour le reste, l'application n'envoie rien. Tout reste sur ton téléphone.
 
 | Autorisation | Pour quoi | Obligatoire ? |
 |---|---|---|
 | Dessiner par-dessus d'autres applications (`SYSTEM_ALERT_WINDOW`) | Les lumières de bord par-dessus l'écran d'accueil et les autres applications | Seulement pour les lumières de bord |
 | Service de premier plan (`FOREGROUND_SERVICE`, `…_SPECIAL_USE`) | Faire tourner les lumières de bord en arrière-plan | Seulement pour les lumières de bord |
 | Micro (`RECORD_AUDIO`, `FOREGROUND_SERVICE_MICROPHONE`) | Lumières qui réagissent au son | Non, seulement si tu choisis cet effet |
+| Internet (`INTERNET`) | Uniquement la recherche de mises à jour du menu ⋯ | Non, seulement si tu appuies dessus |
 | Notifications (`POST_NOTIFICATIONS`) | Notification quotidienne et notification du service de premier plan | Non |
 | Démarrage (`RECEIVE_BOOT_COMPLETED`) | Rétablir les lumières de bord et la notification après un redémarrage | Non |
 
@@ -316,10 +317,10 @@ L'application n'a **aucune autorisation internet** et n'envoie rien. Tout reste 
 
 **Les lumières disparaissent au bout d'un moment.**
 Certaines marques de téléphones (Xiaomi, Huawei, Samsung, OnePlus …) arrêtent agressivement les applications en arrière-plan. Dans les
-réglages de batterie, désactive l'*optimisation de la batterie* pour Kerstlampjes et autorise le *démarrage automatique*.
+réglages de batterie, désactive l'*optimisation de la batterie* pour Lumières de Noël et autorise le *démarrage automatique*.
 
 **Je ne vois pas de lumières par-dessus mon écran d'accueil.**
-Vérifie dans *Réglages → Applications → Kerstlampjes → Afficher par-dessus d'autres applications* que l'autorisation est activée.
+Vérifie dans *Réglages → Applications → Lumières de Noël → Afficher par-dessus d'autres applications* que l'autorisation est activée.
 
 **Les lumières ne reviennent pas après un redémarrage.**
 L'application doit encore avoir l'autorisation de dessiner par-dessus d'autres applications, et les lumières doivent avoir été allumées
@@ -333,7 +334,7 @@ Si une version avec une autre signature est déjà installée, désinstalle-la d
 a Android 8.0 ou plus récent.
 
 **L'application fonctionne-t-elle sans internet ?**
-Oui, entièrement. L'application n'a aucune autorisation internet.
+Oui, entièrement. Internet n'est utilisé que pour la recherche de mises à jour que tu lances toi-même.
 
 **Puis-je avoir l'application sur le Play Store ?**
 Pas encore. L'APK est destinée à être installée soi-même.
@@ -392,7 +393,7 @@ Le keystore et les mots de passe n'ont **pas** leur place dans git.
 ### Publier une release sur GitHub
 
 ```bash
-gh release create v2.2 app-release.apk --title "Kerstlampjes 2.2" --notes "..."
+gh release create v2.3 app-release.apk --title "Kerstlampjes 2.3" --notes "..."
 ```
 
 ---
@@ -465,6 +466,21 @@ tout est traduit dans toutes les langues et que les espaces réservés (`%d`, `%
 
 Ce qui n'a **pas** été testé : le comportement sur un vrai téléphone (batterie, vrai micro, son des chants) et le
 retour des lumières de bord après un vrai redémarrage.
+
+---
+
+## 🤝 Open source et réutilisation
+
+Kerstlampjes est **open source et libre pour tous** sous la [licence MIT](LICENSE). Tu peux le copier, le
+modifier, le partager et même l'utiliser dans ta propre application. Le code se trouve ici : https://github.com/ericbruggema/kerstlampjes.
+
+**Merci de citer la source.** Tu utilises du code ou des idées de ce projet (par exemple l'éditeur de scènes, les
+lumières de bord ou le feu à particules) ? Alors mets un lien vers https://github.com/ericbruggema/kerstlampjes dans ton application, ton README ou ton
+site web. La licence MIT exige au minimum de conserver la mention de copyright dans [`LICENSE`](LICENSE). Une
+courte ligne comme « Basé sur Kerstlampjes, https://github.com/ericbruggema/kerstlampjes » suffit.
+
+Améliorations, traductions et idées sont les bienvenues via les [issues et pull requests](https://github.com/ericbruggema/kerstlampjes/issues). Les
+photos de l'application ont leur propre licence, voir ci-dessous.
 
 ---
 

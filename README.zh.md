@@ -1,10 +1,10 @@
 <div align="center">
 
-# 🎄 Kerstlampjes（圣诞彩灯）
+# 🎄 圣诞彩灯 (Kerstlampjes)
 
 **一串彩灯沿着屏幕边缘亮起，同样显示在主屏幕、图标和小组件之上。另有额外功能：自己的圣诞树、壁炉、场景，以及可以制作自己场景的编辑器。适用于 Android。**
 
-[⬇️ 下载 APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.2)
+[⬇️ 下载 APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.3)
 
 🌍 **其他语言版本：** [Nederlands](README.md) · [English](README.en.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · **中文**
 
@@ -36,7 +36,7 @@
 
 ## 🎅 这是什么？
 
-Kerstlampjes 是一款 Android 应用，把你的手机变成圣诞装饰。**重点是手机背景上的彩灯**：
+圣诞彩灯 是一款 Android 应用，把你的手机变成圣诞装饰。**重点是手机背景上的彩灯**：
 一串绕着屏幕边缘的灯，在主屏幕上同样保持显示。其余的一切都是额外功能。
 
 **核心功能**
@@ -55,12 +55,12 @@ Kerstlampjes 是一款 Android 应用，把你的手机变成圣诞装饰。**�
 
 一切都在应用内部绘制和合成（Canvas，没有游戏引擎，没有 AndroidX）。唯一的
 图片是来自维基共享资源的真实圣诞树和壁炉照片（[来源](#-来源与许可)）。
-**没有广告、没有账号，也不需要网络连接**。
+**没有广告，没有账号**。只有当你自己点击*检查更新*时才会使用网络。
 
 | | |
 |---|---|
 | 包名 | `nl.kerstlampjes.app` |
-| 版本 | 2.2（versionCode 4） |
+| 版本 | 2.3（versionCode 5） |
 | Android | 8.0（API 26）或更高 |
 | 语言 | Kotlin |
 | 大小 | 约 3 MB |
@@ -71,9 +71,8 @@ Kerstlampjes 是一款 Android 应用，把你的手机变成圣诞装饰。**�
 
 ### 方式 1：从 GitHub 下载 APK（推荐）
 
-1. 在手机上打开 [release v2.2](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.2)。
-   由于仓库是私有的，你需要登录 GitHub。
-2. 下载 **`Kerstlampjes-2.2.apk`**。
+1. 在手机上打开 [release v2.3](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.3)。
+2. 下载 **`Kerstlampjes-2.3.apk`**。
 3. 打开下载的文件。如果 Android 要求*允许安装未知来源应用*，请为你的浏览器或文件管理器开启该权限。
 4. 点击**安装**，然后点击**打开**。
 
@@ -194,7 +193,7 @@ Kerstlampjes 是一款 Android 应用，把你的手机变成圣诞装饰。**�
 
 ### 📱 小组件
 
-主屏幕上的三个小组件。长按主屏幕上的空白处，选择*小组件*，找到 *Kerstlampjes*。
+主屏幕上的三个小组件。长按主屏幕上的空白处，选择*小组件*，找到 *圣诞彩灯*。
 
 | 小组件 | 你会看到什么？ |
 |---|---|
@@ -237,6 +236,7 @@ Kerstlampjes 是一款 Android 应用，把你的手机变成圣诞装饰。**�
 | 😴 **睡眠定时器** | 15 分钟到 2 小时：灯光会平静地变暗并熄灭。 |
 | 🔋 **帧率** | 正常（30 fps）、省电（15 fps）或自动。 |
 | 🖼️ **自己的照片** | 使用自己的照片作为背景。 |
+| 🔄 **检查更新** | 在 GitHub 上查找较新的版本并打开下载页面。 |
 | 🌍 **语言** | 自动，或自己选择六种语言之一。 |
 
 ### 📅 特殊日子
@@ -284,13 +284,14 @@ Kerstlampjes 是一款 Android 应用，把你的手机变成圣诞装饰。**�
 
 ## 🔐 权限与隐私
 
-应用**没有网络权限**，不会发送任何东西。一切都留在你的手机上。
+应用**只有**在你点击 ⋯ 菜单中的*检查更新*时才会使用网络。此时它向 GitHub 查询最新版本的名称，不会发送任何与你有关的信息。除此之外应用不会发送任何东西。一切都留在你的手机上。
 
 | 权限 | 用途 | 是否必需？ |
 |---|---|---|
 | 在其他应用上层显示（`SYSTEM_ALERT_WINDOW`） | 在主屏幕和其他应用之上显示边缘彩灯 | 仅边缘彩灯需要 |
 | 前台服务（`FOREGROUND_SERVICE`、`…_SPECIAL_USE`） | 让边缘彩灯在后台运行 | 仅边缘彩灯需要 |
 | 麦克风（`RECORD_AUDIO`、`FOREGROUND_SERVICE_MICROPHONE`） | 对声音作出反应的彩灯 | 否，仅在你选择该效果时 |
+| 网络（`INTERNET`） | 仅用于 ⋯ 菜单中的更新检查 | 否，仅在你点击时 |
 | 通知（`POST_NOTIFICATIONS`） | 每日通知和前台服务的通知 | 否 |
 | 开机（`RECEIVE_BOOT_COMPLETED`） | 重启后恢复边缘彩灯和通知 | 否 |
 
@@ -315,10 +316,10 @@ Kerstlampjes 是一款 Android 应用，把你的手机变成圣诞装饰。**�
 
 **彩灯过一会儿就消失了。**
 某些手机品牌（小米、华为、三星、一加……）会强力关闭后台应用。请在
-电池设置中为 Kerstlampjes 关闭*电池优化*，并允许*自动启动*。
+电池设置中为 圣诞彩灯 关闭*电池优化*，并允许*自动启动*。
 
 **我在主屏幕上看不到彩灯。**
-请在*设置 → 应用 → Kerstlampjes → 在其他应用上层显示*中检查权限是否开启。
+请在*设置 → 应用 → 圣诞彩灯 → 在其他应用上层显示*中检查权限是否开启。
 
 **重启后彩灯没有恢复。**
 应用必须仍然拥有在其他应用上层显示的权限，并且彩灯必须在重启
@@ -332,7 +333,7 @@ Kerstlampjes 是一款 Android 应用，把你的手机变成圣诞装饰。**�
 是否为 Android 8.0 或更高版本。
 
 **应用不联网也能用吗？**
-可以，完全可以。应用没有网络权限。
+可以，完全可以。网络只用于你自己发起的更新检查。
 
 **可以在 Play 商店下载这个应用吗？**
 暂时不行。APK 是供自己安装的。
@@ -391,7 +392,7 @@ keystore 和密码**不应**放进 git。
 ### 在 GitHub 上发布 release
 
 ```bash
-gh release create v2.2 app-release.apk --title "Kerstlampjes 2.2" --notes "..."
+gh release create v2.3 app-release.apk --title "Kerstlampjes 2.3" --notes "..."
 ```
 
 ---
@@ -464,6 +465,19 @@ KerstApp/
 
 **尚未**测试的内容：在真实手机上的表现（电量、真实麦克风、歌曲的声音），以及
 真实重启后边缘彩灯的恢复。
+
+---
+
+## 🤝 开源与再利用
+
+Kerstlampjes 是**开源的，任何人都可以自由使用**，采用 [MIT 许可](LICENSE)。你可以复制、
+修改、分享，甚至用在你自己的应用中。代码在这里：https://github.com/ericbruggema/kerstlampjes。
+
+**请注明出处。** 如果你使用了本项目的代码或创意（例如场景编辑器、边缘彩灯或粒子火焰），
+请在你的应用、README 或网站中链接到 https://github.com/ericbruggema/kerstlampjes。MIT 许可至少要求保留 [`LICENSE`](LICENSE) 中的版权声明。
+一句简短的话，例如“基于 Kerstlampjes，https://github.com/ericbruggema/kerstlampjes”就足够了。
+
+欢迎通过 [issues 和 pull requests](https://github.com/ericbruggema/kerstlampjes/issues) 提交改进、翻译和想法。应用中的照片有各自的许可，见下文。
 
 ---
 

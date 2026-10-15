@@ -1,10 +1,10 @@
 <div align="center">
 
-# 🎄 Kerstlampjes (Weihnachtslichter)
+# 🎄 Weihnachtslichter (Kerstlampjes)
 
 **Eine Lichterkette am Rand deines Bildschirms, auch über deinem Startbildschirm, deinen Icons und Widgets. Dazu als Bonus: eigene Weihnachtsbäume, Kamine, Szenen und ein Editor für deine eigene Szene. Für Android.**
 
-[⬇️ APK herunterladen](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.2)
+[⬇️ APK herunterladen](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.3)
 
 🌍 **Lies dies in:** [Nederlands](README.md) · [English](README.en.md) · **Deutsch** · [Français](README.fr.md) · [Español](README.es.md) · [中文](README.zh.md)
 
@@ -36,7 +36,7 @@
 
 ## 🎅 Was ist das?
 
-Kerstlampjes ist eine Android-App, die dein Handy in eine Weihnachtsdekoration verwandelt. **Die Hauptsache sind die Lichter
+Weihnachtslichter ist eine Android-App, die dein Handy in eine Weihnachtsdekoration verwandelt. **Die Hauptsache sind die Lichter
 im Hintergrund deines Handys**: eine Lichterkette um den Rand deines Bildschirms, die auch über deinem Startbildschirm bleibt.
 Alles andere ist Bonus.
 
@@ -56,12 +56,12 @@ Alles andere ist Bonus.
 
 Alles wird in der App selbst gezeichnet und synthetisiert (Canvas, keine Game-Engine, kein AndroidX). Die einzigen
 Bilder sind die Fotos echter Bäume und Kamine von Wikimedia Commons ([Quellen](#-quellen-und-lizenzen)).
-Es gibt **keine Werbung, keine Konten und keine Internetverbindung ist nötig**.
+Es gibt **keine Werbung und keine Konten**. Das Internet wird nur benutzt, wenn du selbst auf *Nach Updates suchen* tippst.
 
 | | |
 |---|---|
 | Paketname | `nl.kerstlampjes.app` |
-| Version | 2.2 (versionCode 4) |
+| Version | 2.3 (versionCode 5) |
 | Android | 8.0 (API 26) oder neuer |
 | Sprache | Kotlin |
 | Größe | etwa 3 MB |
@@ -72,9 +72,8 @@ Es gibt **keine Werbung, keine Konten und keine Internetverbindung ist nötig**.
 
 ### Option 1: die APK von GitHub (empfohlen)
 
-1. Öffne auf deinem Handy das [Release v2.1](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.2).
-   Da das Repository privat ist, musst du bei GitHub angemeldet sein.
-2. Lade **`Kerstlampjes-2.2.apk`** herunter.
+1. Öffne auf deinem Handy das [Release v2.1](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.3).
+2. Lade **`Kerstlampjes-2.3.apk`** herunter.
 3. Öffne die heruntergeladene Datei. Fragt Android nach der Erlaubnis, *Apps aus unbekannten Quellen zu installieren*, erlaube das für deinen Browser oder Dateimanager.
 4. Tippe auf **Installieren** und danach auf **Öffnen**.
 
@@ -195,7 +194,7 @@ Klassisch · Mini-LEDs · Glaskugeln · Flämmchen · Sternchen · Herzen · Eis
 
 ### 📱 Widgets
 
-Drei Widgets für deinen Startbildschirm. Halte eine leere Stelle auf deinem Startbildschirm gedrückt, wähle *Widgets* und suche *Kerstlampjes*.
+Drei Widgets für deinen Startbildschirm. Halte eine leere Stelle auf deinem Startbildschirm gedrückt, wähle *Widgets* und suche *Weihnachtslichter*.
 
 | Widget | Was siehst du? |
 |---|---|
@@ -238,6 +237,7 @@ Der gesamte Ton wird **in der App selbst synthetisiert**. Es gibt keine Audiodat
 | 😴 **Schlaf-Timer** | 15 Minuten bis 2 Stunden: Die Lichter dimmen ruhig und gehen aus. |
 | 🔋 **Bildrate** | Normal (30 fps), sparsam (15 fps) oder automatisch. |
 | 🖼️ **Eigenes Foto** | Verwende ein eigenes Foto als Hintergrund. |
+| 🔄 **Nach Updates suchen** | Sucht auf GitHub nach einer neueren Version und öffnet die Download-Seite. |
 | 🌍 **Sprache** | Automatisch oder wähle selbst eine der sechs Sprachen. |
 
 ### 📅 Besondere Tage
@@ -285,13 +285,14 @@ ganze App, die Widgets und die Benachrichtigung. Ist dein Telefon auf eine ander
 
 ## 🔐 Berechtigungen und Datenschutz
 
-Die App hat **keine Internet-Berechtigung** und sendet nichts. Alles bleibt auf deinem Handy.
+Die App nutzt das Internet **nur**, wenn du im ⋯-Menü auf *Nach Updates suchen* tippst. Dann wird bei GitHub der Name der neuesten Version abgefragt und nichts über dich gesendet. Sonst sendet die App nichts. Alles bleibt auf deinem Handy.
 
 | Berechtigung | Wofür | Erforderlich? |
 |---|---|---|
 | Über anderen Apps zeichnen (`SYSTEM_ALERT_WINDOW`) | Die Randlichter über Startbildschirm und anderen Apps | Nur für die Randlichter |
 | Vordergrunddienst (`FOREGROUND_SERVICE`, `…_SPECIAL_USE`) | Die Randlichter im Hintergrund laufen lassen | Nur für die Randlichter |
 | Mikrofon (`RECORD_AUDIO`, `FOREGROUND_SERVICE_MICROPHONE`) | Lichter, die auf Geräusche reagieren | Nein, nur wenn du diesen Effekt wählst |
+| Internet (`INTERNET`) | Nur die Update-Prüfung im ⋯-Menü | Nein, nur wenn du darauf tippst |
 | Benachrichtigungen (`POST_NOTIFICATIONS`) | Tägliche Benachrichtigung und die Benachrichtigung des Vordergrunddienstes | Nein |
 | Start (`RECEIVE_BOOT_COMPLETED`) | Randlichter und Benachrichtigung nach einem Neustart wiederherstellen | Nein |
 
@@ -316,10 +317,10 @@ Die App hat **keine Internet-Berechtigung** und sendet nichts. Alles bleibt auf 
 
 **Die Lichter verschwinden nach einer Weile.**
 Manche Handymarken (Xiaomi, Huawei, Samsung, OnePlus …) beenden Hintergrund-Apps aggressiv. Schalte in den
-Akku-Einstellungen die *Akkuoptimierung* für Kerstlampjes aus und erlaube den *Autostart*.
+Akku-Einstellungen die *Akkuoptimierung* für Weihnachtslichter aus und erlaube den *Autostart*.
 
 **Ich sehe keine Lichter über meinem Startbildschirm.**
-Prüfe unter *Einstellungen → Apps → Kerstlampjes → Über anderen Apps anzeigen*, ob die Berechtigung aktiv ist.
+Prüfe unter *Einstellungen → Apps → Weihnachtslichter → Über anderen Apps anzeigen*, ob die Berechtigung aktiv ist.
 
 **Die Lichter kommen nach einem Neustart nicht zurück.**
 Die App muss noch die Berechtigung haben, über anderen Apps zu zeichnen, und die Lichter müssen vor dem Neustart an
@@ -333,7 +334,7 @@ Ist schon eine Version mit anderer Signatur installiert, deinstalliere sie zuers
 Android 8.0 oder neuer hat.
 
 **Funktioniert die App ohne Internet?**
-Ja, vollständig. Die App hat keine Internet-Berechtigung.
+Ja, vollständig. Das Internet wird nur für die Update-Prüfung benutzt, die du selbst startest.
 
 **Kann ich die App im Play Store bekommen?**
 Noch nicht. Die APK ist zum selbst Installieren gedacht.
@@ -392,7 +393,7 @@ Der Keystore und die Passwörter gehören **nicht** in Git.
 ### Ein Release auf GitHub veröffentlichen
 
 ```bash
-gh release create v2.2 app-release.apk --title "Kerstlampjes 2.2" --notes "..."
+gh release create v2.3 app-release.apk --title "Kerstlampjes 2.3" --notes "..."
 ```
 
 ---
@@ -465,6 +466,21 @@ alles in allen Sprachen übersetzt ist und die Platzhalter (`%d`, `%s`) überein
 
 Was **nicht** getestet ist: das Verhalten auf einem echten Handy (Akku, echtes Mikrofon, Klang der Lieder) und die
 Rückkehr der Randlichter nach einem echten Neustart.
+
+---
+
+## 🤝 Open Source und Weiterverwendung
+
+Kerstlampjes ist **Open Source und für alle frei nutzbar** unter der [MIT-Lizenz](LICENSE). Du darfst es kopieren,
+ändern, teilen und sogar in deiner eigenen App verwenden. Der Code liegt hier: https://github.com/ericbruggema/kerstlampjes.
+
+**Bitte nenne die Quelle.** Verwendest du Code oder Ideen aus diesem Projekt (zum Beispiel den Szenen-Editor, die
+Randlichter oder das Partikelfeuer)? Dann verlinke bitte https://github.com/ericbruggema/kerstlampjes in deiner App, README oder Website. Die
+MIT-Lizenz verlangt mindestens, dass der Copyright-Hinweis in [`LICENSE`](LICENSE) erhalten bleibt. Eine kurze
+Zeile wie „Basiert auf Kerstlampjes, https://github.com/ericbruggema/kerstlampjes“ genügt.
+
+Verbesserungen, Übersetzungen und Ideen sind willkommen über [Issues und Pull Requests](https://github.com/ericbruggema/kerstlampjes/issues). Die Fotos in
+der App haben eigene Lizenzen, siehe unten.
 
 ---
 

@@ -59,6 +59,8 @@ object Credits {
     fun short(i: Int): String = Tr.t("Foto") + ": ${photos[i].author} · ${photos[i].license}"
 
     fun asText(): String = buildString {
+        append(Tr.t("Kerstlampjes is open source en vrij voor iedereen te gebruiken (MIT-licentie). Gebruik je code of ideeën uit dit project? Vermeld dan een verwijzing naar:") + "\n")
+        append(Updater.REPO_URL + "\n\n")
         append(Tr.f("Foto's van Wikimedia Commons (opgehaald %s). ", RETRIEVED))
         append(Tr.t("Voor gebruik in de app zijn ze verkleind en bijgesneden.") + "\n\n")
         photos.forEach {

@@ -1,10 +1,10 @@
 <div align="center">
 
-# 🎄 Kerstlampjes (Luces de Navidad)
+# 🎄 Luces de Navidad (Kerstlampjes)
 
 **Una guirnalda de luces a lo largo del borde de tu pantalla, también por encima de tu pantalla de inicio, tus iconos y tus widgets. Además, como extra: tus propios árboles de Navidad, chimeneas, escenas y un editor para tu propia escena. Para Android.**
 
-[⬇️ Descargar el APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.2)
+[⬇️ Descargar el APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.3)
 
 🌍 **Léelo en:** [Nederlands](README.md) · [English](README.en.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · **Español** · [中文](README.zh.md)
 
@@ -36,7 +36,7 @@
 
 ## 🎅 ¿Qué es?
 
-Kerstlampjes es una aplicación de Android que convierte tu teléfono en una decoración navideña. **Lo principal son las luces
+Luces de Navidad es una aplicación de Android que convierte tu teléfono en una decoración navideña. **Lo principal son las luces
 en el fondo de tu teléfono**: una guirnalda alrededor del borde de tu pantalla que también se queda por encima de tu pantalla de inicio.
 Todo lo demás es un extra.
 
@@ -56,12 +56,12 @@ Todo lo demás es un extra.
 
 Todo se dibuja y sintetiza en la propia aplicación (Canvas, sin motor de juegos, sin AndroidX). Las únicas
 imágenes son las fotos de árboles y chimeneas reales, de Wikimedia Commons ([fuentes](#-fuentes-y-licencias)).
-**No hay anuncios, ni cuentas, y no hace falta conexión a internet**.
+**No hay anuncios ni cuentas**. Internet solo se usa cuando tú mismo tocas *Buscar actualizaciones*.
 
 | | |
 |---|---|
 | Nombre del paquete | `nl.kerstlampjes.app` |
-| Versión | 2.2 (versionCode 4) |
+| Versión | 2.3 (versionCode 5) |
 | Android | 8.0 (API 26) o más reciente |
 | Lenguaje | Kotlin |
 | Tamaño | unos 3 MB |
@@ -72,9 +72,8 @@ imágenes son las fotos de árboles y chimeneas reales, de Wikimedia Commons ([f
 
 ### Opción 1: el APK desde GitHub (recomendada)
 
-1. En tu teléfono, ve a la [release v2.2](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.2).
-   Como el repositorio es privado, tienes que haber iniciado sesión en GitHub.
-2. Descarga **`Kerstlampjes-2.2.apk`**.
+1. En tu teléfono, ve a la [release v2.3](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.3).
+2. Descarga **`Kerstlampjes-2.3.apk`**.
 3. Abre el archivo descargado. Si Android te pide permiso para *instalar desde orígenes desconocidos*, concédelo a tu navegador o gestor de archivos.
 4. Toca **Instalar** y después **Abrir**.
 
@@ -195,7 +194,7 @@ Clásicas · Mini LED · Bolas de cristal · Llamitas · Estrellitas · Corazone
 
 ### 📱 Widgets
 
-Tres widgets para tu pantalla de inicio. Mantén pulsado un hueco vacío de tu pantalla de inicio, elige *Widgets* y busca *Kerstlampjes*.
+Tres widgets para tu pantalla de inicio. Mantén pulsado un hueco vacío de tu pantalla de inicio, elige *Widgets* y busca *Luces de Navidad*.
 
 | Widget | ¿Qué ves? |
 |---|---|
@@ -238,6 +237,7 @@ Todo el sonido se **sintetiza en la propia aplicación**. No hay archivos de aud
 | 😴 **Temporizador de sueño** | De 15 minutos a 2 horas: las luces se atenúan con calma y se apagan. |
 | 🔋 **Velocidad de imagen** | Normal (30 fps), económica (15 fps) o automática. |
 | 🖼️ **Foto propia** | Usa una foto propia como fondo. |
+| 🔄 **Buscar actualizaciones** | Busca en GitHub una versión más reciente y abre la página de descarga. |
 | 🌍 **Idioma** | Automático, o elige tú mismo uno de los seis idiomas. |
 
 ### 📅 Días especiales
@@ -285,13 +285,14 @@ toda la aplicación, los widgets y la notificación. Si tu teléfono está en ot
 
 ## 🔐 Permisos y privacidad
 
-La aplicación **no tiene permiso de internet** y no envía nada. Todo se queda en tu teléfono.
+La aplicación usa internet **solo** cuando tocas *Buscar actualizaciones* en el menú ⋯. Entonces pregunta a GitHub por el nombre de la última versión y no envía nada sobre ti. Aparte de eso, la aplicación no envía nada. Todo se queda en tu teléfono.
 
 | Permiso | Para qué | ¿Obligatorio? |
 |---|---|---|
 | Dibujar sobre otras aplicaciones (`SYSTEM_ALERT_WINDOW`) | Las luces del borde sobre la pantalla de inicio y otras aplicaciones | Solo para las luces del borde |
 | Servicio en primer plano (`FOREGROUND_SERVICE`, `…_SPECIAL_USE`) | Mantener las luces del borde en segundo plano | Solo para las luces del borde |
 | Micrófono (`RECORD_AUDIO`, `FOREGROUND_SERVICE_MICROPHONE`) | Luces que reaccionan al sonido | No, solo si eliges ese efecto |
+| Internet (`INTERNET`) | Solo la búsqueda de actualizaciones del menú ⋯ | No, solo si la tocas |
 | Notificaciones (`POST_NOTIFICATIONS`) | Notificación diaria y la notificación del servicio en primer plano | No |
 | Inicio (`RECEIVE_BOOT_COMPLETED`) | Restablecer las luces del borde y la notificación tras reiniciar | No |
 
@@ -316,10 +317,10 @@ La aplicación **no tiene permiso de internet** y no envía nada. Todo se queda 
 
 **Las luces desaparecen al cabo de un rato.**
 Algunas marcas de teléfonos (Xiaomi, Huawei, Samsung, OnePlus …) detienen de forma agresiva las aplicaciones en segundo plano. En los
-ajustes de batería desactiva la *optimización de batería* para Kerstlampjes y permite el *inicio automático*.
+ajustes de batería desactiva la *optimización de batería* para Luces de Navidad y permite el *inicio automático*.
 
 **No veo luces sobre mi pantalla de inicio.**
-Comprueba en *Ajustes → Aplicaciones → Kerstlampjes → Mostrar sobre otras aplicaciones* que el permiso está activado.
+Comprueba en *Ajustes → Aplicaciones → Luces de Navidad → Mostrar sobre otras aplicaciones* que el permiso está activado.
 
 **Las luces no vuelven tras reiniciar.**
 La aplicación debe seguir teniendo permiso para dibujar sobre otras aplicaciones, y las luces tienen que haber estado encendidas
@@ -333,7 +334,7 @@ Si ya hay instalada una versión con otra firma, desinstálala primero. Comprueb
 tenga Android 8.0 o más reciente.
 
 **¿Funciona la aplicación sin internet?**
-Sí, por completo. La aplicación no tiene permiso de internet.
+Sí, por completo. Internet solo se usa para la búsqueda de actualizaciones que inicias tú mismo.
 
 **¿Puedo conseguir la aplicación en Play Store?**
 Todavía no. El APK está pensado para instalarlo tú mismo.
@@ -392,7 +393,7 @@ El keystore y las contraseñas **no** deben estar en git.
 ### Publicar una release en GitHub
 
 ```bash
-gh release create v2.2 app-release.apk --title "Kerstlampjes 2.2" --notes "..."
+gh release create v2.3 app-release.apk --title "Kerstlampjes 2.3" --notes "..."
 ```
 
 ---
@@ -465,6 +466,21 @@ todo está traducido en todos los idiomas y que los marcadores (`%d`, `%s`) coin
 
 Lo que **no** se ha probado: el comportamiento en un teléfono real (batería, micrófono real, sonido de los villancicos) y la
 vuelta de las luces del borde tras un reinicio real.
+
+---
+
+## 🤝 Código abierto y reutilización
+
+Kerstlampjes es de **código abierto y de uso libre para todos** bajo la [licencia MIT](LICENSE). Puedes copiarlo,
+modificarlo, compartirlo e incluso usarlo en tu propia aplicación. El código está aquí: https://github.com/ericbruggema/kerstlampjes.
+
+**Por favor, menciona la fuente.** ¿Usas código o ideas de este proyecto (por ejemplo el editor de escenas, las
+luces del borde o el fuego de partículas)? Entonces enlaza https://github.com/ericbruggema/kerstlampjes en tu aplicación, README o sitio web. La licencia
+MIT exige al menos conservar el aviso de copyright en [`LICENSE`](LICENSE). Una línea breve como «Basado en
+Kerstlampjes, https://github.com/ericbruggema/kerstlampjes» es suficiente.
+
+Mejoras, traducciones e ideas son bienvenidas mediante [issues y pull requests](https://github.com/ericbruggema/kerstlampjes/issues). Las fotos de la
+aplicación tienen su propia licencia, véase abajo.
 
 ---
 

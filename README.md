@@ -4,7 +4,7 @@
 
 **Een snoer kerstlampjes langs de rand van je scherm, ook boven je beginscherm, je iconen en je widgets. Plus bonus: eigen kerstbomen, haarden, scènes en een editor voor je eigen scène. Voor Android.**
 
-[⬇️ Download de APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.2) ·
+[⬇️ Download de APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.3) ·
 [✨ Functies](#-functies) ·
 [📲 Installeren](#-installeren) ·
 [🛠️ Bouwen](#️-bouwen-uit-de-broncode) ·
@@ -71,12 +71,12 @@ Alles daarna is bonus.
 
 Alles is getekend en gesynthetiseerd in de app zelf (Canvas, geen game-engine, geen AndroidX). De enige
 afbeeldingen zijn de foto's van echte bomen en haarden, uit Wikimedia Commons ([bronnen](#-bronnen-en-licenties)).
-Er zijn **geen advertenties, geen accounts en geen internetverbinding nodig**.
+Er zijn **geen advertenties en geen accounts**. Internet is alleen nodig als je zelf op *Controleren op updates* tikt.
 
 | | |
 |---|---|
 | Pakketnaam | `nl.kerstlampjes.app` |
-| Versie | 2.2 (versionCode 4) |
+| Versie | 2.3 (versionCode 5) |
 | Android | 8.0 (API 26) of nieuwer |
 | Taal | Kotlin |
 | Grootte | circa 3 MB |
@@ -87,9 +87,8 @@ Er zijn **geen advertenties, geen accounts en geen internetverbinding nodig**.
 
 ### Optie 1: de APK van GitHub (aanbevolen)
 
-1. Ga op je telefoon naar de [release v2.2](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.2).
-   Omdat de repository privé is, moet je ingelogd zijn op GitHub.
-2. Download **`Kerstlampjes-2.2.apk`**.
+1. Ga op je telefoon naar de [release v2.3](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.3).
+   2. Download **`Kerstlampjes-2.3.apk`**.
 3. Open het gedownloade bestand. Vraagt Android om toestemming voor *installeren uit onbekende bronnen*, sta dat dan toe voor je browser of bestandsbeheer.
 4. Tik op **Installeren** en daarna op **Openen**.
 
@@ -368,6 +367,7 @@ Alle geluid wordt **in de app zelf gesynthetiseerd**. Er zijn geen audiobestande
 | 😴 **Slaaptimer** | 15 minuten tot 2 uur: de lampjes dimmen rustig en gaan uit. |
 | 🔋 **Beeldsnelheid** | Normaal (30 fps), zuinig (15 fps) of automatisch. |
 | 🖼️ **Eigen foto** | Gebruik een eigen foto als achtergrond. |
+| 🔄 **Controleren op updates** | Kijkt op GitHub of er een nieuwere versie is en opent de downloadpagina. |
 | 🌍 **Taal** | Automatisch, of kies zelf een van de zes talen. |
 
 <table>
@@ -442,13 +442,14 @@ hele app, de widgets en de melding. Staat je telefoon op een andere taal, dan is
 
 ## 🔐 Rechten en privacy
 
-De app heeft **geen internetrechten** en verstuurt niets. Alles blijft op je telefoon.
+De app gebruikt internet **alleen** als jij in het ⋯-menu op *Controleren op updates* tikt. Dan wordt de naam van de nieuwste versie opgevraagd bij GitHub en wordt er niets van jou verstuurd. Verder verstuurt de app niets. Alles blijft op je telefoon.
 
 | Recht | Waarvoor | Verplicht? |
 |---|---|---|
 | Boven andere apps tekenen (`SYSTEM_ALERT_WINDOW`) | De randlampjes boven het beginscherm en andere apps | Alleen voor de randlampjes |
 | Voorgrondservice (`FOREGROUND_SERVICE`, `…_SPECIAL_USE`) | De randlampjes laten draaien op de achtergrond | Alleen voor de randlampjes |
 | Microfoon (`RECORD_AUDIO`, `FOREGROUND_SERVICE_MICROPHONE`) | Lampjes die op geluid reageren | Nee, alleen als je dat effect kiest |
+| Internet (`INTERNET`) | Alleen de updatecontrole in het ⋯-menu | Nee, alleen als je erop tikt |
 | Meldingen (`POST_NOTIFICATIONS`) | Dagelijkse melding en de melding van de voorgrondservice | Nee |
 | Opstarten (`RECEIVE_BOOT_COMPLETED`) | Randlampjes en melding terugzetten na een herstart | Nee |
 
@@ -490,7 +491,7 @@ Staat er al een versie met een andere handtekening, verwijder die dan eerst. Con
 Android 8.0 of nieuwer heeft.
 
 **Werkt de app zonder internet?**
-Ja, volledig. De app heeft geen internetrecht.
+Ja, volledig. Internet wordt alleen gebruikt voor de updatecontrole die je zelf start.
 
 **Kan ik de app in de Play Store krijgen?**
 Nog niet. De APK is bedoeld om zelf te installeren.
@@ -549,7 +550,7 @@ De keystore en de wachtwoorden horen **niet** in git.
 ### Een release op GitHub zetten
 
 ```bash
-gh release create v2.2 app-release.apk --title "Kerstlampjes 2.2" --notes "..."
+gh release create v2.3 app-release.apk --title "Kerstlampjes 2.3" --notes "..."
 ```
 
 ---
@@ -622,6 +623,21 @@ alles in alle talen is vertaald en dat de plaatsaanduidingen (`%d`, `%s`) overee
 
 Wat **niet** is getest: het gedrag op een echte telefoon (batterij, echte microfoon, geluid van de liedjes) en het
 terugkomen van de randlampjes na een echte herstart.
+
+---
+
+## 🤝 Open source en gebruik
+
+Kerstlampjes is **open source en vrij voor iedereen te gebruiken** onder de [MIT-licentie](LICENSE). Kopiëren,
+aanpassen, delen en zelfs gebruiken in je eigen app mag. De code staat hier: https://github.com/ericbruggema/kerstlampjes.
+
+**Graag een vermelding.** Gebruik je code of ideeën uit dit project (bijvoorbeeld de eigen-scène-editor, de
+randlampjes of het deeltjesvuur)? Zet dan een verwijzing naar https://github.com/ericbruggema/kerstlampjes in je app, README of op je website. De
+MIT-licentie vraagt in elk geval om het behouden van de copyright-vermelding in [`LICENSE`](LICENSE). Een korte
+tekst als "Gebaseerd op Kerstlampjes, https://github.com/ericbruggema/kerstlampjes" is genoeg.
+
+Verbeteringen, vertalingen en ideeën zijn welkom via [issues en pull requests](https://github.com/ericbruggema/kerstlampjes/issues). De foto's in de
+app hebben hun eigen licentie, zie hieronder.
 
 ---
 

@@ -31,3 +31,7 @@ Opgehaald op 14 oktober 2026 van Wikimedia Commons; verkleind en bijgesneden naa
 | `white.jpg` | White Christmas Tree Lights at Night.jpg | photos-public-domain.com | CC0 | https://commons.wikimedia.org/wiki/File:White_Christmas_Tree_Lights_at_Night.jpg |
 
 Alle overige beelden (bomen, haarden, scènes, vuur) zijn in code getekend.
+
+## De code
+Kerstlampjes is open source onder de [MIT-licentie](LICENSE). Gebruik je code of ideeën uit dit project?
+Vermeld dan een verwijzing naar https://github.com/ericbruggema/kerstlampjes.

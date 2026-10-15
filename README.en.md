@@ -1,10 +1,10 @@
 <div align="center">
 
-# 🎄 Kerstlampjes (Christmas Lights)
+# 🎄 Christmas Lights (Kerstlampjes)
 
 **A string of Christmas lights along the edge of your screen, also on top of your home screen, your icons and your widgets. Plus bonus: your own Christmas trees, fireplaces, scenes and an editor for your own scene. For Android.**
 
-[⬇️ Download the APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.2)
+[⬇️ Download the APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.3)
 
 🌍 **Read this in:** [Nederlands](README.md) · **English** · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [中文](README.zh.md)
 
@@ -36,7 +36,7 @@
 
 ## 🎅 What is it?
 
-Kerstlampjes is an Android app that turns your phone into a Christmas decoration. **The main point is the lights
+Christmas Lights is an Android app that turns your phone into a Christmas decoration. **The main point is the lights
 in the background of your phone**: a string of lights around the edge of your screen that also stays on top of your home screen.
 Everything else is a bonus.
 
@@ -56,12 +56,12 @@ Everything else is a bonus.
 
 Everything is drawn and synthesised inside the app itself (Canvas, no game engine, no AndroidX). The only
 images are the photos of real trees and fireplaces, from Wikimedia Commons ([sources](#-sources-and-licences)).
-There are **no ads, no accounts and no internet connection needed**.
+There are **no ads and no accounts**. Internet is only used when you yourself tap *Check for updates*.
 
 | | |
 |---|---|
 | Package name | `nl.kerstlampjes.app` |
-| Version | 2.2 (versionCode 4) |
+| Version | 2.3 (versionCode 5) |
 | Android | 8.0 (API 26) or newer |
 | Language | Kotlin |
 | Size | about 3 MB |
@@ -72,9 +72,8 @@ There are **no ads, no accounts and no internet connection needed**.
 
 ### Option 1: the APK from GitHub (recommended)
 
-1. On your phone, go to [release v2.2](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.2).
-   Because the repository is private, you need to be logged in to GitHub.
-2. Download **`Kerstlampjes-2.2.apk`**.
+1. On your phone, go to [release v2.3](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.3).
+2. Download **`Kerstlampjes-2.3.apk`**.
 3. Open the downloaded file. If Android asks for permission to *install from unknown sources*, allow it for your browser or file manager.
 4. Tap **Install** and then **Open**.
 
@@ -194,7 +193,7 @@ Classic · Mini LEDs · Glass baubles · Little flames · Little stars · Hearts
 
 ### 📱 Widgets
 
-Three widgets for your home screen. Long-press an empty spot on your home screen, choose *Widgets* and look for *Kerstlampjes*.
+Three widgets for your home screen. Long-press an empty spot on your home screen, choose *Widgets* and look for *Christmas Lights*.
 
 | Widget | What do you see? |
 |---|---|
@@ -237,6 +236,7 @@ All sound is **synthesised inside the app itself**. There are no audio files.
 | 😴 **Sleep timer** | 15 minutes to 2 hours: the lights dim quietly and go out. |
 | 🔋 **Frame rate** | Normal (30 fps), economical (15 fps) or automatic. |
 | 🖼️ **Own photo** | Use your own photo as background. |
+| 🔄 **Check for updates** | Looks on GitHub for a newer version and opens the download page. |
 | 🌍 **Language** | Automatic, or choose one of the six languages yourself. |
 
 ### 📅 Special days
@@ -284,13 +284,14 @@ whole app, the widgets and the notification. If your phone is set to another lan
 
 ## 🔐 Permissions and privacy
 
-The app has **no internet permission** and sends nothing. Everything stays on your phone.
+The app uses the internet **only** when you tap *Check for updates* in the ⋯ menu. It then asks GitHub for the name of the latest version and sends nothing about you. Apart from that the app sends nothing. Everything stays on your phone.
 
 | Permission | Purpose | Required? |
 |---|---|---|
 | Draw over other apps (`SYSTEM_ALERT_WINDOW`) | The edge lights on top of the home screen and other apps | Only for the edge lights |
 | Foreground service (`FOREGROUND_SERVICE`, `…_SPECIAL_USE`) | Keep the edge lights running in the background | Only for the edge lights |
 | Microphone (`RECORD_AUDIO`, `FOREGROUND_SERVICE_MICROPHONE`) | Lights that react to sound | No, only if you choose that effect |
+| Internet (`INTERNET`) | Only the update check in the ⋯ menu | No, only when you tap it |
 | Notifications (`POST_NOTIFICATIONS`) | Daily notification and the foreground service notification | No |
 | Startup (`RECEIVE_BOOT_COMPLETED`) | Restore edge lights and notification after a restart | No |
 
@@ -315,10 +316,10 @@ The app has **no internet permission** and sends nothing. Everything stays on yo
 
 **The lights disappear after a while.**
 Some phone brands (Xiaomi, Huawei, Samsung, OnePlus …) stop background apps aggressively. In the
-battery settings turn off *battery optimisation* for Kerstlampjes and allow *auto-start*.
+battery settings turn off *battery optimisation* for Christmas Lights and allow *auto-start*.
 
 **I don't see any lights above my home screen.**
-Check in *Settings → Apps → Kerstlampjes → Display over other apps* that the permission is on.
+Check in *Settings → Apps → Christmas Lights → Display over other apps* that the permission is on.
 
 **The lights don't come back after a restart.**
 The app must still have permission to draw over other apps, and the lights must have been on
@@ -332,7 +333,7 @@ If a version with a different signature is already installed, uninstall it first
 has Android 8.0 or newer.
 
 **Does the app work without internet?**
-Yes, completely. The app has no internet permission.
+Yes, completely. The internet is only used for the update check that you start yourself.
 
 **Can I get the app in the Play Store?**
 Not yet. The APK is meant for installing yourself.
@@ -391,7 +392,7 @@ The keystore and the passwords do **not** belong in git.
 ### Publishing a release on GitHub
 
 ```bash
-gh release create v2.2 app-release.apk --title "Kerstlampjes 2.2" --notes "..."
+gh release create v2.3 app-release.apk --title "Kerstlampjes 2.3" --notes "..."
 ```
 
 ---
@@ -464,6 +465,21 @@ everything is translated in all languages and that the placeholders (`%d`, `%s`)
 
 What has **not** been tested: behaviour on a real phone (battery, real microphone, sound of the songs) and the
 edge lights coming back after a real restart.
+
+---
+
+## 🤝 Open source and reuse
+
+Kerstlampjes is **open source and free for everyone to use** under the [MIT licence](LICENSE). You may copy,
+modify, share and even use it in your own app. The code is here: https://github.com/ericbruggema/kerstlampjes.
+
+**Please give credit.** Do you use code or ideas from this project (for example the scene editor, the edge
+lights or the particle fire)? Then please link to https://github.com/ericbruggema/kerstlampjes in your app, README or website. The MIT licence
+requires at least that you keep the copyright notice in [`LICENSE`](LICENSE). A short line such as "Based on
+Kerstlampjes, https://github.com/ericbruggema/kerstlampjes" is enough.
+
+Improvements, translations and ideas are welcome through [issues and pull requests](https://github.com/ericbruggema/kerstlampjes/issues). The photos in
+the app have their own licences, see below.
 
 ---
 
