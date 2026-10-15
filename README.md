@@ -13,6 +13,8 @@
 
 🌍 **Lees dit in:** **Nederlands** · [English](README.en.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [中文](README.zh.md)
 
+💻 **Nieuw: Kerstlampjes voor Windows!** Alleen de lampjes, altijd zichtbaar in het systeemvak. [⬇️ Download (60 kB)](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.0/Kerstlampjes-Windows.exe) · [Meer info](#-windows)
+
 <img src="website/media/extra-beginscherm.jpg" alt="Randlampjes boven het beginscherm" width="360">
 
 </div>

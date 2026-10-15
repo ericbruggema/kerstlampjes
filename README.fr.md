@@ -8,6 +8,8 @@
 
 🌍 **Lire en :** [Nederlands](README.md) · [English](README.en.md) · [Deutsch](README.de.md) · **Français** · [Español](README.es.md) · [中文](README.zh.md)
 
+💻 **Nouveau : Lumières de Noël pour Windows !** Seulement les lumières, toujours visibles depuis la zone de notification. [⬇️ Télécharger (60 ko)](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.0/Kerstlampjes-Windows.exe) · [Plus d'infos](#-windows)
+
 </div>
 
 > 📷 Cette traduction ne contient pas de captures d'écran, pour rester courte. Toutes les images se trouvent dans le [README néerlandais](README.md) et sur le site web. L'application existe dans les six langues.

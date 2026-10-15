@@ -8,6 +8,8 @@
 
 🌍 **其他语言版本：** [Nederlands](README.md) · [English](README.en.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · **中文**
 
+💻 **新：圣诞彩灯 Windows 版！** 只有彩灯，始终显示，在系统托盘中控制。[⬇️ 下载（60 kB）](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.0/Kerstlampjes-Windows.exe) · [详细信息](#-windows)
+
 </div>
 
 > 📷 为保持简短，本译文不含截图。所有图片请见[荷兰语 README](README.md) 和网站。应用本身提供全部六种语言。

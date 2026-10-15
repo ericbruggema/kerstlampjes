@@ -8,6 +8,8 @@
 
 🌍 **Lies dies in:** [Nederlands](README.md) · [English](README.en.md) · **Deutsch** · [Français](README.fr.md) · [Español](README.es.md) · [中文](README.zh.md)
 
+💻 **Neu: Weihnachtslichter für Windows!** Nur die Lichter, immer sichtbar im Infobereich. [⬇️ Download (60 kB)](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.0/Kerstlampjes-Windows.exe) · [Mehr Infos](#-windows)
+
 </div>
 
 > 📷 Diese Übersetzung enthält keine Screenshots, damit sie kurz bleibt. Alle Bilder findest du in der [niederländischen README](README.md) und auf der Website. Die App selbst gibt es in allen sechs Sprachen.

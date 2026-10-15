@@ -8,6 +8,8 @@
 
 🌍 **Read this in:** [Nederlands](README.md) · **English** · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [中文](README.zh.md)
 
+💻 **New: Christmas Lights for Windows!** Just the lights, always visible from the system tray. [⬇️ Download (60 kB)](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.0/Kerstlampjes-Windows.exe) · [More info](#-windows)
+
 </div>
 
 > 📷 This translation has no screenshots, to keep it short. You can find all images in the [Dutch README](README.md) and on the website. The app itself is available in all six languages.
