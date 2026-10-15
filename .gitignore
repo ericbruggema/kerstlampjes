@@ -10,3 +10,8 @@ captures/
 keystore.properties
 *.keystore
 *.jks
+
+# Windows-build
+Windows/out/
+Windows/bin/
+Windows/obj/

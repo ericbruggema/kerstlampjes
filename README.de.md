@@ -469,6 +469,19 @@ Rückkehr der Randlichter nach einem echten Neustart.
 
 ---
 
+## 💻 Windows
+
+Es gibt auch eine kleine Windows-Version nur mit den Lichtern: eine Kette am Rand deines Bildschirms (über der Taskleiste), immer sichtbar, und du kannst einfach hindurchklicken.
+
+- **Download:** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.0/Kerstlampjes-Windows.exe) (60 kB, [Release](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.0)). Nichts zu installieren: Doppelklick, und das Symbol erscheint im Infobereich, unten rechts bei der Uhr.
+- **An/aus:** Linksklick auf das Symbol. **Rechtsklick** öffnet das Menü: Einstellungen, mit Windows starten, nach Updates suchen, Über und Beenden.
+- **Einstellungen:** Effekt (Dauerlicht, Funkeln, abwechselnd, Lauflicht, Farbwelle), Farben, Geschwindigkeit, Größe, Abstand, Eckenrundung, Randabstand, Durchhang, Deckkraft. Auch alle Bildschirme oder nur der Hauptbildschirm.
+- **Blendet sich aus** bei Vollbild-Apps (Spiele, Filme, Präsentationen).
+- **Datenschutz:** nichts geht über das Internet, außer du wählst „Nach Updates suchen“. Einstellungen liegen in `%APPDATA%\Kerstlampjes`.
+- **Sprachen:** folgt der Windows-Sprache (Nederlands, English, Deutsch, Français, Español, 中文).
+- **Windows SmartScreen:** die Datei ist nicht digital signiert; bei der Warnung *Weitere Informationen* → *Trotzdem ausführen* wählen.
+- **Bauen:** Ordner `Windows/`, `dotnet build -c Release` (.NET Framework 4.8, in Windows 10/11 enthalten).
+
 ## 🤝 Open Source und Weiterverwendung
 
 Kerstlampjes ist **Open Source und für alle frei nutzbar** unter der [MIT-Lizenz](LICENSE). Du darfst es kopieren,

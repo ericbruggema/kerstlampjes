@@ -468,6 +468,19 @@ edge lights coming back after a real restart.
 
 ---
 
+## 💻 Windows
+
+There is also a small Windows version with just the lights: a string along the edge of your screen (above the taskbar), always visible, and you can click straight through it.
+
+- **Download:** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.0/Kerstlampjes-Windows.exe) (60 kB, [release](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.0)). Nothing to install: double-click and the icon appears in the system tray, bottom right next to the clock.
+- **On/off:** left-click the icon. **Right-click** opens the menu: settings, start with Windows, check for updates, about and exit.
+- **Settings:** effect (steady, twinkle, alternate, chasing light, colour wave), colours, speed, size, spacing, corner rounding, distance from the edge, sag, opacity. Also all screens or just the main one.
+- **Hides itself** during full-screen apps (games, films, presentations).
+- **Privacy:** nothing goes over the internet unless you choose "Check for updates". Settings live in `%APPDATA%\Kerstlampjes`.
+- **Languages:** follows the Windows language (Nederlands, English, Deutsch, Français, Español, 中文).
+- **Windows SmartScreen:** the file is not digitally signed; at the warning choose *More info* → *Run anyway*.
+- **Building:** folder `Windows/`, `dotnet build -c Release` (.NET Framework 4.8, included in Windows 10/11).
+
 ## 🤝 Open source and reuse
 
 Kerstlampjes is **open source and free for everyone to use** under the [MIT licence](LICENSE). You may copy,

@@ -468,6 +468,19 @@ KerstApp/
 
 ---
 
+## 💻 Windows
+
+另有一个只含彩灯的小型 Windows 版：一串灯沿屏幕边缘（任务栏上方）显示，始终可见，并且可以直接点击穿透。
+
+- **下载：** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.0/Kerstlampjes-Windows.exe)（60 kB，[发布页](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.0)）。无需安装：双击后图标出现在系统托盘（右下角时钟旁）。
+- **开/关：** 左键单击图标。**右键**打开菜单：设置、随 Windows 启动、检查更新、关于和退出。
+- **设置：** 效果（常亮、闪烁、交替、跑马灯、彩色波浪）、颜色、速度、大小、间距、圆角、离边缘距离、下垂、不透明度；可选所有屏幕或仅主屏幕。
+- **自动隐藏：** 全屏应用（游戏、视频、演示）时隐藏。
+- **隐私：** 除非你选择“检查更新”，否则不联网。设置保存在 `%APPDATA%\Kerstlampjes`。
+- **语言：** 跟随 Windows 语言（Nederlands、English、Deutsch、Français、Español、中文）。
+- **Windows SmartScreen：** 文件没有数字签名；出现警告时选择*更多信息* → *仍要运行*。
+- **构建：** 目录 `Windows/`，`dotnet build -c Release`（.NET Framework 4.8，Windows 10/11 自带）。
+
 ## 🤝 开源与再利用
 
 Kerstlampjes 是**开源的，任何人都可以自由使用**，采用 [MIT 许可](LICENSE)。你可以复制、

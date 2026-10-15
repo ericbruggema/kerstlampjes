@@ -626,6 +626,19 @@ terugkomen van de randlampjes na een echte herstart.
 
 ---
 
+## 💻 Windows
+
+Er is ook een kleine Windows-versie met alleen de lampjes: een snoer langs de rand van je scherm (boven de taakbalk), altijd zichtbaar en je kunt er gewoon doorheen klikken.
+
+- **Downloaden:** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.0/Kerstlampjes-Windows.exe) (60 kB, [release](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.0)). Niets te installeren: dubbelklik en het icoon verschijnt in het systeemvak, rechtsonder bij de klok.
+- **Aan/uit:** linkermuisknop op het icoon. **Rechtermuisknop** geeft het menu: instellingen, starten met Windows, controleren op updates, over en afsluiten.
+- **Instellingen:** effect (vast, fonkelen, om en om, lopend licht, kleurgolf), kleuren, snelheid, grootte, afstand, hoekafronding, afstand van de rand, doorhang, doorzichtigheid. Ook alle schermen of alleen het hoofdscherm.
+- **Verbergt zichzelf** bij schermvullende apps (spellen, films, presentaties).
+- **Privacy:** niets via internet, behalve als je zelf "Controleren op updates" kiest. Instellingen staan in `%APPDATA%\Kerstlampjes`.
+- **Talen:** volgt de taal van Windows (Nederlands, English, Deutsch, Français, Español, 中文).
+- **Windows SmartScreen:** het bestand is niet digitaal ondertekend; kies bij de waarschuwing *Meer info* → *Toch uitvoeren*.
+- **Bouwen:** map `Windows/`, `dotnet build -c Release` (.NET Framework 4.8, zit in Windows 10/11).
+
 ## 🤝 Open source en gebruik
 
 Kerstlampjes is **open source en vrij voor iedereen te gebruiken** onder de [MIT-licentie](LICENSE). Kopiëren,

@@ -469,6 +469,19 @@ vuelta de las luces del borde tras un reinicio real.
 
 ---
 
+## 💻 Windows
+
+También hay una pequeña versión para Windows solo con las luces: una guirnalda a lo largo del borde de tu pantalla (sobre la barra de tareas), siempre visible, y puedes hacer clic a través de ella.
+
+- **Descarga:** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.0/Kerstlampjes-Windows.exe) (60 kB, [release](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.0)). Nada que instalar: doble clic y el icono aparece en la bandeja del sistema, abajo a la derecha junto al reloj.
+- **Encender/apagar:** clic izquierdo en el icono. **Clic derecho** abre el menú: ajustes, iniciar con Windows, buscar actualizaciones, acerca de y salir.
+- **Ajustes:** efecto (fijo, parpadeo suave, alterno, luz corredora, ola de color), colores, velocidad, tamaño, separación, redondeo de esquinas, distancia al borde, caída del cable, opacidad. También todas las pantallas o solo la principal.
+- **Se oculta** con apps a pantalla completa (juegos, películas, presentaciones).
+- **Privacidad:** nada pasa por internet, salvo que elijas «Buscar actualizaciones». Los ajustes están en `%APPDATA%\Kerstlampjes`.
+- **Idiomas:** sigue el idioma de Windows (Nederlands, English, Deutsch, Français, Español, 中文).
+- **Windows SmartScreen:** el archivo no está firmado digitalmente; en la advertencia elige *Más información* → *Ejecutar de todas formas*.
+- **Compilar:** carpeta `Windows/`, `dotnet build -c Release` (.NET Framework 4.8, incluido en Windows 10/11).
+
 ## 🤝 Código abierto y reutilización
 
 Kerstlampjes es de **código abierto y de uso libre para todos** bajo la [licencia MIT](LICENSE). Puedes copiarlo,

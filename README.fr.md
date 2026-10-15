@@ -469,6 +469,19 @@ retour des lumières de bord après un vrai redémarrage.
 
 ---
 
+## 💻 Windows
+
+Il existe aussi une petite version Windows avec seulement les lumières : une guirlande le long du bord de votre écran (au-dessus de la barre des tâches), toujours visible, et vous pouvez cliquer à travers.
+
+- **Téléchargement :** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.0/Kerstlampjes-Windows.exe) (60 ko, [release](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.0)). Rien à installer : double-cliquez et l'icône apparaît dans la zone de notification, en bas à droite près de l'horloge.
+- **Marche/arrêt :** clic gauche sur l'icône. **Clic droit** ouvre le menu : paramètres, démarrer avec Windows, rechercher des mises à jour, à propos et quitter.
+- **Paramètres :** effet (fixe, scintillement, alterné, chenillard, vague de couleurs), couleurs, vitesse, taille, espacement, arrondi des coins, distance du bord, affaissement, opacité. Aussi tous les écrans ou seulement l'écran principal.
+- **Se masque** pendant les applis plein écran (jeux, films, présentations).
+- **Confidentialité :** rien ne passe par internet, sauf si vous choisissez « Rechercher des mises à jour ». Les paramètres sont dans `%APPDATA%\Kerstlampjes`.
+- **Langues :** suit la langue de Windows (Nederlands, English, Deutsch, Français, Español, 中文).
+- **Windows SmartScreen :** le fichier n'est pas signé numériquement ; à l'avertissement, choisissez *Informations complémentaires* → *Exécuter quand même*.
+- **Compilation :** dossier `Windows/`, `dotnet build -c Release` (.NET Framework 4.8, inclus dans Windows 10/11).
+
 ## 🤝 Open source et réutilisation
 
 Kerstlampjes est **open source et libre pour tous** sous la [licence MIT](LICENSE). Tu peux le copier, le
