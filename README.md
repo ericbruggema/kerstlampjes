@@ -649,7 +649,7 @@ Tikken kan in het speelscherm (**🎮 Speel met je rand**). De overlay boven and
 
 ## 💻 Windows
 
-<p align="center"><img src="website/media/windows-overlay.jpg" alt="De lampjes en versiering rond de rand van een Windows-bureaublad" width="720"><br><sub>Gesimuleerd bureaublad: zo ziet de rand er op Windows uit, met alle versiering aan.</sub></p>
+<p align="center"><img src="website/media/windows-hero.jpg" alt="De lampjes en versiering rond de rand van een Windows-bureaublad" width="720"><br><sub>Gesimuleerd bureaublad: zo ziet de rand er op Windows uit, met alle versiering aan.</sub></p>
 
 De Windows-versie (alleen de lampjes en de versiering, in het systeemvak) heeft een eigen repo: **[ericbruggema/kerstlampjes-windows](https://github.com/ericbruggema/kerstlampjes-windows)**. [⬇️ Download Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes-windows/releases/latest/download/Kerstlampjes-Windows.exe): Windows 10/11, niets te installeren, open source (MIT). Handleiding, instellingen en privacy staan in die repo.
 
