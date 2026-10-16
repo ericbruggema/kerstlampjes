@@ -4,7 +4,7 @@
 
 **Een snoer kerstlampjes langs de rand van je scherm, ook boven je beginscherm, je iconen en je widgets. Plus bonus: eigen kerstbomen, haarden, scènes en een editor voor je eigen scène. Voor Android.**
 
-[⬇️ Download de APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.3) ·
+[⬇️ Download de APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.4) ·
 [✨ Functies](#-functies) ·
 [📲 Installeren](#-installeren) ·
 [🛠️ Bouwen](#️-bouwen-uit-de-broncode) ·
@@ -13,7 +13,7 @@
 
 🌍 **Lees dit in:** **Nederlands** · [English](README.en.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [中文](README.zh.md)
 
-💻 **Nieuw: Kerstlampjes voor Windows!** Alleen de lampjes, altijd zichtbaar in het systeemvak. [⬇️ Download (60 kB)](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.0/Kerstlampjes-Windows.exe) · [Meer info](#-windows)
+💻 **Nieuw: Kerstlampjes voor Windows!** Alleen de lampjes, altijd zichtbaar in het systeemvak. [⬇️ Download (100 kB)](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) · [Meer info](#-windows)
 
 <img src="website/media/extra-beginscherm.jpg" alt="Randlampjes boven het beginscherm" width="360">
 
@@ -78,7 +78,7 @@ Er zijn **geen advertenties en geen accounts**. Internet is alleen nodig als je 
 | | |
 |---|---|
 | Pakketnaam | `nl.kerstlampjes.app` |
-| Versie | 2.3 (versionCode 5) |
+| Versie | 2.4 (versionCode 6) |
 | Android | 8.0 (API 26) of nieuwer |
 | Taal | Kotlin |
 | Grootte | circa 3 MB |
@@ -89,8 +89,8 @@ Er zijn **geen advertenties en geen accounts**. Internet is alleen nodig als je 
 
 ### Optie 1: de APK van GitHub (aanbevolen)
 
-1. Ga op je telefoon naar de [release v2.3](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.3).
-   2. Download **`Kerstlampjes-2.3.apk`**.
+1. Ga op je telefoon naar de [release v2.4](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.4).
+   2. Download **`Kerstlampjes-2.4.apk`**.
 3. Open het gedownloade bestand. Vraagt Android om toestemming voor *installeren uit onbekende bronnen*, sta dat dan toe voor je browser of bestandsbeheer.
 4. Tik op **Installeren** en daarna op **Openen**.
 
@@ -452,6 +452,7 @@ De app gebruikt internet **alleen** als jij in het ⋯-menu op *Controleren op u
 | Voorgrondservice (`FOREGROUND_SERVICE`, `…_SPECIAL_USE`) | De randlampjes laten draaien op de achtergrond | Alleen voor de randlampjes |
 | Microfoon (`RECORD_AUDIO`, `FOREGROUND_SERVICE_MICROPHONE`) | Lampjes die op geluid reageren | Nee, alleen als je dat effect kiest |
 | Internet (`INTERNET`) | Alleen de updatecontrole in het ⋯-menu | Nee, alleen als je erop tikt |
+| Gebruiksgegevens (`PACKAGE_USAGE_STATS`) | Alleen voor de optie "Alleen op het beginscherm": zien welke app voorop staat | Ja, je geeft toegang in de systeeminstellingen; er wordt niets opgeslagen of verstuurd |
 | Meldingen (`POST_NOTIFICATIONS`) | Dagelijkse melding en de melding van de voorgrondservice | Nee |
 | Opstarten (`RECEIVE_BOOT_COMPLETED`) | Randlampjes en melding terugzetten na een herstart | Nee |
 
@@ -552,7 +553,7 @@ De keystore en de wachtwoorden horen **niet** in git.
 ### Een release op GitHub zetten
 
 ```bash
-gh release create v2.3 app-release.apk --title "Kerstlampjes 2.3" --notes "..."
+gh release create v2.4 app-release.apk --title "Kerstlampjes 2.4" --notes "..."
 ```
 
 ---
@@ -628,13 +629,32 @@ terugkomen van de randlampjes na een echte herstart.
 
 ---
 
+## 🎁 Versiering rond je rand
+
+<p align="center"><img src="website/media/versiering.jpg" alt="Versiering rond de rand: treintje, slinger, sneeuw, ijspegels" width="300"></p>
+
+Naast de lampjes kun je onder **Versiering** op het hoofdscherm van alles bijzetten. Alles staat los aan of uit:
+
+- 🚂 **Treintje** dat rondjes rijdt: van boven gezien langs je rand, of van opzij over de onderrand. 1 tot 8 wagons vol cadeautjes, op wens met lampjes. Tik op de trein en hij fluit.
+- ❄️ **Sneeuwvlokken en sterretjes**, ⭐ **vallende sterren** (tik er een aan voor vuurwerk) en 🎆 **vuurwerk** (tik ergens voor een knal).
+- ☃️ **Sneeuw die blijft liggen** op de onderrand. Schud je telefoon en de sneeuw vliegt weg; daarna bouwt hij zich weer op.
+- 🧊 **Ijspegels** langs de bovenrand. Tik erop en ze vallen; daarna groeien ze weer aan.
+- 🎄 **Slinger** langs de rand, met of zonder ballen en met of zonder lampjes (*Lampjes tonen*).
+- 🛷 **Slee met rendieren**, 🐧 **pinguïns en sneeuwman** (tik erop, dan springen ze) en een **lichtkrant** met je eigen tekst.
+- **Alleen op het beginscherm:** optie om alles niet boven je apps te laten staan. Daarvoor vraagt de app toegang tot gebruiksgegevens, om te zien welke app voorop staat. Dat blijft op je telefoon; er wordt niets opgeslagen of verstuurd.
+
+Tikken kan in het speelscherm (**🎮 Speel met je rand**). De overlay boven andere apps laat alle tikken door naar de app eronder, maar schudden werkt overal.
+
 ## 💻 Windows
 
 Er is ook een kleine Windows-versie met alleen de lampjes: een snoer langs de rand van je scherm (boven de taakbalk), altijd zichtbaar en je kunt er gewoon doorheen klikken.
 
-- **Downloaden:** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.0/Kerstlampjes-Windows.exe) (60 kB, [release](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.0)). Niets te installeren: dubbelklik en het icoon verschijnt in het systeemvak, rechtsonder bij de klok.
+- **Downloaden:** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) (100 kB, [release](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.1)). Niets te installeren: dubbelklik en het icoon verschijnt in het systeemvak, rechtsonder bij de klok.
 - **Aan/uit:** linkermuisknop op het icoon. **Rechtermuisknop** geeft het menu: instellingen, starten met Windows, controleren op updates, over en afsluiten.
 - **Instellingen:** effect (vast, fonkelen, om en om, lopend licht, kleurgolf), kleuren, snelheid, grootte, afstand, hoekafronding, afstand van de rand, doorhang, doorzichtigheid. Ook alle schermen of alleen het hoofdscherm.
+- **Versiering:** dezelfde als op Android (treintje, sneeuw, vuurwerk, ijspegels, slinger, slee, pinguïns, lichtkrant), apart aan te zetten in de instellingen. Klik op ijspegels, vallende sterren, de trein of de pinguïns en ze reageren; je klik gaat daarna gewoon door naar het venster eronder.
+- **Sneeuw weghalen:** beweeg je muis door de sneeuw, schud je muis heen en weer, of kies *Sneeuw wegvegen* in het menu.
+- **Alleen op het bureaublad:** optie om de lampjes alleen te tonen als je het bureaublad ziet, niet boven programma's.
 - **Verbergt zichzelf** bij schermvullende apps (spellen, films, presentaties).
 - **Privacy:** niets via internet, behalve als je zelf "Controleren op updates" kiest. Instellingen staan in `%APPDATA%\Kerstlampjes`.
 - **Talen:** volgt de taal van Windows (Nederlands, English, Deutsch, Français, Español, 中文).

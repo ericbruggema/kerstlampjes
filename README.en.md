@@ -4,11 +4,11 @@
 
 **A string of Christmas lights along the edge of your screen, also on top of your home screen, your icons and your widgets. Plus bonus: your own Christmas trees, fireplaces, scenes and an editor for your own scene. For Android.**
 
-[⬇️ Download the APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.3)
+[⬇️ Download the APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.4)
 
 🌍 **Read this in:** [Nederlands](README.md) · **English** · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [中文](README.zh.md)
 
-💻 **New: Christmas Lights for Windows!** Just the lights, always visible from the system tray. [⬇️ Download (60 kB)](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.0/Kerstlampjes-Windows.exe) · [More info](#-windows)
+💻 **New: Christmas Lights for Windows!** Just the lights, always visible from the system tray. [⬇️ Download (100 kB)](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) · [More info](#-windows)
 
 </div>
 
@@ -63,7 +63,7 @@ There are **no ads and no accounts**. Internet is only used when you yourself ta
 | | |
 |---|---|
 | Package name | `nl.kerstlampjes.app` |
-| Version | 2.3 (versionCode 5) |
+| Version | 2.4 (versionCode 6) |
 | Android | 8.0 (API 26) or newer |
 | Language | Kotlin |
 | Size | about 3 MB |
@@ -74,8 +74,8 @@ There are **no ads and no accounts**. Internet is only used when you yourself ta
 
 ### Option 1: the APK from GitHub (recommended)
 
-1. On your phone, go to [release v2.3](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.3).
-2. Download **`Kerstlampjes-2.3.apk`**.
+1. On your phone, go to [release v2.4](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.4).
+2. Download **`Kerstlampjes-2.4.apk`**.
 3. Open the downloaded file. If Android asks for permission to *install from unknown sources*, allow it for your browser or file manager.
 4. Tap **Install** and then **Open**.
 
@@ -294,6 +294,7 @@ The app uses the internet **only** when you tap *Check for updates* in the ⋯ m
 | Foreground service (`FOREGROUND_SERVICE`, `…_SPECIAL_USE`) | Keep the edge lights running in the background | Only for the edge lights |
 | Microphone (`RECORD_AUDIO`, `FOREGROUND_SERVICE_MICROPHONE`) | Lights that react to sound | No, only if you choose that effect |
 | Internet (`INTERNET`) | Only the update check in the ⋯ menu | No, only when you tap it |
+| Usage data (`PACKAGE_USAGE_STATS`) | Only for the "Only on the home screen" option: seeing which app is in front | Yes, you grant it in the system settings; nothing is stored or sent |
 | Notifications (`POST_NOTIFICATIONS`) | Daily notification and the foreground service notification | No |
 | Startup (`RECEIVE_BOOT_COMPLETED`) | Restore edge lights and notification after a restart | No |
 
@@ -394,7 +395,7 @@ The keystore and the passwords do **not** belong in git.
 ### Publishing a release on GitHub
 
 ```bash
-gh release create v2.3 app-release.apk --title "Kerstlampjes 2.3" --notes "..."
+gh release create v2.4 app-release.apk --title "Kerstlampjes 2.4" --notes "..."
 ```
 
 ---
@@ -470,13 +471,30 @@ edge lights coming back after a real restart.
 
 ---
 
+## 🎁 Decorations around your edge
+
+Besides the lights, under **Decorations** on the main screen you can add all sorts of extras. Each one can be switched on or off separately:
+
+- 🚂 **Little train** going round and round: seen from above along your edge, or from the side along the bottom edge. 1 to 8 wagons full of presents, optionally with lights. Tap the train and it whistles.
+- ❄️ **Snowflakes and sparkles**, ⭐ **shooting stars** (tap one for fireworks) and 🎆 **fireworks** (tap anywhere for a bang).
+- ☃️ **Settling snow** on the bottom edge. Shake your phone and the snow flies away; then it builds up again.
+- 🧊 **Icicles** along the top edge. Tap them and they fall; then they grow back.
+- 🎄 **Garland** along the edge, with or without baubles and with or without lights (*Show lights*).
+- 🛷 **Sleigh with reindeer**, 🐧 **penguins and snowman** (tap them and they jump) and a **scrolling text sign** with your own text.
+- **Only on the home screen:** an option to keep everything from showing over your apps. For that the app asks for access to usage data, to see which app is in front. It stays on your phone; nothing is stored or sent.
+
+Tapping works in the play screen (**🎮 Play with your edge**). The overlay over other apps lets every tap through to the app underneath, but shaking works everywhere.
+
 ## 💻 Windows
 
 There is also a small Windows version with just the lights: a string along the edge of your screen (above the taskbar), always visible, and you can click straight through it.
 
-- **Download:** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.0/Kerstlampjes-Windows.exe) (60 kB, [release](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.0)). Nothing to install: double-click and the icon appears in the system tray, bottom right next to the clock.
+- **Download:** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) (100 kB, [release](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.1)). Nothing to install: double-click and the icon appears in the system tray, bottom right next to the clock.
 - **On/off:** left-click the icon. **Right-click** opens the menu: settings, start with Windows, check for updates, about and exit.
 - **Settings:** effect (steady, twinkle, alternate, chasing light, colour wave), colours, speed, size, spacing, corner rounding, distance from the edge, sag, opacity. Also all screens or just the main one.
+- **Decorations:** the same as on Android (little train, snow, fireworks, icicles, garland, sleigh, penguins, scrolling text), each switched on separately in the settings. Click icicles, shooting stars, the train or the penguins and they react; your click still passes through to the window underneath.
+- **Clearing the snow:** move your mouse through the snow, shake your mouse back and forth, or choose *Sweep away the snow* in the menu.
+- **Only on the desktop:** an option to show the lights only when you see the desktop, not over programs.
 - **Hides itself** during full-screen apps (games, films, presentations).
 - **Privacy:** nothing goes over the internet unless you choose "Check for updates". Settings live in `%APPDATA%\Kerstlampjes`.
 - **Languages:** follows the Windows language (Nederlands, English, Deutsch, Français, Español, 中文).

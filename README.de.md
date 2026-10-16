@@ -4,11 +4,11 @@
 
 **Eine Lichterkette am Rand deines Bildschirms, auch über deinem Startbildschirm, deinen Icons und Widgets. Dazu als Bonus: eigene Weihnachtsbäume, Kamine, Szenen und ein Editor für deine eigene Szene. Für Android.**
 
-[⬇️ APK herunterladen](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.3)
+[⬇️ APK herunterladen](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.4)
 
 🌍 **Lies dies in:** [Nederlands](README.md) · [English](README.en.md) · **Deutsch** · [Français](README.fr.md) · [Español](README.es.md) · [中文](README.zh.md)
 
-💻 **Neu: Weihnachtslichter für Windows!** Nur die Lichter, immer sichtbar im Infobereich. [⬇️ Download (60 kB)](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.0/Kerstlampjes-Windows.exe) · [Mehr Infos](#-windows)
+💻 **Neu: Weihnachtslichter für Windows!** Nur die Lichter, immer sichtbar im Infobereich. [⬇️ Download (100 kB)](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) · [Mehr Infos](#-windows)
 
 </div>
 
@@ -63,7 +63,7 @@ Es gibt **keine Werbung und keine Konten**. Das Internet wird nur benutzt, wenn 
 | | |
 |---|---|
 | Paketname | `nl.kerstlampjes.app` |
-| Version | 2.3 (versionCode 5) |
+| Version | 2.4 (versionCode 6) |
 | Android | 8.0 (API 26) oder neuer |
 | Sprache | Kotlin |
 | Größe | etwa 3 MB |
@@ -74,8 +74,8 @@ Es gibt **keine Werbung und keine Konten**. Das Internet wird nur benutzt, wenn 
 
 ### Option 1: die APK von GitHub (empfohlen)
 
-1. Öffne auf deinem Handy das [Release v2.1](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.3).
-2. Lade **`Kerstlampjes-2.3.apk`** herunter.
+1. Öffne auf deinem Handy das [Release v2.1](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.4).
+2. Lade **`Kerstlampjes-2.4.apk`** herunter.
 3. Öffne die heruntergeladene Datei. Fragt Android nach der Erlaubnis, *Apps aus unbekannten Quellen zu installieren*, erlaube das für deinen Browser oder Dateimanager.
 4. Tippe auf **Installieren** und danach auf **Öffnen**.
 
@@ -295,6 +295,7 @@ Die App nutzt das Internet **nur**, wenn du im ⋯-Menü auf *Nach Updates suche
 | Vordergrunddienst (`FOREGROUND_SERVICE`, `…_SPECIAL_USE`) | Die Randlichter im Hintergrund laufen lassen | Nur für die Randlichter |
 | Mikrofon (`RECORD_AUDIO`, `FOREGROUND_SERVICE_MICROPHONE`) | Lichter, die auf Geräusche reagieren | Nein, nur wenn du diesen Effekt wählst |
 | Internet (`INTERNET`) | Nur die Update-Prüfung im ⋯-Menü | Nein, nur wenn du darauf tippst |
+| Nutzungsdaten (`PACKAGE_USAGE_STATS`) | Nur für die Option „Nur auf dem Startbildschirm“: erkennen, welche App vorne ist | Ja, du erlaubst es in den Systemeinstellungen; nichts wird gespeichert oder gesendet |
 | Benachrichtigungen (`POST_NOTIFICATIONS`) | Tägliche Benachrichtigung und die Benachrichtigung des Vordergrunddienstes | Nein |
 | Start (`RECEIVE_BOOT_COMPLETED`) | Randlichter und Benachrichtigung nach einem Neustart wiederherstellen | Nein |
 
@@ -395,7 +396,7 @@ Der Keystore und die Passwörter gehören **nicht** in Git.
 ### Ein Release auf GitHub veröffentlichen
 
 ```bash
-gh release create v2.3 app-release.apk --title "Kerstlampjes 2.3" --notes "..."
+gh release create v2.4 app-release.apk --title "Kerstlampjes 2.4" --notes "..."
 ```
 
 ---
@@ -471,13 +472,30 @@ Rückkehr der Randlichter nach einem echten Neustart.
 
 ---
 
+## 🎁 Dekoration rund um deinen Rand
+
+Neben den Lichtern kannst du unter **Dekoration** auf dem Hauptbildschirm vieles dazuschalten. Alles lässt sich einzeln ein- oder ausschalten:
+
+- 🚂 **Kleiner Zug**, der Runden dreht: von oben gesehen am Rand entlang oder von der Seite am unteren Rand. 1 bis 8 Wagen voller Geschenke, auf Wunsch mit Lichtern. Tippe auf den Zug, dann pfeift er.
+- ❄️ **Schneeflocken und Sternchen**, ⭐ **Sternschnuppen** (tippe eine an für Feuerwerk) und 🎆 **Feuerwerk** (tippe irgendwo für einen Knall).
+- ☃️ **Liegenbleibender Schnee** am unteren Rand. Schüttle dein Handy, und der Schnee fliegt weg; danach baut er sich wieder auf.
+- 🧊 **Eiszapfen** am oberen Rand. Tippe darauf, dann fallen sie; danach wachsen sie nach.
+- 🎄 **Girlande** am Rand, mit oder ohne Kugeln und mit oder ohne Lichter (*Lichter anzeigen*).
+- 🛷 **Schlitten mit Rentieren**, 🐧 **Pinguine und Schneemann** (tippe darauf, dann hüpfen sie) und eine **Laufschrift** mit deinem eigenen Text.
+- **Nur auf dem Startbildschirm:** eine Option, damit nichts über deinen Apps erscheint. Dafür fragt die App nach Zugriff auf die Nutzungsdaten, um zu sehen, welche App vorne ist. Das bleibt auf deinem Handy; nichts wird gespeichert oder gesendet.
+
+Tippen funktioniert im Spielbildschirm (**🎮 Spiel mit deinem Rand**). Das Overlay über anderen Apps lässt alle Tipper zur App darunter durch, aber Schütteln funktioniert überall.
+
 ## 💻 Windows
 
 Es gibt auch eine kleine Windows-Version nur mit den Lichtern: eine Kette am Rand deines Bildschirms (über der Taskleiste), immer sichtbar, und du kannst einfach hindurchklicken.
 
-- **Download:** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.0/Kerstlampjes-Windows.exe) (60 kB, [Release](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.0)). Nichts zu installieren: Doppelklick, und das Symbol erscheint im Infobereich, unten rechts bei der Uhr.
+- **Download:** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) (100 kB, [Release](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.1)). Nichts zu installieren: Doppelklick, und das Symbol erscheint im Infobereich, unten rechts bei der Uhr.
 - **An/aus:** Linksklick auf das Symbol. **Rechtsklick** öffnet das Menü: Einstellungen, mit Windows starten, nach Updates suchen, Über und Beenden.
 - **Einstellungen:** Effekt (Dauerlicht, Funkeln, abwechselnd, Lauflicht, Farbwelle), Farben, Geschwindigkeit, Größe, Abstand, Eckenrundung, Randabstand, Durchhang, Deckkraft. Auch alle Bildschirme oder nur der Hauptbildschirm.
+- **Dekoration:** dieselbe wie auf Android (kleiner Zug, Schnee, Feuerwerk, Eiszapfen, Girlande, Schlitten, Pinguine, Laufschrift), einzeln in den Einstellungen einzuschalten. Klicke auf Eiszapfen, Sternschnuppen, den Zug oder die Pinguine, dann reagieren sie; dein Klick geht trotzdem ans Fenster darunter.
+- **Schnee entfernen:** fahre mit der Maus durch den Schnee, schüttle die Maus hin und her oder wähle im Menü *Schnee wegfegen*.
+- **Nur auf dem Desktop:** eine Option, die Lichter nur zu zeigen, wenn du den Desktop siehst, nicht über Programmen.
 - **Blendet sich aus** bei Vollbild-Apps (Spiele, Filme, Präsentationen).
 - **Datenschutz:** nichts geht über das Internet, außer du wählst „Nach Updates suchen“. Einstellungen liegen in `%APPDATA%\Kerstlampjes`.
 - **Sprachen:** folgt der Windows-Sprache (Nederlands, English, Deutsch, Français, Español, 中文).

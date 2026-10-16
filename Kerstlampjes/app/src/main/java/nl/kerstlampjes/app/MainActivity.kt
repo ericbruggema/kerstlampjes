@@ -11,12 +11,18 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.text.Editable
+import android.text.InputFilter
+import android.text.InputType
+import android.text.TextWatcher
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.ScrollView
@@ -108,6 +114,16 @@ class MainActivity : Activity() {
             setOnClickListener { startActivity(Intent(this@MainActivity, TreeActivity::class.java)) }
         }, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, px(52)))
 
+        root.addView(Button(this).apply {
+            text = Tr.t("🎮 Speel met je rand")
+            textSize = 16f
+            setTextColor(Color.WHITE)
+            background = GradientDrawable().apply {
+                setColor(0xFF1F5A8A.toInt()); cornerRadius = px(14).toFloat()
+            }
+            setOnClickListener { startActivity(Intent(this@MainActivity, PlayActivity::class.java)) }
+        }, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, px(52)).apply { topMargin = px(10) })
+
         section(root, Tr.t("Effect"))
         root.addView(spinner(TreeModes.names.map { Tr.t(it) }.toTypedArray(), s.mode) {
             s = s.copy(mode = it)
@@ -128,6 +144,40 @@ class MainActivity : Activity() {
         section(root, Tr.t("Pasvorm scherm"))
         slider(root, Tr.t("Afronding hoeken"), 0, 80, s.cornerDp, " dp") { s = s.copy(cornerDp = it) }
         slider(root, Tr.t("Afstand tot rand"), 0, 40, s.insetDp, " dp") { s = s.copy(insetDp = it) }
+
+        check(root, Tr.t("Alleen op het beginscherm (niet boven apps)"), s.homeOnly) { on ->
+            s = s.copy(homeOnly = on)
+            if (on && !HomeOnly.hasAccess(this)) askUsageAccess()
+        }
+
+        section(root, Tr.t("Versiering"))
+        check(root, Tr.t("Lampjes tonen"), s.showLights) { s = s.copy(showLights = it) }
+        Decor.flags.forEachIndexed { i, f ->
+            check(root, Tr.t(Decor.names[i]), (s.decor and f) != 0) { on ->
+                s = s.copy(decor = if (on) s.decor or f else s.decor and f.inv())
+            }
+        }
+        section(root, Tr.t("Treintje"))
+        root.addView(spinner(Decor.trainViews.map { Tr.t(it) }.toTypedArray(), if (s.trainSide) 1 else 0) {
+            s = s.copy(trainSide = it == 1)
+        })
+        slider(root, Tr.t("Aantal wagons"), 1, 8, s.trainWagons, "") { s = s.copy(trainWagons = it) }
+        check(root, Tr.t("Lampjes op de trein"), s.trainLights) { s = s.copy(trainLights = it) }
+        check(root, Tr.t("Ballen in de slinger"), s.garlandBalls) { s = s.copy(garlandBalls = it) }
+        section(root, Tr.t("Lichtkrant"))
+        root.addView(EditText(this).apply {
+            setText(s.marquee)
+            hint = Tr.t("Fijne feestdagen!")
+            setTextColor(0xFFE8EFEA.toInt())
+            setHintTextColor(0xFF6F8577.toInt())
+            inputType = InputType.TYPE_CLASS_TEXT
+            filters = arrayOf(InputFilter.LengthFilter(80))
+            addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(e: Editable?) { s = s.copy(marquee = e?.toString() ?: ""); changed() }
+                override fun beforeTextChanged(a: CharSequence?, b: Int, c: Int, d: Int) {}
+                override fun onTextChanged(a: CharSequence?, b: Int, c: Int, d: Int) {}
+            })
+        })
 
         root.addView(TextView(this).apply {
             text = Tr.t("Tip: voeg de tegel \"Kerstlampjes\" toe aan je snelle instellingen om ze met één veeg aan en uit te zetten.")
@@ -161,6 +211,27 @@ class MainActivity : Activity() {
                 override fun onNothingSelected(p: AdapterView<*>?) {}
             }
         }
+
+    private fun askUsageAccess() {
+        android.app.AlertDialog.Builder(this)
+            .setTitle(Tr.t("Toegang nodig"))
+            .setMessage(Tr.t("Om te zien of je op het beginscherm bent, heeft Kerstlampjes toegang tot gebruiksgegevens nodig. Het blijft op je telefoon: er wordt niets opgeslagen of verstuurd. Zet Kerstlampjes aan in het volgende scherm."))
+            .setPositiveButton(Tr.t("Toegang geven")) { _, _ ->
+                startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
+            }
+            .setNegativeButton(Tr.t("Later"), null)
+            .show()
+    }
+
+    private fun check(parent: LinearLayout, label: String, value: Boolean, onSet: (Boolean) -> Unit) {
+        parent.addView(CheckBox(this).apply {
+            text = label
+            setTextColor(0xFFE8EFEA.toInt())
+            textSize = 15f
+            isChecked = value
+            setOnCheckedChangeListener { _, on -> onSet(on); changed() }
+        })
+    }
 
     private fun slider(parent: LinearLayout, label: String, min: Int, max: Int, value: Int, unit: String, onSet: (Int) -> Unit) {
         val tv = TextView(this).apply {

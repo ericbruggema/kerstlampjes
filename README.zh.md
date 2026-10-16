@@ -4,11 +4,11 @@
 
 **一串彩灯沿着屏幕边缘亮起，同样显示在主屏幕、图标和小组件之上。另有额外功能：自己的圣诞树、壁炉、场景，以及可以制作自己场景的编辑器。适用于 Android。**
 
-[⬇️ 下载 APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.3)
+[⬇️ 下载 APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.4)
 
 🌍 **其他语言版本：** [Nederlands](README.md) · [English](README.en.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · **中文**
 
-💻 **新：圣诞彩灯 Windows 版！** 只有彩灯，始终显示，在系统托盘中控制。[⬇️ 下载（60 kB）](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.0/Kerstlampjes-Windows.exe) · [详细信息](#-windows)
+💻 **新：圣诞彩灯 Windows 版！** 只有彩灯，始终显示，在系统托盘中控制。[⬇️ 下载（100 kB）](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) · [详细信息](#-windows)
 
 </div>
 
@@ -62,7 +62,7 @@
 | | |
 |---|---|
 | 包名 | `nl.kerstlampjes.app` |
-| 版本 | 2.3（versionCode 5） |
+| 版本 | 2.4（versionCode 6） |
 | Android | 8.0（API 26）或更高 |
 | 语言 | Kotlin |
 | 大小 | 约 3 MB |
@@ -73,8 +73,8 @@
 
 ### 方式 1：从 GitHub 下载 APK（推荐）
 
-1. 在手机上打开 [release v2.3](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.3)。
-2. 下载 **`Kerstlampjes-2.3.apk`**。
+1. 在手机上打开 [release v2.4](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.4)。
+2. 下载 **`Kerstlampjes-2.4.apk`**。
 3. 打开下载的文件。如果 Android 要求*允许安装未知来源应用*，请为你的浏览器或文件管理器开启该权限。
 4. 点击**安装**，然后点击**打开**。
 
@@ -294,6 +294,7 @@
 | 前台服务（`FOREGROUND_SERVICE`、`…_SPECIAL_USE`） | 让边缘彩灯在后台运行 | 仅边缘彩灯需要 |
 | 麦克风（`RECORD_AUDIO`、`FOREGROUND_SERVICE_MICROPHONE`） | 对声音作出反应的彩灯 | 否，仅在你选择该效果时 |
 | 网络（`INTERNET`） | 仅用于 ⋯ 菜单中的更新检查 | 否，仅在你点击时 |
+| 使用情况数据（`PACKAGE_USAGE_STATS`） | 仅用于“仅在主屏幕显示”选项：了解哪个应用在前台 | 是，需要你在系统设置中授予；不会被存储或发送 |
 | 通知（`POST_NOTIFICATIONS`） | 每日通知和前台服务的通知 | 否 |
 | 开机（`RECEIVE_BOOT_COMPLETED`） | 重启后恢复边缘彩灯和通知 | 否 |
 
@@ -394,7 +395,7 @@ keystore 和密码**不应**放进 git。
 ### 在 GitHub 上发布 release
 
 ```bash
-gh release create v2.3 app-release.apk --title "Kerstlampjes 2.3" --notes "..."
+gh release create v2.4 app-release.apk --title "Kerstlampjes 2.4" --notes "..."
 ```
 
 ---
@@ -470,13 +471,30 @@ KerstApp/
 
 ---
 
+## 🎁 屏幕边缘的装饰
+
+除了彩灯，你还可以在主界面的**装饰**里添加很多内容，每一项都可以单独开关：
+
+- 🚂 **小火车**绕圈行驶：俯视时沿着屏幕边缘，侧视时沿着底部边缘。1 到 8 节车厢装满礼物，可选带彩灯。点一下火车它就会鸣笛。
+- ❄️ **雪花和小星星**、⭐ **流星**（点一颗就会放烟花）和 🎆 **烟花**（点任意位置听一声巨响）。
+- ☃️ **积雪**留在底部边缘。摇晃手机，雪就会飞走，然后重新慢慢堆起来。
+- 🧊 **冰柱**挂在顶部边缘。点一下就会掉落，之后又会重新长出来。
+- 🎄 **花环**沿着边缘，可选带彩球、可选带彩灯（*显示彩灯*）。
+- 🛷 **驯鹿雪橇**、🐧 **企鹅和雪人**（点一下它们会跳起来）和显示你自定义文字的**滚动字幕**。
+- **仅在主屏幕显示：** 可以让这些内容不出现在其他应用上方。为此应用需要访问使用情况数据，以便知道哪个应用在前台。数据只保留在手机上，不会被存储或发送。
+
+点击需要在游戏界面（**🎮 玩转屏幕边缘**）中进行。其他应用上方的悬浮层会让所有点击穿透到下面的应用，但摇晃在任何地方都有效。
+
 ## 💻 Windows
 
 另有一个只含彩灯的小型 Windows 版：一串灯沿屏幕边缘（任务栏上方）显示，始终可见，并且可以直接点击穿透。
 
-- **下载：** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.0/Kerstlampjes-Windows.exe)（60 kB，[发布页](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.0)）。无需安装：双击后图标出现在系统托盘（右下角时钟旁）。
+- **下载：** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe)（100 kB，[发布页](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.1)）。无需安装：双击后图标出现在系统托盘（右下角时钟旁）。
 - **开/关：** 左键单击图标。**右键**打开菜单：设置、随 Windows 启动、检查更新、关于和退出。
 - **设置：** 效果（常亮、闪烁、交替、跑马灯、彩色波浪）、颜色、速度、大小、间距、圆角、离边缘距离、下垂、不透明度；可选所有屏幕或仅主屏幕。
+- **装饰：** 与 Android 版相同（小火车、雪、烟花、冰柱、花环、雪橇、企鹅、滚动字幕），可在设置中分别开启。点击冰柱、流星、火车或企鹅它们会有反应；你的点击仍会穿透到下面的窗口。
+- **清除积雪：** 把鼠标划过积雪、左右晃动鼠标，或在菜单中选择*扫掉积雪*。
+- **仅在桌面显示：** 可选择只在看到桌面时显示彩灯，不覆盖程序。
 - **自动隐藏：** 全屏应用（游戏、视频、演示）时隐藏。
 - **隐私：** 除非你选择“检查更新”，否则不联网。设置保存在 `%APPDATA%\Kerstlampjes`。
 - **语言：** 跟随 Windows 语言（Nederlands、English、Deutsch、Français、Español、中文）。

@@ -33,6 +33,8 @@ class TranslationsTest {
         keys.addAll(Palettes.names)
         keys.addAll(LampStyles.names)
         keys.addAll(Sound.songNames)
+        keys.addAll(Decor.names)
+        keys.addAll(Decor.trainViews)
         keys.addAll(MyKinds.names)
         keys.addAll(MyLook.anims)
         keys.addAll(MyLook.taps)

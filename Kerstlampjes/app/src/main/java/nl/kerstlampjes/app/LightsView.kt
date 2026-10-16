@@ -10,6 +10,7 @@ import android.graphics.RadialGradient
 import android.graphics.RectF
 import android.graphics.Shader
 import android.os.SystemClock
+import android.view.MotionEvent
 import android.view.View
 import kotlin.math.PI
 import kotlin.math.atan2
@@ -55,20 +56,39 @@ class LightsView(context: Context) : View(context) {
     private val shinePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.WHITE }
     private val shineRect = RectF()
 
+    private val decor = RimDecor(density)
+
+    /** Alleen in de app zelf: tikken op de versiering (de overlay boven andere apps laat alle tikken door). */
+    var interactive = false
+
+    fun shake() = decor.shake()
+
+    override fun onTouchEvent(e: MotionEvent): Boolean {
+        if (!interactive) return false
+        if (e.actionMasked == MotionEvent.ACTION_DOWN) {
+            val hit = decor.onTouch(e.x, e.y)
+            if (hit) invalidate()
+            return true
+        }
+        return false
+    }
+
     private var running = false
     private val startTime = SystemClock.uptimeMillis()
     private val frame = object : Runnable {
         override fun run() {
             if (!running) return
             // "Vast aan" verandert niet: dan hoeft er niets opnieuw getekend te worden.
-            if (settings.mode != Modes.STEADY) invalidate()
-            postDelayed(this, if (settings.mode == Modes.STEADY) 500L else Perf.frameDelay(context))
+            val busy = settings.mode != Modes.STEADY || decor.active
+            if (busy) invalidate()
+            postDelayed(this, if (!busy) 500L else Perf.frameDelay(context))
         }
     }
 
     fun apply(s: LightSettings) {
         settings = s
         alpha = s.opacity / 100f
+        decor.layout(s, width.toFloat(), height.toFloat())
         rebuild()
         invalidate()
     }
@@ -91,6 +111,7 @@ class LightsView(context: Context) : View(context) {
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        decor.layout(settings, w.toFloat(), h.toFloat())
         rebuild()
     }
 
@@ -199,6 +220,13 @@ class LightsView(context: Context) : View(context) {
     }
 
     override fun onDraw(canvas: Canvas) {
+        decor.update()
+        decor.drawBack(canvas)
+        if (settings.showLights) drawLights(canvas)
+        decor.drawFront(canvas)
+    }
+
+    private fun drawLights(canvas: Canvas) {
         if (count == 0) return
         val t = (SystemClock.uptimeMillis() - startTime) / 1000f
         val palette = Palettes.colors[settings.palette.coerceIn(0, Palettes.colors.size - 1)]

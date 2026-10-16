@@ -290,6 +290,35 @@ object Sound {
     private val pentatonic = doubleArrayOf(523.25, 587.33, 659.25, 783.99, 880.0, 1046.5)
 
     /** Eén helder belletje (bij een tik). */
+    /** Korte fluit van het treintje. */
+    fun toot() = oneShot(0.55) { tt ->
+        val f = if (tt < 0.22) 392.0 else 523.25
+        val env = if (tt < 0.02) tt / 0.02 else exp(-(tt - 0.02) * 2.2)
+        (sin(2 * PI * f * tt) + 0.5 * sin(2 * PI * f * 2 * tt) + 0.25 * sin(2 * PI * f * 3 * tt)) * env * 0.3
+    }
+
+    /** Knal van het vuurwerk. */
+    fun boom() = oneShot(0.6) { tt ->
+        val noise = Random.nextDouble(-1.0, 1.0)
+        (noise * 0.6 + sin(2 * PI * 70.0 * tt) * 0.5) * exp(-tt * 7.0) * 0.4
+    }
+
+    private fun oneShot(seconds: Double, gen: (Double) -> Double) {
+        if (!enabled) return
+        Thread {
+            try {
+                val n = (RATE * seconds).toInt()
+                val data = ShortArray(n) { i -> (gen(i / RATE.toDouble()).coerceIn(-1.0, 1.0) * 32000 * 0.5).toInt().toShort() }
+                val t = track(n * 2, false)
+                t.write(data, 0, n)
+                t.play()
+                Thread.sleep((seconds * 1000).toLong() + 300)
+                t.release()
+            } catch (e: Exception) {
+            }
+        }.also { it.isDaemon = true }.start()
+    }
+
     fun ding() {
         if (!enabled) return
         Thread {

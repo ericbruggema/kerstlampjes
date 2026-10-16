@@ -4,11 +4,11 @@
 
 **Une guirlande lumineuse le long du bord de ton écran, aussi par-dessus ton écran d'accueil, tes icônes et tes widgets. En bonus : tes propres sapins, cheminées, scènes et un éditeur pour ta propre scène. Pour Android.**
 
-[⬇️ Télécharger l'APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.3)
+[⬇️ Télécharger l'APK](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.4)
 
 🌍 **Lire en :** [Nederlands](README.md) · [English](README.en.md) · [Deutsch](README.de.md) · **Français** · [Español](README.es.md) · [中文](README.zh.md)
 
-💻 **Nouveau : Lumières de Noël pour Windows !** Seulement les lumières, toujours visibles depuis la zone de notification. [⬇️ Télécharger (60 ko)](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.0/Kerstlampjes-Windows.exe) · [Plus d'infos](#-windows)
+💻 **Nouveau : Lumières de Noël pour Windows !** Seulement les lumières, toujours visibles depuis la zone de notification. [⬇️ Télécharger (100 ko)](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) · [Plus d'infos](#-windows)
 
 </div>
 
@@ -63,7 +63,7 @@ Il n'y a **ni publicité, ni compte**. Internet n'est utilisé que si tu appuies
 | | |
 |---|---|
 | Nom du paquet | `nl.kerstlampjes.app` |
-| Version | 2.3 (versionCode 5) |
+| Version | 2.4 (versionCode 6) |
 | Android | 8.0 (API 26) ou plus récent |
 | Langage | Kotlin |
 | Taille | environ 3 Mo |
@@ -74,8 +74,8 @@ Il n'y a **ni publicité, ni compte**. Internet n'est utilisé que si tu appuies
 
 ### Option 1 : l'APK depuis GitHub (recommandé)
 
-1. Sur ton téléphone, va sur la [release v2.3](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.3).
-2. Télécharge **`Kerstlampjes-2.3.apk`**.
+1. Sur ton téléphone, va sur la [release v2.4](https://github.com/ericbruggema/kerstlampjes/releases/tag/v2.4).
+2. Télécharge **`Kerstlampjes-2.4.apk`**.
 3. Ouvre le fichier téléchargé. Si Android demande l'autorisation d'*installer depuis des sources inconnues*, autorise-le pour ton navigateur ou ton gestionnaire de fichiers.
 4. Appuie sur **Installer** puis sur **Ouvrir**.
 
@@ -295,6 +295,7 @@ L'application n'utilise internet **que** si tu appuies sur *Rechercher des mises
 | Service de premier plan (`FOREGROUND_SERVICE`, `…_SPECIAL_USE`) | Faire tourner les lumières de bord en arrière-plan | Seulement pour les lumières de bord |
 | Micro (`RECORD_AUDIO`, `FOREGROUND_SERVICE_MICROPHONE`) | Lumières qui réagissent au son | Non, seulement si tu choisis cet effet |
 | Internet (`INTERNET`) | Uniquement la recherche de mises à jour du menu ⋯ | Non, seulement si tu appuies dessus |
+| Données d'utilisation (`PACKAGE_USAGE_STATS`) | Uniquement pour l'option « Seulement sur l'écran d'accueil » : voir quelle appli est au premier plan | Oui, tu l'accordes dans les paramètres système ; rien n'est enregistré ni envoyé |
 | Notifications (`POST_NOTIFICATIONS`) | Notification quotidienne et notification du service de premier plan | Non |
 | Démarrage (`RECEIVE_BOOT_COMPLETED`) | Rétablir les lumières de bord et la notification après un redémarrage | Non |
 
@@ -395,7 +396,7 @@ Le keystore et les mots de passe n'ont **pas** leur place dans git.
 ### Publier une release sur GitHub
 
 ```bash
-gh release create v2.3 app-release.apk --title "Kerstlampjes 2.3" --notes "..."
+gh release create v2.4 app-release.apk --title "Kerstlampjes 2.4" --notes "..."
 ```
 
 ---
@@ -471,13 +472,30 @@ retour des lumières de bord après un vrai redémarrage.
 
 ---
 
+## 🎁 Décorations autour de ton bord
+
+En plus des lumières, sous **Décorations** sur l'écran principal tu peux ajouter plein de choses. Chacune s'active ou se désactive séparément :
+
+- 🚂 **Petit train** qui fait des tours : vu du dessus le long du bord, ou de côté sur le bord du bas. De 1 à 8 wagons pleins de cadeaux, avec des lumières si tu veux. Touche le train et il siffle.
+- ❄️ **Flocons et étincelles**, ⭐ **étoiles filantes** (touches-en une pour un feu d'artifice) et 🎆 **feux d'artifice** (touche n'importe où pour une explosion).
+- ☃️ **Neige qui s'accumule** sur le bord du bas. Secoue ton téléphone et la neige s'envole ; ensuite elle se reforme.
+- 🧊 **Glaçons** le long du bord du haut. Touche-les et ils tombent ; ensuite ils repoussent.
+- 🎄 **Guirlande** le long du bord, avec ou sans boules et avec ou sans lumières (*Afficher les lumières*).
+- 🛷 **Traîneau avec rennes**, 🐧 **pingouins et bonhomme de neige** (touche-les et ils sautent) et un **bandeau lumineux** avec ton propre texte.
+- **Seulement sur l'écran d'accueil :** une option pour ne rien afficher au-dessus de tes applis. L'appli demande pour cela l'accès aux données d'utilisation, afin de voir quelle appli est au premier plan. Cela reste sur ton téléphone ; rien n'est enregistré ni envoyé.
+
+Toucher fonctionne dans l'écran de jeu (**🎮 Joue avec ton bord**). La superposition au-dessus des autres applis laisse passer tous les touchers vers l'appli en dessous, mais secouer marche partout.
+
 ## 💻 Windows
 
 Il existe aussi une petite version Windows avec seulement les lumières : une guirlande le long du bord de votre écran (au-dessus de la barre des tâches), toujours visible, et vous pouvez cliquer à travers.
 
-- **Téléchargement :** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.0/Kerstlampjes-Windows.exe) (60 ko, [release](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.0)). Rien à installer : double-cliquez et l'icône apparaît dans la zone de notification, en bas à droite près de l'horloge.
+- **Téléchargement :** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) (100 ko, [release](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.1)). Rien à installer : double-cliquez et l'icône apparaît dans la zone de notification, en bas à droite près de l'horloge.
 - **Marche/arrêt :** clic gauche sur l'icône. **Clic droit** ouvre le menu : paramètres, démarrer avec Windows, rechercher des mises à jour, à propos et quitter.
 - **Paramètres :** effet (fixe, scintillement, alterné, chenillard, vague de couleurs), couleurs, vitesse, taille, espacement, arrondi des coins, distance du bord, affaissement, opacité. Aussi tous les écrans ou seulement l'écran principal.
+- **Décorations :** les mêmes que sur Android (petit train, neige, feux d'artifice, glaçons, guirlande, traîneau, pingouins, bandeau lumineux), à activer séparément dans les paramètres. Clique sur les glaçons, les étoiles filantes, le train ou les pingouins et ils réagissent ; ton clic passe quand même à la fenêtre en dessous.
+- **Enlever la neige :** passe la souris dans la neige, secoue-la de gauche à droite, ou choisis *Balayer la neige* dans le menu.
+- **Seulement sur le bureau :** une option pour n'afficher les lumières que lorsque tu vois le bureau, pas au-dessus des programmes.
 - **Se masque** pendant les applis plein écran (jeux, films, présentations).
 - **Confidentialité :** rien ne passe par internet, sauf si vous choisissez « Rechercher des mises à jour ». Les paramètres sont dans `%APPDATA%\Kerstlampjes`.
 - **Langues :** suit la langue de Windows (Nederlands, English, Deutsch, Français, Español, 中文).

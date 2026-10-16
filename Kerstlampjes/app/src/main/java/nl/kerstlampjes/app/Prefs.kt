@@ -12,7 +12,15 @@ data class LightSettings(
     val cornerDp: Int = 28,        // afronding hoeken (volg je schermhoeken)
     val insetDp: Int = 4,          // afstand van de schermrand
     val opacity: Int = 100,        // 30..100 %
-    val sagDp: Int = 6             // doorhang van de draad
+    val sagDp: Int = 6,            // doorhang van de draad
+    val decor: Int = 0,            // versiering, bitmasker van Decor
+    val trainSide: Boolean = false, // trein van opzij (anders van boven)
+    val trainWagons: Int = 3,
+    val trainLights: Boolean = true,
+    val garlandBalls: Boolean = true,
+    val showLights: Boolean = true,
+    val marquee: String = "",      // tekst van de lichtkrant (leeg = standaardtekst)
+    val homeOnly: Boolean = false  // alleen op het beginscherm, niet boven apps
 )
 
 object Modes {
@@ -65,7 +73,15 @@ object Prefs {
             cornerDp = p.getInt("corner", d.cornerDp),
             insetDp = p.getInt("inset", d.insetDp),
             opacity = p.getInt("opacity", d.opacity),
-            sagDp = p.getInt("sag", d.sagDp)
+            sagDp = p.getInt("sag", d.sagDp),
+            decor = p.getInt("decor", d.decor),
+            trainSide = p.getBoolean("train_side", d.trainSide),
+            trainWagons = p.getInt("train_wagons", d.trainWagons),
+            trainLights = p.getBoolean("train_lights", d.trainLights),
+            garlandBalls = p.getBoolean("garland_balls", d.garlandBalls),
+            showLights = p.getBoolean("show_lights", d.showLights),
+            marquee = p.getString("marquee", d.marquee) ?: "",
+            homeOnly = p.getBoolean("home_only", d.homeOnly)
         )
     }
 
@@ -80,6 +96,14 @@ object Prefs {
             .putInt("inset", s.insetDp)
             .putInt("opacity", s.opacity)
             .putInt("sag", s.sagDp)
+            .putInt("decor", s.decor)
+            .putBoolean("train_side", s.trainSide)
+            .putInt("train_wagons", s.trainWagons)
+            .putBoolean("train_lights", s.trainLights)
+            .putBoolean("garland_balls", s.garlandBalls)
+            .putBoolean("show_lights", s.showLights)
+            .putString("marquee", s.marquee)
+            .putBoolean("home_only", s.homeOnly)
             .apply()
     }
 }

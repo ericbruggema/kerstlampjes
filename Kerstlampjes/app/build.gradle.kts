@@ -19,8 +19,8 @@ android {
         applicationId = "nl.kerstlampjes.app"
         minSdk = 26
         targetSdk = 35
-        versionCode = 5
-        versionName = "2.3"
+        versionCode = 6
+        versionName = "2.4"
         // Talen die de app kent (overige talen vallen terug op Engels)
         resourceConfigurations += listOf("nl", "en", "de", "fr", "es", "zh")
     }

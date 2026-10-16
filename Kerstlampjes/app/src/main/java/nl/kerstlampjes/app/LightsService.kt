@@ -50,11 +50,33 @@ class LightsService : Service() {
 
     private lateinit var wm: WindowManager
     private var view: LightsView? = null
+    private var shake: ShakeDetector? = null
+    private var wantShake = false
+    private var tracker: HomeOnly.Tracker? = null
+    private var homeOnly = false
+    private var screenOn = true
+    private val handler = android.os.Handler(android.os.Looper.getMainLooper())
+    private val homeCheck = object : Runnable {
+        override fun run() {
+            if (!homeOnly) return
+            val home = tracker?.isHome() ?: true
+            val v = view
+            if (v != null) {
+                val vis = if (home) android.view.View.VISIBLE else android.view.View.GONE
+                if (v.visibility != vis) v.visibility = vis
+                v.setAnimating(home && screenOn)
+            }
+            handler.postDelayed(this, 1000)
+        }
+    }
 
     private val screenReceiver = object : BroadcastReceiver() {
         override fun onReceive(c: Context, i: Intent) {
             // Animatie pauzeren als het scherm uit staat
-            view?.setAnimating(i.action == Intent.ACTION_SCREEN_ON)
+            val on = i.action == Intent.ACTION_SCREEN_ON
+            screenOn = on
+            view?.setAnimating(on && (!homeOnly || view?.visibility == android.view.View.VISIBLE))
+            if (on && wantShake) shake?.start() else shake?.stop()
         }
     }
 
@@ -88,6 +110,23 @@ class LightsService : Service() {
         if (view == null) addOverlay()
         view?.apply(s)
         updateWindowAlpha(s)
+        // Schudden haalt de sneeuw weg; de sensor is alleen aan als er sneeuw kan blijven liggen
+        handler.removeCallbacks(homeCheck)
+        homeOnly = s.homeOnly
+        if (homeOnly) {
+            if (tracker == null) tracker = HomeOnly.Tracker(this)
+            handler.post(homeCheck)
+        } else {
+            view?.visibility = android.view.View.VISIBLE
+            view?.setAnimating(screenOn)
+        }
+        wantShake = (s.decor and Decor.PILE) != 0
+        if (wantShake) {
+            if (shake == null) shake = ShakeDetector(this) { view?.post { view?.shake() } }
+            shake?.start()
+        } else {
+            shake?.stop()
+        }
         AudioLevel.sync(this, s.mode == TreeModes.MUSIC, "overlay")
 
         isRunning = true
@@ -175,6 +214,8 @@ class LightsService : Service() {
     override fun onDestroy() {
         isRunning = false
         AudioLevel.sync(this, false, "overlay")
+        shake?.stop()
+        handler.removeCallbacks(homeCheck)
         try { unregisterReceiver(screenReceiver) } catch (_: Exception) {}
         view?.let {
             it.setAnimating(false)
