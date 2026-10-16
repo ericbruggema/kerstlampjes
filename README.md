@@ -13,7 +13,7 @@
 
 🌍 **Lees dit in:** **Nederlands** · [English](README.en.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [中文](README.zh.md)
 
-💻 **Nieuw: Kerstlampjes voor Windows!** Alleen de lampjes, altijd zichtbaar in het systeemvak. [⬇️ Download (100 kB)](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) · [Meer info](#-windows)
+💻 **Nieuw: Kerstlampjes voor Windows!** Alleen de lampjes, altijd zichtbaar in het systeemvak. [⬇️ Download (100 kB)](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.2/Kerstlampjes-Windows.exe) · [Meer info](#-windows)
 
 <img src="website/media/extra-beginscherm.jpg" alt="Randlampjes boven het beginscherm" width="360">
 
@@ -657,7 +657,7 @@ Er is ook een kleine Windows-versie met alleen de lampjes: een snoer langs de ra
 
 **Aan de slag**
 
-1. Download [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) en dubbelklik erop. Er is niets te installeren; Windows 10 of 11 is genoeg.
+1. Download [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.2/Kerstlampjes-Windows.exe) en dubbelklik erop. Er is niets te installeren; Windows 10 of 11 is genoeg.
 2. Zoek het lampje-icoon rechtsonder bij de klok (soms achter het pijltje ^).
 3. **Linkermuisknop** op het icoon zet de lampjes aan of uit. **Rechtermuisknop** opent het menu:
 
@@ -672,10 +672,12 @@ Er is ook een kleine Windows-versie met alleen de lampjes: een snoer langs de ra
 | Afsluiten | Stopt het programma |
 
 
-- **Downloaden:** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) (100 kB, [release](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.1)). Niets te installeren: dubbelklik en het icoon verschijnt in het systeemvak, rechtsonder bij de klok.
+- **Downloaden:** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.2/Kerstlampjes-Windows.exe) (100 kB, [release](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.2)). Niets te installeren: dubbelklik en het icoon verschijnt in het systeemvak, rechtsonder bij de klok.
 - **Aan/uit:** linkermuisknop op het icoon. **Rechtermuisknop** geeft het menu: instellingen, starten met Windows, controleren op updates, over en afsluiten.
 - **Instellingen:** effect (vast, fonkelen, om en om, lopend licht, kleurgolf), kleuren, snelheid, grootte, afstand, hoekafronding, afstand van de rand, doorhang, doorzichtigheid. Ook alle schermen of alleen het hoofdscherm.
 - **Versiering:** dezelfde als op Android (treintje, sneeuw, vuurwerk, ijspegels, slinger, slee, pinguïns, lichtkrant), apart aan te zetten in de instellingen. Klik op ijspegels, vallende sterren, de trein of de pinguïns en ze reageren; je klik gaat daarna gewoon door naar het venster eronder.
+- **Vuurwerkshow:** kies willekeurig vuurwerk of een soort: pijlen, fonteinen, vuurpotten, Romeinse kaarsen, vuurraden of een gechoreografeerde grote show (ongeveer 32 seconden, daarna een pauze). Het gaat af op willekeurige plekken langs de onderrand; handmatig afsteken kan via het menu.
+- **Sneeuw:** valt standaard aan de zijkanten; je kunt hem ook over het hele scherm laten vallen. De optie voor ballen in de slinger is pas te kiezen als de slinger aan staat.
 - **Sneeuw weghalen:** beweeg je muis door de sneeuw, schud je muis heen en weer, of kies *Sneeuw wegvegen* in het menu.
 - **Alleen op het bureaublad:** optie om de lampjes alleen te tonen als je het bureaublad ziet, niet boven programma's.
 - **Verbergt zichzelf** bij schermvullende apps (spellen, films, presentaties).

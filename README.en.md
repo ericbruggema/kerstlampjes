@@ -8,7 +8,7 @@
 
 🌍 **Read this in:** [Nederlands](README.md) · **English** · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [中文](README.zh.md)
 
-💻 **New: Christmas Lights for Windows!** Just the lights, always visible from the system tray. [⬇️ Download (100 kB)](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) · [More info](#-windows)
+💻 **New: Christmas Lights for Windows!** Just the lights, always visible from the system tray. [⬇️ Download (100 kB)](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.2/Kerstlampjes-Windows.exe) · [More info](#-windows)
 
 </div>
 
@@ -493,7 +493,7 @@ There is also a small Windows version with just the lights: a string along the e
 
 **Getting started**
 
-1. Download [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) and double-click it. Nothing to install; Windows 10 or 11 is enough.
+1. Download [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.2/Kerstlampjes-Windows.exe) and double-click it. Nothing to install; Windows 10 or 11 is enough.
 2. Look for the light-bulb icon at the bottom right next to the clock (sometimes behind the ^ arrow).
 3. **Left-click** the icon to turn the lights on or off. **Right-click** opens the menu:
 
@@ -508,10 +508,12 @@ There is also a small Windows version with just the lights: a string along the e
 | Exit | Stops the program |
 
 
-- **Download:** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) (100 kB, [release](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.1)). Nothing to install: double-click and the icon appears in the system tray, bottom right next to the clock.
+- **Download:** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.2/Kerstlampjes-Windows.exe) (100 kB, [release](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.2)). Nothing to install: double-click and the icon appears in the system tray, bottom right next to the clock.
 - **On/off:** left-click the icon. **Right-click** opens the menu: settings, start with Windows, check for updates, about and exit.
 - **Settings:** effect (steady, twinkle, alternate, chasing light, colour wave), colours, speed, size, spacing, corner rounding, distance from the edge, sag, opacity. Also all screens or just the main one.
 - **Decorations:** the same as on Android (little train, snow, fireworks, icicles, garland, sleigh, penguins, scrolling text), each switched on separately in the settings. Click icicles, shooting stars, the train or the penguins and they react; your click still passes through to the window underneath.
+- **Fireworks show:** choose random fireworks or one kind: rockets, fountains, mortars, Roman candles, Catherine wheels or a choreographed grand show (about 32 seconds, then a pause). It goes off at random spots along the bottom edge; you can also launch it by hand from the menu.
+- **Snow:** falls along the sides by default; you can also let it fall across the whole screen. The baubles-on-the-garland option can only be chosen when the garland is on.
 - **Clearing the snow:** move your mouse through the snow, shake your mouse back and forth, or choose *Sweep away the snow* in the menu.
 - **Only on the desktop:** an option to show the lights only when you see the desktop, not over programs.
 - **Hides itself** during full-screen apps (games, films, presentations).

@@ -8,7 +8,7 @@
 
 🌍 **Lire en :** [Nederlands](README.md) · [English](README.en.md) · [Deutsch](README.de.md) · **Français** · [Español](README.es.md) · [中文](README.zh.md)
 
-💻 **Nouveau : Lumières de Noël pour Windows !** Seulement les lumières, toujours visibles depuis la zone de notification. [⬇️ Télécharger (100 ko)](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) · [Plus d'infos](#-windows)
+💻 **Nouveau : Lumières de Noël pour Windows !** Seulement les lumières, toujours visibles depuis la zone de notification. [⬇️ Télécharger (100 ko)](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.2/Kerstlampjes-Windows.exe) · [Plus d'infos](#-windows)
 
 </div>
 
@@ -494,7 +494,7 @@ Il existe aussi une petite version Windows avec seulement les lumières : une gu
 
 **Pour commencer**
 
-1. Télécharge [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) et double-clique dessus. Rien à installer ; Windows 10 ou 11 suffit.
+1. Télécharge [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.2/Kerstlampjes-Windows.exe) et double-clique dessus. Rien à installer ; Windows 10 ou 11 suffit.
 2. Cherche l'icône d'ampoule en bas à droite près de l'horloge (parfois derrière la flèche ^).
 3. **Clic gauche** sur l'icône pour allumer ou éteindre les lumières. **Clic droit** ouvre le menu :
 
@@ -509,13 +509,16 @@ Il existe aussi une petite version Windows avec seulement les lumières : une gu
 | Quitter | Arrête le programme |
 
 
-- **Téléchargement :** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) (100 ko, [release](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.1)). Rien à installer : double-cliquez et l'icône apparaît dans la zone de notification, en bas à droite près de l'horloge.
+- **Téléchargement :** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.2/Kerstlampjes-Windows.exe) (100 ko, [release](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.2)). Rien à installer : double-cliquez et l'icône apparaît dans la zone de notification, en bas à droite près de l'horloge.
 - **Marche/arrêt :** clic gauche sur l'icône. **Clic droit** ouvre le menu : paramètres, démarrer avec Windows, rechercher des mises à jour, à propos et quitter.
 - **Paramètres :** effet (fixe, scintillement, alterné, chenillard, vague de couleurs), couleurs, vitesse, taille, espacement, arrondi des coins, distance du bord, affaissement, opacité. Aussi tous les écrans ou seulement l'écran principal.
 - **Décorations :** les mêmes que sur Android (petit train, neige, feux d'artifice, glaçons, guirlande, traîneau, pingouins, bandeau lumineux), à activer séparément dans les paramètres. Clique sur les glaçons, les étoiles filantes, le train ou les pingouins et ils réagissent ; ton clic passe quand même à la fenêtre en dessous.
+- **Spectacle pyrotechnique :** choisis des feux aléatoires ou un type : fusées, fontaines, mortiers, chandelles romaines, soleils ou un grand spectacle chorégraphié (environ 32 secondes, puis une pause). Il part à des endroits aléatoires le long du bord du bas ; tu peux aussi le lancer à la main depuis le menu.
+- **Neige :** tombe par défaut sur les côtés ; tu peux aussi la faire tomber sur tout l'écran. L'option boules sur la guirlande n'est disponible que si la guirlande est activée.
 - **Enlever la neige :** passe la souris dans la neige, secoue-la de gauche à droite, ou choisis *Balayer la neige* dans le menu.
 - **Seulement sur le bureau :** une option pour n'afficher les lumières que lorsque tu vois le bureau, pas au-dessus des programmes.
 - **Se masque** pendant les applis plein écran (jeux, films, présentations).
+- **Au rythme de la musique :** un effet qui réagit au son via le microphone. Le microphone n'est ouvert que si tu choisis cet effet ; rien n'est enregistré ni envoyé, seul le volume est mesuré.
 - **Confidentialité :** rien ne passe par internet, sauf si vous choisissez « Rechercher des mises à jour ». Les paramètres sont dans `%APPDATA%\Kerstlampjes`.
 - **Langues :** suit la langue de Windows (Nederlands, English, Deutsch, Français, Español, 中文).
 - **Windows SmartScreen :** le fichier n'est pas signé numériquement ; à l'avertissement, choisissez *Informations complémentaires* → *Exécuter quand même*.
