@@ -651,6 +651,8 @@ Tikken kan in het speelscherm (**🎮 Speel met je rand**). De overlay boven and
 
 Er is ook een kleine Windows-versie met alleen de lampjes: een snoer langs de rand van je scherm (boven de taakbalk), altijd zichtbaar en je kunt er gewoon doorheen klikken.
 
+<p align="center"><img src="website/media/windows-overlay.jpg" alt="De lampjes en versiering rond de rand van een Windows-bureaublad" width="720"><br><sub>Gesimuleerd bureaublad: zo ziet de rand er op Windows uit, met alle versiering aan.</sub></p>
+
 <p align="center"><img src="website/media/windows-instellingen.png" alt="Instellingen van de Windows-versie" width="300"></p>
 
 **Aan de slag**
