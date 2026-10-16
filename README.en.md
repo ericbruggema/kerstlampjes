@@ -23,6 +23,8 @@
 2. Installing
 3. First use
 4. Features
+5. Decorations around your edge
+5. Windows version
 5. Controls
 6. Languages
 7. Permissions and privacy
@@ -488,6 +490,23 @@ Tapping works in the play screen (**🎮 Play with your edge**). The overlay ove
 ## 💻 Windows
 
 There is also a small Windows version with just the lights: a string along the edge of your screen (above the taskbar), always visible, and you can click straight through it.
+
+**Getting started**
+
+1. Download [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) and double-click it. Nothing to install; Windows 10 or 11 is enough.
+2. Look for the light-bulb icon at the bottom right next to the clock (sometimes behind the ^ arrow).
+3. **Left-click** the icon to turn the lights on or off. **Right-click** opens the menu:
+
+| Menu item | What it does |
+|---|---|
+| Lights on | Turns the lights on or off |
+| Settings… | Effect, colours, decorations and more |
+| Launch fireworks · Drop the icicles · Sweep away the snow | Quick actions for the decorations |
+| Start with Windows | Starts the program automatically at startup |
+| Check for updates | Checks on GitHub whether there is a newer version |
+| About Christmas Lights… | Explanation, version and licence |
+| Exit | Stops the program |
+
 
 - **Download:** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) (100 kB, [release](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.1)). Nothing to install: double-click and the icon appears in the system tray, bottom right next to the clock.
 - **On/off:** left-click the icon. **Right-click** opens the menu: settings, start with Windows, check for updates, about and exit.

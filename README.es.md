@@ -23,6 +23,8 @@
 2. Instalación
 3. Primer uso
 4. Funciones
+5. Decoración alrededor de tu borde
+5. Versión para Windows
 5. Controles
 6. Idiomas
 7. Permisos y privacidad
@@ -489,6 +491,23 @@ Tocar funciona en la pantalla de juego (**🎮 Juega con tu borde**). La superpo
 ## 💻 Windows
 
 También hay una pequeña versión para Windows solo con las luces: una guirnalda a lo largo del borde de tu pantalla (sobre la barra de tareas), siempre visible, y puedes hacer clic a través de ella.
+
+**Primeros pasos**
+
+1. Descarga [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) y haz doble clic. No hay nada que instalar; basta con Windows 10 u 11.
+2. Busca el icono de bombilla abajo a la derecha junto al reloj (a veces detrás de la flecha ^).
+3. **Clic izquierdo** en el icono para encender o apagar las luces. **Clic derecho** abre el menú:
+
+| Elemento del menú | Qué hace |
+|---|---|
+| Luces encendidas | Enciende o apaga las luces |
+| Ajustes… | Efecto, colores, decoración y más |
+| Lanzar fuegos artificiales · Hacer caer los carámbanos · Barrer la nieve | Acciones rápidas para la decoración |
+| Iniciar con Windows | Inicia el programa automáticamente al arrancar |
+| Buscar actualizaciones | Comprueba en GitHub si hay una versión más reciente |
+| Acerca de Luces de Navidad… | Explicación, versión y licencia |
+| Salir | Cierra el programa |
+
 
 - **Descarga:** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) (100 kB, [release](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.1)). Nada que instalar: doble clic y el icono aparece en la bandeja del sistema, abajo a la derecha junto al reloj.
 - **Encender/apagar:** clic izquierdo en el icono. **Clic derecho** abre el menú: ajustes, iniciar con Windows, buscar actualizaciones, acerca de y salir.

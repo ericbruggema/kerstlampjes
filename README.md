@@ -38,6 +38,8 @@
    - [Geluid, muziek en microfoon](#-geluid-muziek-en-microfoon)
    - [Het ⋯-menu](#-het--menu)
    - [Speciale dagen](#-speciale-dagen)
+5. [Versiering rond je rand](#-versiering-rond-je-rand)
+5. [Windows-versie](#-windows)
 5. [Bediening](#-bediening)
 6. [Talen](#-talen)
 7. [Rechten en privacy](#-rechten-en-privacy)
@@ -648,6 +650,25 @@ Tikken kan in het speelscherm (**🎮 Speel met je rand**). De overlay boven and
 ## 💻 Windows
 
 Er is ook een kleine Windows-versie met alleen de lampjes: een snoer langs de rand van je scherm (boven de taakbalk), altijd zichtbaar en je kunt er gewoon doorheen klikken.
+
+<p align="center"><img src="website/media/windows-instellingen.png" alt="Instellingen van de Windows-versie" width="300"></p>
+
+**Aan de slag**
+
+1. Download [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) en dubbelklik erop. Er is niets te installeren; Windows 10 of 11 is genoeg.
+2. Zoek het lampje-icoon rechtsonder bij de klok (soms achter het pijltje ^).
+3. **Linkermuisknop** op het icoon zet de lampjes aan of uit. **Rechtermuisknop** opent het menu:
+
+| Menu-item | Wat het doet |
+|---|---|
+| Lampjes aan | Zet de lampjes aan of uit |
+| Instellingen… | Effect, kleuren, versiering en meer |
+| Vuurwerk afsteken · Ijspegels laten vallen · Sneeuw wegvegen | Snelle acties voor de versiering |
+| Starten met Windows | Start het programma automatisch bij het opstarten |
+| Controleren op updates | Kijkt op GitHub of er een nieuwere versie is |
+| Over Kerstlampjes… | Uitleg, versie en licentie |
+| Afsluiten | Stopt het programma |
+
 
 - **Downloaden:** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) (100 kB, [release](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.1)). Niets te installeren: dubbelklik en het icoon verschijnt in het systeemvak, rechtsonder bij de klok.
 - **Aan/uit:** linkermuisknop op het icoon. **Rechtermuisknop** geeft het menu: instellingen, starten met Windows, controleren op updates, over en afsluiten.

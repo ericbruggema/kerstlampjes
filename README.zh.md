@@ -23,6 +23,8 @@
 2. 安装
 3. 首次使用
 4. 功能
+5. 屏幕边缘的装饰
+5. Windows 版
 5. 操作
 6. 语言
 7. 权限与隐私
@@ -488,6 +490,23 @@ KerstApp/
 ## 💻 Windows
 
 另有一个只含彩灯的小型 Windows 版：一串灯沿屏幕边缘（任务栏上方）显示，始终可见，并且可以直接点击穿透。
+
+**快速上手**
+
+1. 下载 [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) 并双击运行。无需安装；Windows 10 或 11 即可。
+2. 在右下角时钟旁找到灯泡图标（有时在 ^ 箭头后面）。
+3. **左键单击**图标开关彩灯，**右键单击**打开菜单：
+
+| 菜单项 | 作用 |
+|---|---|
+| 开灯 | 开启或关闭彩灯 |
+| 设置… | 效果、颜色、装饰等 |
+| 放烟花 · 让冰柱掉落 · 扫掉积雪 | 装饰的快捷操作 |
+| 随 Windows 启动 | 开机时自动启动程序 |
+| 检查更新 | 在 GitHub 上检查是否有新版本 |
+| 关于圣诞彩灯… | 说明、版本和许可证 |
+| 退出 | 关闭程序 |
+
 
 - **下载：** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe)（100 kB，[发布页](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.1)）。无需安装：双击后图标出现在系统托盘（右下角时钟旁）。
 - **开/关：** 左键单击图标。**右键**打开菜单：设置、随 Windows 启动、检查更新、关于和退出。

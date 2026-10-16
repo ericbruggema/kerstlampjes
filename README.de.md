@@ -23,6 +23,8 @@
 2. Installation
 3. Erste Benutzung
 4. Funktionen
+5. Dekoration rund um deinen Rand
+5. Windows-Version
 5. Bedienung
 6. Sprachen
 7. Berechtigungen und Datenschutz
@@ -489,6 +491,23 @@ Tippen funktioniert im Spielbildschirm (**🎮 Spiel mit deinem Rand**). Das Ove
 ## 💻 Windows
 
 Es gibt auch eine kleine Windows-Version nur mit den Lichtern: eine Kette am Rand deines Bildschirms (über der Taskleiste), immer sichtbar, und du kannst einfach hindurchklicken.
+
+**Erste Schritte**
+
+1. Lade [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) herunter und doppelklicke darauf. Nichts zu installieren; Windows 10 oder 11 genügt.
+2. Suche das Glühbirnen-Symbol unten rechts neben der Uhr (manchmal hinter dem Pfeil ^).
+3. **Linksklick** auf das Symbol schaltet die Lichter an oder aus. **Rechtsklick** öffnet das Menü:
+
+| Menüpunkt | Was er macht |
+|---|---|
+| Lichter an | Schaltet die Lichter an oder aus |
+| Einstellungen… | Effekt, Farben, Dekoration und mehr |
+| Feuerwerk zünden · Eiszapfen fallen lassen · Schnee wegfegen | Schnellaktionen für die Dekoration |
+| Mit Windows starten | Startet das Programm automatisch beim Hochfahren |
+| Nach Updates suchen | Prüft auf GitHub, ob es eine neuere Version gibt |
+| Über Weihnachtslichter… | Erklärung, Version und Lizenz |
+| Beenden | Beendet das Programm |
+
 
 - **Download:** [Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes/releases/download/windows-v1.1/Kerstlampjes-Windows.exe) (100 kB, [Release](https://github.com/ericbruggema/kerstlampjes/releases/tag/windows-v1.1)). Nichts zu installieren: Doppelklick, und das Symbol erscheint im Infobereich, unten rechts bei der Uhr.
 - **An/aus:** Linksklick auf das Symbol. **Rechtsklick** öffnet das Menü: Einstellungen, mit Windows starten, nach Updates suchen, Über und Beenden.
