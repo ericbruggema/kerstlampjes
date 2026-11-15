@@ -34,6 +34,7 @@
     decor: "",             // versiering, bijvoorbeeld "snow,stars,garland" (zie README)
     garlandBalls: true,    // ballen in de slinger
     trainWagons: 3,        // aantal wagons van het treintje
+    glow: true,            // gloed rond de lampjes aan of uit
     respectReducedMotion: true, // false = altijd animeren, ook als het systeem "minder beweging" vraagt
     marquee: /^en/i.test(document.documentElement.lang || "") ? "Merry Christmas and a Happy New Year!" : "Vrolijk kerstfeest en een gelukkig nieuwjaar!", // text of the sign / tekst van de lichtkrant
     size: 14,              // grootte van een lampje in pixels
@@ -190,10 +191,12 @@
       g.scale(dpr, dpr);
       g.translate(d / 2, d / 2 - z * 1.0);
       var k2 = level / 7, col = colors[ci % colors.length], cy = z * 1.1;
-      var gr = g.createRadialGradient(0, cy, 0, 0, cy, z * 2.4);
-      gr.addColorStop(0, rgba(col, 0.75 * k2 * k2));
-      gr.addColorStop(1, rgba(col, 0));
-      g.fillStyle = gr; g.beginPath(); g.arc(0, cy, z * 2.4, 0, 6.2832); g.fill();
+      if (o.glow) {
+        var gr = g.createRadialGradient(0, cy, 0, 0, cy, z * 2.4);
+        gr.addColorStop(0, rgba(col, 0.75 * k2 * k2));
+        gr.addColorStop(1, rgba(col, 0));
+        g.fillStyle = gr; g.beginPath(); g.arc(0, cy, z * 2.4, 0, 6.2832); g.fill();
+      }
       drawBulb(g, style, mix("#222a25", col, 0.18 + 0.82 * k2), k2, z);
       sprites[key] = c;
       return c;

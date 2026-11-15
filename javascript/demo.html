@@ -33,6 +33,7 @@
     <label>Soort <select id="bulbStyle"><option>classic</option><option>led</option><option>ball</option><option>flame</option><option>star</option><option>heart</option><option>icicle</option><option>snowflake</option><option>mix</option></select></label>
     <label>Grootte <input type="range" id="size" min="8" max="28" value="14"></label>
     <label>Snelheid <input type="range" id="speed" min="1" max="10" value="5"></label>
+    <label><input type="checkbox" id="glow" checked> gloed</label>
   </fieldset>
   <fieldset><legend>Versiering</legend>
     <label><input type="checkbox" class="decor" value="snow"> sneeuw</label>
@@ -51,10 +52,10 @@
   var lights = Kerstlampjes.start({ respectReducedMotion: false });
   function checked(cls) { return [].slice.call(document.querySelectorAll("." + cls + ":checked")).map(function (c) { return c.value; }).join(","); }
   function apply() {
-    var o = { sides: checked("side") || "none", mode: mode.value, palette: palette.value, bulbStyle: bulbStyle.value, decor: checked("decor") || "none", size: +size.value, speed: +speed.value };
+    var o = { sides: checked("side") || "none", mode: mode.value, palette: palette.value, bulbStyle: bulbStyle.value, decor: checked("decor") || "none", size: +size.value, speed: +speed.value, glow: glow.checked };
     lights.update(o);
     var parts = [];
-    for (var k in o) if (!(k === "decor" && o[k] === "none")) parts.push(k + ": " + (typeof o[k] === "number" ? o[k] : '"' + o[k] + '"'));
+    for (var k in o) if (!(k === "decor" && o[k] === "none") && !(k === "glow" && o[k])) parts.push(k + ": " + (typeof o[k] === "string" ? '"' + o[k] + '"' : o[k]));
     code.textContent = "Kerstlampjes.start({ " + parts.join(", ") + " });";
   }
   document.querySelectorAll("input,select").forEach(function (e) { e.addEventListener("input", apply); });

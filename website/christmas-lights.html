@@ -36,6 +36,7 @@
           <label>Colours <select id="jpalette"><option value="classic">classic multicolour</option><option value="warm">warm white</option><option value="redgreen">red / green / gold</option><option value="ice">ice blue</option><option value="pink">pink / purple</option></select></label>
           <label>Type <select id="jbulb"><option value="classic">classic</option><option value="led">mini LED</option><option value="ball">glass ball</option><option value="flame">flame</option><option value="star">star</option><option value="heart">heart</option><option value="icicle">icicle</option><option value="snowflake">snowflake</option><option value="mix">mix</option></select></label>
           <label>Speed <input type="range" id="jspeed" min="1" max="10" value="5"></label>
+          <label><input type="checkbox" id="jglow" checked> glow</label>
         </fieldset>
         <fieldset><legend>Decorations</legend>
           <label><input type="checkbox" class="jdecor" value="snow"> snow</label>
@@ -67,10 +68,10 @@
       var lights = ChristmasLights.create({ target: "#jsstage", sides: "all", decor: "snow,garland", respectReducedMotion: false });
       document.querySelectorAll(".jdecor").forEach(function (c) { c.checked = c.value === "snow" || c.value === "garland"; });
       function apply() {
-        var o = { sides: checked("jside") || "none", mode: $("jmode").value, palette: $("jpalette").value, bulbStyle: $("jbulb").value, decor: checked("jdecor") || "none", speed: +$("jspeed").value };
+        var o = { sides: checked("jside") || "none", mode: $("jmode").value, palette: $("jpalette").value, bulbStyle: $("jbulb").value, decor: checked("jdecor") || "none", speed: +$("jspeed").value, glow: $("jglow").checked };
         lights.update(o);
         var parts = [];
-        for (var k in o) if (!(k === "decor" && o[k] === "none") && !(k === "sides" && o[k] === "top,right,bottom,left") && !(k === "speed" && o[k] === 5)) parts.push(k + ": " + (k === "speed" ? o[k] : "\"" + o[k] + "\""));
+        for (var k in o) if (!(k === "decor" && o[k] === "none") && !(k === "sides" && o[k] === "top,right,bottom,left") && !(k === "speed" && o[k] === 5) && !(k === "glow" && o[k])) parts.push(k + ": " + (typeof o[k] === "string" ? "\"" + o[k] + "\"" : o[k]));
         $("jscode").textContent = '<script src="christmaslights.js"><' + '/script>\n<script>ChristmasLights.start(' + (parts.length ? "{ " + parts.join(", ") + " }" : "") + ');<' + '/script>';
       }
       document.querySelectorAll("#javascript input, #javascript select").forEach(function (e) { e.addEventListener("input", apply); });

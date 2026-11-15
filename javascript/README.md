@@ -38,6 +38,7 @@ Alles is optioneel. Dezelfde namen werken als `data-`-attribuut (`data-sides="to
 | `garlandBalls` | `true` | Ballen in de slinger |
 | `trainWagons` | `3` | Aantal wagons van het treintje, 1 tot 8 |
 | `marquee` | "Vrolijk kerstfeest…" | Tekst van de lichtkrant |
+| `glow` | `true` | Gloed rond de lampjes aan of uit |
 | `respectReducedMotion` | `true` | Staat in het systeem "minder beweging" aan, dan blijven de lampjes stilstaan. Met `false` animeren ze altijd (de demo's doen dat) |
 | `size` | `14` | Grootte van een lampje in pixels |
 | `spacing` | `44` | Afstand tussen de lampjes in pixels |
@@ -102,6 +103,7 @@ or
 | `bulbStyle` | `"classic"` | `classic`, `led`, `ball`, `flame`, `star`, `heart`, `icicle`, `snowflake`, or `mix` |
 | `decor` | `""` | Decorations, a list or `all`: `snow`, `stars`, `shooting`, `icicles`, `garland`, `train`, `marquee` |
 | `garlandBalls` / `trainWagons` / `marquee` | `true` / `3` / text | Baubles in the garland, number of wagons (1 to 8), text of the sign |
+| `glow` | `true` | Glow around the bulbs on or off |
 | `respectReducedMotion` | `true` | If the system asks for reduced motion (e.g. Windows: animation effects off), the lights stay still. Use `false` to always animate (the demos do) |
 | `size` / `spacing` | `14` / `44` | Bulb size and distance between bulbs, in pixels |
 | `speed` | `5` | 1 to 10 |
