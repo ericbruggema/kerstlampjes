@@ -109,3 +109,13 @@ footer { padding: 40px 0 60px; color: var(--muted); text-align: center; font-siz
 h3.sub { margin: 26px 0 8px; font-size: 1.15rem; }
 .steps { padding-left: 1.3rem; line-height: 1.7; }
 #rand { border-bottom: 1px solid #2c4a3d; padding-bottom: 28px; margin-bottom: 36px; }
+
+
+/* voorbeeld van de JavaScript-lampjes */
+.jsstage { position: relative; margin: 26px 0 14px; padding: 56px 34px; min-height: 260px; border-radius: 14px; background: #0a1511; display: flex; align-items: center; justify-content: center; text-align: center; }
+.jspanel { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+.jspanel fieldset { border: 1px solid #2f5a49; border-radius: 12px; margin: 0; padding: 8px 14px 12px; }
+.jspanel legend { color: var(--muted); padding: 0 6px; }
+.jspanel label { display: inline-block; margin: 4px 14px 4px 0; white-space: nowrap; }
+.jspanel select { font: inherit; max-width: 100%; }
+.jscode { background: #08110d; color: #bfe8cf; padding: 12px 14px; border-radius: 10px; overflow: auto; font-size: .9rem; line-height: 1.45; }

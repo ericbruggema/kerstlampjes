@@ -7,30 +7,40 @@
 <style>
   body { margin: 0; min-height: 100vh; font: 16px/1.5 system-ui, sans-serif; background: #0e1f2e; color: #e8f1f8;
          display: flex; align-items: center; justify-content: center; }
-  main { max-width: 640px; padding: 56px 32px; }
+  main { max-width: 680px; padding: 70px 32px; }
   h1 { margin-top: 0; }
   fieldset { border: 1px solid #2c4358; border-radius: 10px; margin: 14px 0; }
   legend { padding: 0 8px; color: #9fc3dd; }
-  label { margin-right: 14px; white-space: nowrap; }
-  pre { background: #08131d; padding: 12px; border-radius: 8px; overflow: auto; color: #b9e0ff; }
+  label { margin-right: 14px; white-space: nowrap; display: inline-block; }
+  pre { background: #08131d; padding: 12px; border-radius: 8px; overflow: auto; color: #b9e0ff; white-space: pre-wrap; }
   select { font: inherit; }
 </style>
 </head>
 <body>
 <main>
   <h1>🎄 Kerstlampjes voor websites</h1>
-  <p>Eén los bestand, geen afhankelijkheden. Pas hieronder de instellingen aan en kopieer de regel.</p>
+  <p>Eén los bestand, geen afhankelijkheden. Pas hieronder de instellingen aan en kopieer de code.</p>
 
-  <fieldset><legend>Zijden</legend>
+  <fieldset><legend>Zijden met lampjes</legend>
     <label><input type="checkbox" class="side" value="top" checked> boven</label>
     <label><input type="checkbox" class="side" value="right" checked> rechts</label>
     <label><input type="checkbox" class="side" value="bottom" checked> onder</label>
     <label><input type="checkbox" class="side" value="left" checked> links</label>
   </fieldset>
-  <fieldset><legend>Uiterlijk</legend>
+  <fieldset><legend>Lampjes</legend>
     <label>Effect <select id="mode"><option>twinkle</option><option>steady</option><option>alternate</option><option>chase</option><option>wave</option></select></label>
     <label>Kleuren <select id="palette"><option>classic</option><option>warm</option><option>redgreen</option><option>ice</option><option>pink</option></select></label>
+    <label>Soort <select id="bulbStyle"><option>classic</option><option>led</option><option>ball</option><option>flame</option><option>star</option><option>heart</option><option>icicle</option><option>snowflake</option><option>mix</option></select></label>
     <label>Grootte <input type="range" id="size" min="8" max="28" value="14"></label>
+  </fieldset>
+  <fieldset><legend>Versiering</legend>
+    <label><input type="checkbox" class="decor" value="snow"> sneeuw</label>
+    <label><input type="checkbox" class="decor" value="stars"> sterretjes</label>
+    <label><input type="checkbox" class="decor" value="shooting"> vallende sterren</label>
+    <label><input type="checkbox" class="decor" value="icicles"> ijspegels</label>
+    <label><input type="checkbox" class="decor" value="garland"> slinger</label>
+    <label><input type="checkbox" class="decor" value="train"> treintje</label>
+    <label><input type="checkbox" class="decor" value="marquee"> lichtkrant</label>
   </fieldset>
   <pre id="code"></pre>
 </main>
@@ -38,11 +48,13 @@
 <script src="kerstlampjes.js"></script>
 <script>
   var lights = Kerstlampjes.start();
+  function checked(cls) { return [].slice.call(document.querySelectorAll("." + cls + ":checked")).map(function (c) { return c.value; }).join(","); }
   function apply() {
-    var sides = [].slice.call(document.querySelectorAll(".side:checked")).map(function (c) { return c.value; });
-    var o = { sides: sides.join(",") || "none", mode: mode.value, palette: palette.value, size: +size.value };
+    var o = { sides: checked("side") || "none", mode: mode.value, palette: palette.value, bulbStyle: bulbStyle.value, decor: checked("decor") || "none", size: +size.value };
     lights.update(o);
-    code.textContent = "Kerstlampjes.start(" + JSON.stringify(o, null, 2).replace(/\n\s*/g, " ") + ");";
+    var parts = [];
+    for (var k in o) if (!(k === "decor" && o[k] === "none")) parts.push(k + ": " + (typeof o[k] === "number" ? o[k] : '"' + o[k] + '"'));
+    code.textContent = "Kerstlampjes.start({ " + parts.join(", ") + " });";
   }
   document.querySelectorAll("input,select").forEach(function (e) { e.addEventListener("input", apply); });
   apply();

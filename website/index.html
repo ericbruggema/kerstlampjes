@@ -225,6 +225,38 @@
       <p><img class="shot" src="media/versiering.jpg" alt="Versiering rond de rand: treintje, slinger, sneeuw, ijspegels" style="max-width:300px" loading="lazy"></p>
     </section>
 
+    <section id="javascript">
+      <h2>🌐 Ook voor je eigen website</h2>
+      <p class="lead">Kerstlampjes als <strong>één los JavaScript-bestand</strong>, zonder afhankelijkheden. Rondom de pagina of alleen boven, links, rechts of onder, met alle soorten lampjes en de versiering. Probeer het hieronder uit: dit is het echte script.</p>
+      <div id="jsstage" class="jsstage"><div><strong>Kies hieronder wat je wilt zien</strong><br><small>De lampjes hangen om dit vak.</small></div></div>
+      <div class="jspanel">
+        <fieldset><legend>Zijden</legend>
+          <label><input type="checkbox" class="jside" value="top" checked> boven</label>
+          <label><input type="checkbox" class="jside" value="right" checked> rechts</label>
+          <label><input type="checkbox" class="jside" value="bottom" checked> onder</label>
+          <label><input type="checkbox" class="jside" value="left" checked> links</label>
+        </fieldset>
+        <fieldset><legend>Lampjes</legend>
+          <label>Effect <select id="jmode"><option value="twinkle">fonkelen</option><option value="steady">vast aan</option><option value="alternate">om en om</option><option value="chase">lopend licht</option><option value="wave">kleurgolf</option></select></label>
+          <label>Kleuren <select id="jpalette"><option value="classic">klassiek bont</option><option value="warm">warm wit</option><option value="redgreen">rood/groen/goud</option><option value="ice">ijsblauw</option><option value="pink">roze/paars</option></select></label>
+          <label>Soort <select id="jbulb"><option value="classic">klassiek</option><option value="led">mini-led</option><option value="ball">glazen bol</option><option value="flame">vlammetje</option><option value="star">sterretje</option><option value="heart">hartje</option><option value="icicle">ijspegel</option><option value="snowflake">sneeuwvlok</option><option value="mix">mix</option></select></label>
+        </fieldset>
+        <fieldset><legend>Versiering</legend>
+          <label><input type="checkbox" class="jdecor" value="snow"> sneeuw</label>
+          <label><input type="checkbox" class="jdecor" value="stars"> sterretjes</label>
+          <label><input type="checkbox" class="jdecor" value="shooting"> vallende sterren</label>
+          <label><input type="checkbox" class="jdecor" value="icicles"> ijspegels</label>
+          <label><input type="checkbox" class="jdecor" value="garland"> slinger</label>
+          <label><input type="checkbox" class="jdecor" value="train"> treintje</label>
+          <label><input type="checkbox" class="jdecor" value="marquee"> lichtkrant</label>
+        </fieldset>
+      </div>
+      <p>Zo zet je het op je eigen site:</p>
+      <pre id="jscode" class="jscode"></pre>
+      <p><a class="btn" href="kerstlampjes.js" download>kerstlampjes.js downloaden</a>
+      <a class="btn secondary" href="https://github.com/ericbruggema/kerstlampjes/tree/main/javascript">Handleiding</a></p>
+    </section>
+
     <section id="windows">
       <h2>💻 Ook voor Windows</h2>
       <p class="lead">Een klein programma met alleen de lampjes: een snoer langs de rand van je scherm, altijd zichtbaar
@@ -259,6 +291,27 @@
     <div class="wrap">Gemaakt met veel lampjes. Open source (MIT).</div>
   </footer>
 
+  <script src="kerstlampjes.js"></script>
+  <script>
+    (function () {
+      var $ = function (id) { return document.getElementById(id); };
+      var checked = function (cls) { return [].slice.call(document.querySelectorAll("." + cls + ":checked")).map(function (c) { return c.value; }).join(","); };
+      var lights = Kerstlampjes.create({ target: "#jsstage", sides: "all", decor: "snow,garland" });
+      document.querySelectorAll(".jdecor").forEach(function (c) { c.checked = c.value === "snow" || c.value === "garland"; });
+      function apply() {
+        var o = { sides: checked("jside") || "none", mode: $("jmode").value, palette: $("jpalette").value, bulbStyle: $("jbulb").value, decor: checked("jdecor") || "none" };
+        lights.update(o);
+        var parts = [];
+        for (var k in o) if (!(k === "decor" && o[k] === "none") && !(k === "sides" && o[k] === "top,right,bottom,left")) parts.push(k + ": \"" + o[k] + "\"");
+        $("jscode").textContent = '<script src="kerstlampjes.js"><' + '/script>\n<script>Kerstlampjes.start(' + (parts.length ? "{ " + parts.join(", ") + " }" : "") + ');<' + '/script>';
+      }
+      document.querySelectorAll("#javascript input, #javascript select").forEach(function (e) { e.addEventListener("input", apply); });
+      // alleen tekenen als het vak in beeld is
+      if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { en[0].isIntersecting ? lights.start() : lights.stop(); }).observe($("jsstage"));
+      else lights.start();
+      apply();
+    })();
+  </script>
   <script src="eggs.js"></script>
   <script>
     // Alleen het ei dat bij de datum van vandaag hoort wordt geladen en getoond.
