@@ -240,6 +240,7 @@
           <label>Effect <select id="jmode"><option value="twinkle">fonkelen</option><option value="steady">vast aan</option><option value="alternate">om en om</option><option value="chase">lopend licht</option><option value="wave">kleurgolf</option></select></label>
           <label>Kleuren <select id="jpalette"><option value="classic">klassiek bont</option><option value="warm">warm wit</option><option value="redgreen">rood/groen/goud</option><option value="ice">ijsblauw</option><option value="pink">roze/paars</option></select></label>
           <label>Soort <select id="jbulb"><option value="classic">klassiek</option><option value="led">mini-led</option><option value="ball">glazen bol</option><option value="flame">vlammetje</option><option value="star">sterretje</option><option value="heart">hartje</option><option value="icicle">ijspegel</option><option value="snowflake">sneeuwvlok</option><option value="mix">mix</option></select></label>
+          <label>Snelheid <input type="range" id="jspeed" min="1" max="10" value="5"></label>
         </fieldset>
         <fieldset><legend>Versiering</legend>
           <label><input type="checkbox" class="jdecor" value="snow"> sneeuw</label>
@@ -300,10 +301,10 @@
       var lights = Kerstlampjes.create({ target: "#jsstage", sides: "all", decor: "snow,garland", respectReducedMotion: false });
       document.querySelectorAll(".jdecor").forEach(function (c) { c.checked = c.value === "snow" || c.value === "garland"; });
       function apply() {
-        var o = { sides: checked("jside") || "none", mode: $("jmode").value, palette: $("jpalette").value, bulbStyle: $("jbulb").value, decor: checked("jdecor") || "none" };
+        var o = { sides: checked("jside") || "none", mode: $("jmode").value, palette: $("jpalette").value, bulbStyle: $("jbulb").value, decor: checked("jdecor") || "none", speed: +$("jspeed").value };
         lights.update(o);
         var parts = [];
-        for (var k in o) if (!(k === "decor" && o[k] === "none") && !(k === "sides" && o[k] === "top,right,bottom,left")) parts.push(k + ": \"" + o[k] + "\"");
+        for (var k in o) if (!(k === "decor" && o[k] === "none") && !(k === "sides" && o[k] === "top,right,bottom,left") && !(k === "speed" && o[k] === 5)) parts.push(k + ": " + (k === "speed" ? o[k] : "\"" + o[k] + "\""));
         $("jscode").textContent = '<script src="kerstlampjes.js"><' + '/script>\n<script>Kerstlampjes.start(' + (parts.length ? "{ " + parts.join(", ") + " }" : "") + ');<' + '/script>';
       }
       document.querySelectorAll("#javascript input, #javascript select").forEach(function (e) { e.addEventListener("input", apply); });
