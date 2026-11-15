@@ -47,7 +47,7 @@
 
 <script src="christmaslights.js"></script>
 <script>
-  var lights = ChristmasLights.start();
+  var lights = ChristmasLights.start({ respectReducedMotion: false });
   function checked(cls) { return [].slice.call(document.querySelectorAll("." + cls + ":checked")).map(function (c) { return c.value; }).join(","); }
   function apply() {
     var o = { sides: checked("side") || "none", mode: mode.value, palette: palette.value, bulbStyle: bulbStyle.value, decor: checked("decor") || "none", size: +size.value };

@@ -47,7 +47,7 @@
 
 <script src="kerstlampjes.js"></script>
 <script>
-  var lights = Kerstlampjes.start();
+  var lights = Kerstlampjes.start({ respectReducedMotion: false });
   function checked(cls) { return [].slice.call(document.querySelectorAll("." + cls + ":checked")).map(function (c) { return c.value; }).join(","); }
   function apply() {
     var o = { sides: checked("side") || "none", mode: mode.value, palette: palette.value, bulbStyle: bulbStyle.value, decor: checked("decor") || "none", size: +size.value };

@@ -297,7 +297,7 @@
     (function () {
       var $ = function (id) { return document.getElementById(id); };
       var checked = function (cls) { return [].slice.call(document.querySelectorAll("." + cls + ":checked")).map(function (c) { return c.value; }).join(","); };
-      var lights = Kerstlampjes.create({ target: "#jsstage", sides: "all", decor: "snow,garland" });
+      var lights = Kerstlampjes.create({ target: "#jsstage", sides: "all", decor: "snow,garland", respectReducedMotion: false });
       document.querySelectorAll(".jdecor").forEach(function (c) { c.checked = c.value === "snow" || c.value === "garland"; });
       function apply() {
         var o = { sides: checked("jside") || "none", mode: $("jmode").value, palette: $("jpalette").value, bulbStyle: $("jbulb").value, decor: checked("jdecor") || "none" };

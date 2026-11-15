@@ -34,6 +34,7 @@
     decor: "",             // versiering, bijvoorbeeld "snow,stars,garland" (zie README)
     garlandBalls: true,    // ballen in de slinger
     trainWagons: 3,        // aantal wagons van het treintje
+    respectReducedMotion: true, // false = altijd animeren, ook als het systeem "minder beweging" vraagt
     marquee: /^en/i.test(document.documentElement.lang || "") ? "Merry Christmas and a Happy New Year!" : "Vrolijk kerstfeest en een gelukkig nieuwjaar!", // text of the sign / tekst van de lichtkrant
     size: 14,              // grootte van een lampje in pixels
     spacing: 44,           // afstand tussen de lampjes in pixels
@@ -101,11 +102,12 @@
     var ctx = canvas.getContext("2d");
     var colors, sides, decor, bulbs = [], sprites = {}, raf = 0, running = false, dpr = 1, W = 0, H = 0, target = null;
     var flakes = [], sparks = [], shoot = null, nextShoot = 3, icicles = [], rnd = seeded(7);
-    var reduce = root.matchMedia && root.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var reduceQuery = root.matchMedia && root.matchMedia("(prefers-reduced-motion: reduce)");
+    function reduce() { return !!(o.respectReducedMotion && reduceQuery && reduceQuery.matches); }
     var api;
 
     function has(d) { return decor.indexOf(d) >= 0; }
-    function animated() { return reduce ? false : (o.mode !== "steady" || decor.length > 0 || !!target); }
+    function animated() { return reduce() ? false : (o.mode !== "steady" || decor.length > 0 || !!target); }
 
     function configure(opts) {
       for (k in opts) if (k in DEFAULTS) o[k] = opts[k];
