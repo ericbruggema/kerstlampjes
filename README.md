@@ -15,6 +15,8 @@
 
 💻 **Nieuw: Kerstlampjes voor Windows!** Alleen de lampjes, altijd zichtbaar in het systeemvak. [⬇️ Download (100 kB)](https://github.com/ericbruggema/kerstlampjes-windows/releases/latest/download/Kerstlampjes-Windows.exe) · [Meer info](#-windows)
 
+🌐 **Nieuw: kerstlampjes voor je website!** Eén los JavaScript-bestand, rondom of alleen boven/links/rechts. [Meer info](#-javascript-voor-websites)
+
 <img src="website/media/extra-beginscherm.jpg" alt="Randlampjes boven het beginscherm" width="360">
 
 </div>
@@ -652,6 +654,19 @@ Tikken kan in het speelscherm (**🎮 Speel met je rand**). De overlay boven and
 <p align="center"><img src="website/media/windows-hero.jpg" alt="De lampjes en versiering rond de rand van een Windows-bureaublad" width="720"><br><sub>Gesimuleerd bureaublad: zo ziet de rand er op Windows uit, met alle versiering aan.</sub></p>
 
 De Windows-versie (alleen de lampjes en de versiering, in het systeemvak) heeft een eigen repo: **[ericbruggema/kerstlampjes-windows](https://github.com/ericbruggema/kerstlampjes-windows)**. [⬇️ Download Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes-windows/releases/latest/download/Kerstlampjes-Windows.exe): Windows 10/11, niets te installeren, open source (MIT). Handleiding, instellingen en privacy staan in die repo.
+
+
+## 🌐 JavaScript voor websites
+
+Ook voor je eigen website: **[javascript/kerstlampjes.js](javascript/kerstlampjes.js)**, één los bestand zonder afhankelijkheden. Rondom de hele pagina, of alleen boven, links, rechts of onder, of een combinatie. Instellen met één aanroep of met attributen op de scripttag:
+
+```html
+<script src="kerstlampjes.js" data-sides="top,left" data-palette="ice"></script>
+<!-- of -->
+<script>Kerstlampjes.start({ sides: "top,left,right", mode: "twinkle" });</script>
+```
+
+Effecten, kleuren, grootte en meer staan in de [handleiding](javascript/README.md); open [demo.html](javascript/demo.html) om het uit te proberen. Vrij te gebruiken (MIT).
 
 ## 🤝 Open source en gebruik
 

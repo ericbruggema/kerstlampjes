@@ -10,6 +10,8 @@
 
 💻 **新：圣诞彩灯 Windows 版！** 只有彩灯，始终显示，在系统托盘中控制。[⬇️ 下载（100 kB）](https://github.com/ericbruggema/kerstlampjes-windows/releases/latest/download/Kerstlampjes-Windows.exe) · [详细信息](#-windows)
 
+🌐 **新：网站圣诞彩灯！** 只需一个 JavaScript 文件，可环绕整个页面，或只放在上/左/右。[详细信息](#-网站用-javascript)
+
 </div>
 
 > 📷 为保持简短，本译文不含截图。所有图片请见[荷兰语 README](README.md) 和网站。应用本身提供全部六种语言。
@@ -490,6 +492,19 @@ KerstApp/
 ## 💻 Windows
 
 Windows 版（只有彩灯和装饰，位于系统托盘）有自己独立的仓库：**[ericbruggema/kerstlampjes-windows](https://github.com/ericbruggema/kerstlampjes-windows)**。[⬇️ 下载 Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes-windows/releases/latest/download/Kerstlampjes-Windows.exe)：Windows 10/11，无需安装，开源（MIT）。使用说明、设置和隐私信息都在该仓库中。
+
+
+## 🌐 网站用 JavaScript
+
+也适用于你自己的网站：**[javascript/kerstlampjes.js](javascript/kerstlampjes.js)**，单个文件，无依赖。可环绕整个页面，也可只放在上、左、右或下，或任意组合。用一次调用或脚本标签上的属性即可设置：
+
+```html
+<script src="kerstlampjes.js" data-sides="top,left" data-palette="ice"></script>
+<!-- 或 -->
+<script>Kerstlampjes.start({ sides: "top,left,right", mode: "twinkle" });</script>
+```
+
+效果、颜色、大小等见[说明](javascript/README.md)；打开 [demo.html](javascript/demo.html) 试用。可自由使用（MIT）。
 
 ## 🤝 开源与再利用
 

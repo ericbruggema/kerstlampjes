@@ -10,6 +10,8 @@
 
 💻 **Novedad: ¡Luces de Navidad para Windows!** Solo las luces, siempre visibles desde la bandeja del sistema. [⬇️ Descargar (100 kB)](https://github.com/ericbruggema/kerstlampjes-windows/releases/latest/download/Kerstlampjes-Windows.exe) · [Más información](#-windows)
 
+🌐 **Novedad: ¡luces de Navidad para tu web!** Un único archivo JavaScript, alrededor de toda la página o solo arriba/izquierda/derecha. [Más información](#-javascript-para-sitios-web)
+
 </div>
 
 > 📷 Esta traducción no incluye capturas de pantalla, para mantenerla corta. Todas las imágenes están en el [README neerlandés](README.md) y en el sitio web. La propia aplicación está disponible en los seis idiomas.
@@ -491,6 +493,19 @@ Tocar funciona en la pantalla de juego (**🎮 Juega con tu borde**). La superpo
 ## 💻 Windows
 
 La versión para Windows (solo las luces y la decoración, en la bandeja del sistema) tiene su propio repositorio: **[ericbruggema/kerstlampjes-windows](https://github.com/ericbruggema/kerstlampjes-windows)**. [⬇️ Descargar Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes-windows/releases/latest/download/Kerstlampjes-Windows.exe): Windows 10/11, nada que instalar, código abierto (MIT). La guía, los ajustes y la privacidad están en ese repositorio.
+
+
+## 🌐 JavaScript para sitios web
+
+También para tu propia web: **[javascript/kerstlampjes.js](javascript/kerstlampjes.js)**, un solo archivo sin dependencias. Alrededor de toda la página, o solo arriba, izquierda, derecha o abajo, o una combinación. Se configura con una llamada o con atributos en la etiqueta script:
+
+```html
+<script src="kerstlampjes.js" data-sides="top,left" data-palette="ice"></script>
+<!-- o -->
+<script>Kerstlampjes.start({ sides: "top,left,right", mode: "twinkle" });</script>
+```
+
+Efectos, colores, tamaño y más en la [guía](javascript/README.md); abre [demo.html](javascript/demo.html) para probarlo. De uso libre (MIT).
 
 ## 🤝 Código abierto y reutilización
 

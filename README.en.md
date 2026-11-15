@@ -10,6 +10,8 @@
 
 💻 **New: Christmas Lights for Windows!** Just the lights, always visible from the system tray. [⬇️ Download (100 kB)](https://github.com/ericbruggema/kerstlampjes-windows/releases/latest/download/Kerstlampjes-Windows.exe) · [More info](#-windows)
 
+🌐 **New: Christmas lights for your website!** One single JavaScript file, all around the page or just top/left/right. [More info](#-javascript-for-websites)
+
 </div>
 
 > 📷 This translation has no screenshots, to keep it short. You can find all images in the [Dutch README](README.md) and on the website. The app itself is available in all six languages.
@@ -490,6 +492,19 @@ Tapping works in the play screen (**🎮 Play with your edge**). The overlay ove
 ## 💻 Windows
 
 The Windows version (just the lights and the decorations, in the system tray) has its own repo: **[ericbruggema/kerstlampjes-windows](https://github.com/ericbruggema/kerstlampjes-windows)**. [⬇️ Download Kerstlampjes-Windows.exe](https://github.com/ericbruggema/kerstlampjes-windows/releases/latest/download/Kerstlampjes-Windows.exe): Windows 10/11, nothing to install, open source (MIT). The guide, settings and privacy notes are in that repo.
+
+
+## 🌐 JavaScript for websites
+
+Also for your own website: **[javascript/kerstlampjes.js](javascript/kerstlampjes.js)**, one single file with no dependencies. All around the page, or only top, left, right or bottom, or any combination. Set it up with one call or with attributes on the script tag:
+
+```html
+<script src="kerstlampjes.js" data-sides="top,left" data-palette="ice"></script>
+<!-- or -->
+<script>Kerstlampjes.start({ sides: "top,left,right", mode: "twinkle" });</script>
+```
+
+Effects, colours, size and more are in the [guide](javascript/README.md); open [demo.html](javascript/demo.html) to try it. Free to use (MIT).
 
 ## 🤝 Open source and reuse
 
