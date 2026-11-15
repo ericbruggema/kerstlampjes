@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Christmas Lights for websites – demo</title>
+<style>
+  body { margin: 0; min-height: 100vh; font: 16px/1.5 system-ui, sans-serif; background: #0e1f2e; color: #e8f1f8;
+         display: flex; align-items: center; justify-content: center; }
+  main { max-width: 680px; padding: 70px 32px; }
+  h1 { margin-top: 0; }
+  fieldset { border: 1px solid #2c4358; border-radius: 10px; margin: 14px 0; }
+  legend { padding: 0 8px; color: #9fc3dd; }
+  label { margin-right: 14px; white-space: nowrap; display: inline-block; }
+  pre { background: #08131d; padding: 12px; border-radius: 8px; overflow: auto; color: #b9e0ff; white-space: pre-wrap; }
+  select { font: inherit; }
+</style>
+</head>
+<body>
+<main>
+  <h1>🎄 Christmas Lights for websites</h1>
+  <p>One single file, no dependencies. Change the settings below and copy the code.</p>
+
+  <fieldset><legend>Edges with lights</legend>
+    <label><input type="checkbox" class="side" value="top" checked> top</label>
+    <label><input type="checkbox" class="side" value="right" checked> right</label>
+    <label><input type="checkbox" class="side" value="bottom" checked> bottom</label>
+    <label><input type="checkbox" class="side" value="left" checked> left</label>
+  </fieldset>
+  <fieldset><legend>Lights</legend>
+    <label>Effect <select id="mode"><option value="twinkle">twinkle</option><option value="steady">steady</option><option value="alternate">alternate</option><option value="chase">chase</option><option value="wave">wave</option></select></label>
+    <label>Colours <select id="palette"><option value="classic">classic multicolour</option><option value="warm">warm white</option><option value="redgreen">red / green / gold</option><option value="ice">ice blue</option><option value="pink">pink / purple</option></select></label>
+    <label>Type <select id="bulbStyle"><option value="classic">classic</option><option value="led">mini LED</option><option value="ball">glass ball</option><option value="flame">flame</option><option value="star">star</option><option value="heart">heart</option><option value="icicle">icicle</option><option value="snowflake">snowflake</option><option value="mix">mix</option></select></label>
+    <label>Size <input type="range" id="size" min="8" max="28" value="14"></label>
+  </fieldset>
+  <fieldset><legend>Decorations</legend>
+    <label><input type="checkbox" class="decor" value="snow"> snow</label>
+    <label><input type="checkbox" class="decor" value="stars"> sparkles</label>
+    <label><input type="checkbox" class="decor" value="shooting"> shooting stars</label>
+    <label><input type="checkbox" class="decor" value="icicles"> icicles</label>
+    <label><input type="checkbox" class="decor" value="garland"> garland</label>
+    <label><input type="checkbox" class="decor" value="train"> little train</label>
+    <label><input type="checkbox" class="decor" value="marquee"> scrolling sign</label>
+  </fieldset>
+  <pre id="code"></pre>
+</main>
+
+<script src="christmaslights.js"></script>
+<script>
+  var lights = ChristmasLights.start();
+  function checked(cls) { return [].slice.call(document.querySelectorAll("." + cls + ":checked")).map(function (c) { return c.value; }).join(","); }
+  function apply() {
+    var o = { sides: checked("side") || "none", mode: mode.value, palette: palette.value, bulbStyle: bulbStyle.value, decor: checked("decor") || "none", size: +size.value };
+    lights.update(o);
+    var parts = [];
+    for (var k in o) if (!(k === "decor" && o[k] === "none")) parts.push(k + ": " + (typeof o[k] === "number" ? o[k] : '"' + o[k] + '"'));
+    code.textContent = "ChristmasLights.start({ " + parts.join(", ") + " });";
+  }
+  document.querySelectorAll("input,select").forEach(function (e) { e.addEventListener("input", apply); });
+  apply();
+</script>
+</body>
+</html>

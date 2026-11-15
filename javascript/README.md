@@ -2,7 +2,7 @@
 
 Een snoer kerstlampjes langs de rand van je webpagina, met acht soorten lampjes en optionele versiering (sneeuw, sterretjes, vallende sterren, ijspegels, slinger, treintje en lichtkrant). **Eén los bestand ([kerstlampjes.js](kerstlampjes.js)), geen afhankelijkheden, 25 kB (8 kB ingepakt).** Klikken gaan dwars door de lampjes heen, dus ze zitten nooit in de weg. Open [demo.html](demo.html) om alles uit te proberen.
 
-*English below.*
+*English below. In het Engels heet het script `christmaslights.js` (`ChristmasLights.start(...)`), met [Engelse demo](demo.en.html); het is hetzelfde bestand als `kerstlampjes.js`.*
 
 ## Het kortst mogelijk
 
@@ -76,20 +76,20 @@ Kerstlampjes.create({ target: "#kaart", mode: "chase" }).start();
 
 # 🎄 Christmas lights for websites (JavaScript)
 
-A string of Christmas lights along the edge of your web page, with eight bulb styles and optional decorations (snow, sparkles, shooting stars, icicles, garland, little train and a scrolling text sign). **One single file ([kerstlampjes.js](kerstlampjes.js)), no dependencies, 25 kB (8 kB gzipped).** Clicks pass straight through the lights, so they never get in the way. Open [demo.html](demo.html) to try it.
+A string of Christmas lights along the edge of your web page, with eight bulb styles and optional decorations (snow, sparkles, shooting stars, icicles, garland, little train and a scrolling text sign). **One single file ([christmaslights.js](christmaslights.js)), no dependencies, 25 kB (8 kB gzipped).** Clicks pass straight through the lights, so they never get in the way. Open [demo.en.html](demo.en.html) to try it.
 
 ```html
-<script src="kerstlampjes.js" data-sides="top"></script>
+<script src="christmaslights.js" data-sides="top"></script>
 ```
 
 or
 
 ```html
-<script src="kerstlampjes.js"></script>
+<script src="christmaslights.js"></script>
 <script>
-  Kerstlampjes.start();                                   // all around the screen
-  // Kerstlampjes.start({ sides: "top" });                // top only
-  // Kerstlampjes.start({ sides: "top,left,right" });     // any combination
+  ChristmasLights.start();                                   // all around the screen
+  // ChristmasLights.start({ sides: "top" });                // top only
+  // ChristmasLights.start({ sides: "top,left,right" });     // any combination
 </script>
 ```
 
@@ -109,4 +109,4 @@ or
 | `zIndex` | high | Stacking level |
 | `target` | whole page | An element (selector or node): the lights then hang around that element only |
 
-The same names work as `data-` attributes. Control them while running with `update({ ... })`, `stop()` and `toggle()`; make several strings with `Kerstlampjes.create({ ... }).start()`. The script pauses in hidden tabs, stays still for people who prefer reduced motion, and sends nothing anywhere. MIT licence.
+The Dutch name keeps working too: `Kerstlampjes` and `kerstlampjes.js` are the same file and object. The same option names work as `data-` attributes. Control them while running with `update({ ... })`, `stop()` and `toggle()`; make several strings with `ChristmasLights.create({ ... }).start()`. The script pauses in hidden tabs, stays still for people who prefer reduced motion, and sends nothing anywhere. MIT licence.

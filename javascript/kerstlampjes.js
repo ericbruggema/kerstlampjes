@@ -1,14 +1,17 @@
 /*!
- * Kerstlampjes voor websites – een snoer kerstlampjes langs de rand van de pagina, met optionele versiering.
- * Eén los bestand, geen afhankelijkheden. MIT-licentie.
+ * Kerstlampjes / Christmas Lights for websites – a string of Christmas lights along the edge of the page,
+ * with optional decorations. One single file, no dependencies. MIT licence.
  * https://github.com/ericbruggema/kerstlampjes
  *
- * Gebruik (alles is optioneel):
- *   <script src="kerstlampjes.js"></script>
- *   <script>Kerstlampjes.start({ sides: "top,left,right", palette: "warm", decor: "snow,garland" });</script>
+ * Usage (every option is optional) / Gebruik (alles is optioneel):
+ *   <script src="christmaslights.js"></script>          (or / of kerstlampjes.js: the same file)
+ *   <script>ChristmasLights.start({ sides: "top,left,right", palette: "warm", decor: "snow,garland" });</script>
+ *   Dutch name / Nederlandse naam: Kerstlampjes.start({ ... })
  *
- * Of zonder code, met data-attributen op de scripttag:
- *   <script src="kerstlampjes.js" data-sides="top" data-bulb-style="star" data-decor="snow"></script>
+ * Or without code, with data attributes on the script tag / Of zonder code, met data-attributen:
+ *   <script src="christmaslights.js" data-sides="top" data-bulb-style="star" data-decor="snow"></script>
+ *
+ * The marquee text defaults to English when <html lang="en"> is set, otherwise to Dutch.
  */
 (function (root) {
   "use strict";
@@ -31,7 +34,7 @@
     decor: "",             // versiering, bijvoorbeeld "snow,stars,garland" (zie README)
     garlandBalls: true,    // ballen in de slinger
     trainWagons: 3,        // aantal wagons van het treintje
-    marquee: "Vrolijk kerstfeest en een gelukkig nieuwjaar!", // tekst van de lichtkrant
+    marquee: /^en/i.test(document.documentElement.lang || "") ? "Merry Christmas and a Happy New Year!" : "Vrolijk kerstfeest en een gelukkig nieuwjaar!", // text of the sign / tekst van de lichtkrant
     size: 14,              // grootte van een lampje in pixels
     spacing: 44,           // afstand tussen de lampjes in pixels
     speed: 5,              // 1..10
@@ -457,6 +460,7 @@
     create: create
   };
   root.Kerstlampjes = Kerstlampjes;
+  root.ChristmasLights = Kerstlampjes; // English name, same object
 
   // Automatisch starten via data-attributen: <script src="kerstlampjes.js" data-sides="top" data-bulb-style="star">
   var me = document.currentScript;

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Christmas Lights for websites – one JavaScript file</title>
+  <meta name="description" content="A string of Christmas lights along the edge of your web page, with eight bulb styles and optional decorations. One single JavaScript file, no dependencies, MIT licence.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="garland" aria-hidden="true"></div>
+
+  <header class="hero">
+    <div class="wrap">
+      <h1>🎄 Christmas Lights for websites</h1>
+      <p>A string of Christmas lights along the edge of your web page. One single JavaScript file, no dependencies.</p>
+      <a class="btn" href="christmaslights.js" download>Download christmaslights.js</a>
+      <a class="btn secondary" href="index.html">Nederlands</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="javascript">
+      <h2>🌐 Try it</h2>
+      <p class="lead">Edges, effects, colours, eight bulb styles and decorations: snow, sparkles, shooting stars, icicles, a garland, a little train and a scrolling text sign. This is the real script.</p>
+      <div id="jsstage" class="jsstage"><div><strong>Pick what you want to see below</strong><br><small>The lights hang around this box.</small></div></div>
+      <div class="jspanel">
+        <fieldset><legend>Edges</legend>
+          <label><input type="checkbox" class="jside" value="top" checked> top</label>
+          <label><input type="checkbox" class="jside" value="right" checked> right</label>
+          <label><input type="checkbox" class="jside" value="bottom" checked> bottom</label>
+          <label><input type="checkbox" class="jside" value="left" checked> left</label>
+        </fieldset>
+        <fieldset><legend>Lights</legend>
+          <label>Effect <select id="jmode"><option value="twinkle">twinkle</option><option value="steady">steady</option><option value="alternate">alternate</option><option value="chase">chase</option><option value="wave">wave</option></select></label>
+          <label>Colours <select id="jpalette"><option value="classic">classic multicolour</option><option value="warm">warm white</option><option value="redgreen">red / green / gold</option><option value="ice">ice blue</option><option value="pink">pink / purple</option></select></label>
+          <label>Type <select id="jbulb"><option value="classic">classic</option><option value="led">mini LED</option><option value="ball">glass ball</option><option value="flame">flame</option><option value="star">star</option><option value="heart">heart</option><option value="icicle">icicle</option><option value="snowflake">snowflake</option><option value="mix">mix</option></select></label>
+        </fieldset>
+        <fieldset><legend>Decorations</legend>
+          <label><input type="checkbox" class="jdecor" value="snow"> snow</label>
+          <label><input type="checkbox" class="jdecor" value="stars"> sparkles</label>
+          <label><input type="checkbox" class="jdecor" value="shooting"> shooting stars</label>
+          <label><input type="checkbox" class="jdecor" value="icicles"> icicles</label>
+          <label><input type="checkbox" class="jdecor" value="garland"> garland</label>
+          <label><input type="checkbox" class="jdecor" value="train"> little train</label>
+          <label><input type="checkbox" class="jdecor" value="marquee"> scrolling sign</label>
+        </fieldset>
+      </div>
+      <p>Put it on your own site:</p>
+      <pre id="jscode" class="jscode"></pre>
+      <p><a class="btn" href="christmaslights.js" download>Download christmaslights.js</a>
+      <a class="btn secondary" href="https://github.com/ericbruggema/kerstlampjes/tree/main/javascript">Guide and all options</a></p>
+      <p><small>Free and open source (MIT). Using it? A link to <a href="https://github.com/ericbruggema/kerstlampjes">github.com/ericbruggema/kerstlampjes</a> is appreciated. Nothing is loaded or sent anywhere.</small></p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Made with lots of lights. Open source (MIT).</div>
+  </footer>
+
+  <script src="christmaslights.js"></script>
+  <script>
+    (function () {
+      var $ = function (id) { return document.getElementById(id); };
+      var checked = function (cls) { return [].slice.call(document.querySelectorAll("." + cls + ":checked")).map(function (c) { return c.value; }).join(","); };
+      var lights = ChristmasLights.create({ target: "#jsstage", sides: "all", decor: "snow,garland" });
+      document.querySelectorAll(".jdecor").forEach(function (c) { c.checked = c.value === "snow" || c.value === "garland"; });
+      function apply() {
+        var o = { sides: checked("jside") || "none", mode: $("jmode").value, palette: $("jpalette").value, bulbStyle: $("jbulb").value, decor: checked("jdecor") || "none" };
+        lights.update(o);
+        var parts = [];
+        for (var k in o) if (!(k === "decor" && o[k] === "none") && !(k === "sides" && o[k] === "top,right,bottom,left")) parts.push(k + ": \"" + o[k] + "\"");
+        $("jscode").textContent = '<script src="christmaslights.js"><' + '/script>\n<script>ChristmasLights.start(' + (parts.length ? "{ " + parts.join(", ") + " }" : "") + ');<' + '/script>';
+      }
+      document.querySelectorAll("#javascript input, #javascript select").forEach(function (e) { e.addEventListener("input", apply); });
+      if ("IntersectionObserver" in window) new IntersectionObserver(function (en) { en[0].isIntersecting ? lights.start() : lights.stop(); }).observe($("jsstage"));
+      else lights.start();
+      apply();
+    })();
+  </script>
+</body>
+</html>
