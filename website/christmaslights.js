@@ -35,6 +35,7 @@
     garlandBalls: true,    // ballen in de slinger
     trainWagons: 3,        // aantal wagons van het treintje
     glow: true,            // gloed rond de lampjes aan of uit
+    glowSize: 1,           // grootte van de gloed: 0.3 (klein) tot 3 (groot)
     respectReducedMotion: true, // false = altijd animeren, ook als het systeem "minder beweging" vraagt
     marquee: /^en/i.test(document.documentElement.lang || "") ? "Merry Christmas and a Happy New Year!" : "Vrolijk kerstfeest en een gelukkig nieuwjaar!", // text of the sign / tekst van de lichtkrant
     size: 14,              // grootte van een lampje in pixels
@@ -181,21 +182,25 @@
       }
     }
 
+    function gs() { var v = Number(o.glowSize); return v > 0 ? Math.max(0.3, Math.min(3, v)) : 1; }
+    // formaat van het plaatje van één lampje: groeit mee met de gloed
+    function spriteSize() { return Math.ceil(Math.max(5.2, 2 * (2.4 * gs() + 2.1)) * o.size); }
+
     // één lampje per kleur, helderheid en soort vooraf getekend; daarna alleen nog neerzetten
     function sprite(ci, level, style) {
       var key = style + ":" + ci + ":" + level;
       if (sprites[key]) return sprites[key];
-      var z = o.size, d = Math.ceil(z * 5.2), c = document.createElement("canvas");
+      var z = o.size, d = spriteSize(), c = document.createElement("canvas");
       c.width = c.height = Math.ceil(d * dpr);
       var g = c.getContext("2d");
       g.scale(dpr, dpr);
       g.translate(d / 2, d / 2 - z * 1.0);
       var k2 = level / 7, col = colors[ci % colors.length], cy = z * 1.1;
       if (o.glow) {
-        var gr = g.createRadialGradient(0, cy, 0, 0, cy, z * 2.4);
+        var gr = g.createRadialGradient(0, cy, 0, 0, cy, z * 2.4 * gs());
         gr.addColorStop(0, rgba(col, 0.75 * k2 * k2));
         gr.addColorStop(1, rgba(col, 0));
-        g.fillStyle = gr; g.beginPath(); g.arc(0, cy, z * 2.4, 0, 6.2832); g.fill();
+        g.fillStyle = gr; g.beginPath(); g.arc(0, cy, z * 2.4 * gs(), 0, 6.2832); g.fill();
       }
       drawBulb(g, style, mix("#222a25", col, 0.18 + 0.82 * k2), k2, z);
       sprites[key] = c;
@@ -405,7 +410,7 @@
       if (has("icicles")) drawIcicles(t);
       if (has("stars")) drawStars(t);
       wire();
-      var half = Math.ceil(o.size * 5.2) / 2, dy = o.size * 1.0;
+      var half = spriteSize() / 2, dy = o.size * 1.0;
       for (var n = 0; n < bulbs.length; n++) {
         var b = bulbs[n], lvl = Math.max(0, Math.min(7, Math.round(intensity(b, t) * 7)));
         ctx.save(); ctx.translate(b.x, b.y); ctx.rotate(b.rot);
